@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bollywood: Movies in 2016</title>
+</head>
+<body>
+  
+	<div id="series_chart_div" style="width: 100%; height: 600px;"></div>
+	<h3 style="font-size: 14px;font-weight: normal;font-family: 'Times New Roman';">*All figures as on Dec.29, 2016.</h3>
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<script>
+		google.charts.load('current', {'packages':['corechart']});
+		google.charts.setOnLoadCallback(drawSeriesChart);
+
+		function drawSeriesChart() {
+
+			var data = google.visualization.arrayToDataTable([
+				["Movie","B.O. Collection (in Rs)","% of budget recovered","Release Month","Budget (in Rs)"],
+				["Wazir ",351800000,78.17,"Jan",450000000,],
+				["Airlift ",2316000000,772,"Jan",300000000,],
+				["Kyaa Kool Hain Hum 3",269100000,96.1,"Jan",280000000,],
+				["Saala Khadoos",70000000,31.81,"Jan",220000000,],
+				["Mastizaade ",177500000,59.16,"Jan",300000000,],
+				["Sanam Teri Kasam ",55500000,26.42,"Feb",210000000,],
+				["Ghayal Once Again ",366600000,91.65,"Feb",400000000,],
+				["Fitoor ",176800000,29.46,"Feb",600000000,],
+				["Sanam Re",219000000,109.5,"Feb",200000000,],
+				["Loveshhuda",30000000,15,"Feb",200000000,],
+				["Neerja",712600000,285.04,"Feb",250000000,],
+				["Aligarh ",22500000,12.5,"Feb",180000000,],
+				["Tere Bin Laden: Dead or Alive",36500000,26.07,"Feb",140000000,],
+				["Jai Gangaajal",325600000,108.53,"Mar",300000000,],
+				["Teraa Surroor",98400000,89.45,"Mar",110000000,],
+				["Kapoor & Sons ",613000000,165.67,"Mar",370000000,],
+				["Rocky Handsome ",223000000,53.09,"Mar",420000000,],
+				["Ki & Ka",460400000,131.54,"Apr",350000000,],
+				["Love Games",40000000,28.57,"Apr",140000000,],
+				["Fan",832500000,79.28,"Apr",1050000000,],
+				["Baaghi ",751700000,159.93,"Apr",470000000,],
+				["One Night Stand" ,29600000,21.14,"May",140000000,],
+				["1920 London ",134700000,112.25,"May",120000000,],
+				["Azhar",314500000,82.76,"May",380000000,],
+				["Sarabjit",254000000,84.66,"May",300000000,],
+				["Phobia ",27500000,34.37,"May",80000000,],
+				["Waiting ",20000000,25,"May",80000000,],
+				["Veerappan ",65000000,43.33,"May",150000000,],
+				["Housefull 3",1075400000,126.51,"Jun",850000000,],
+				["Te3n",181600000,64.85,"Jun",280000000,],
+				["Udta Punjab ",582100000,121.27,"Jun",480000000,],
+				["Raman Raghav 2.0",54500000,77.85,"Jun",70000000,],
+				["Sultan ",3002200000,333.57,"Jul",900000000,],
+				["Great Grand Masti",120000000,28.57,"Jul",420000000,],
+				["Madaari",122500000,51.04,"Jul",240000000,],
+				["Dishoom ",670000000,103.07,"Jul",650000000,],
+				["Mohenjo Daro",561100000,48.79,"Aug",1150000000,],
+				["Rustom",1245000000,191.53,"Aug",650000000,],
+				["Happy Bhag Jayegi",273000000,151.66,"Aug",180000000,],
+				["A Flying Jatt",355500000,71.1,"Aug",500000000,],
+				["Akira",246500000,82.16,"Sep",300000000,],
+				["Baar Baar Dekho",306500000,66.63,"Sep",460000000,],
+				["Freaky Ali",130500000,68.68,"Sep",190000000,],
+				["Pink",632100000,243.11,"Sep",260000000,],
+				["Raaz Reboot",247300000,82.43,"Sep",300000000,],
+				["Parched",12000000,6.66,"Sep",180000000,],
+				["Banjo",85000000,28.33,"Sep",300000000,],
+				["M.S. Dhoni: The Untold Story",1270400000,122.15,"Sep",1040000000,],
+				["Mirzya",85000000,24.28,"Oct",350000000,],
+				["Shivaay ",872500000,72.7,"Oct",1200000000,],
+				["Ae Dil Hai Mushkil",1072500000,116.57,"Oct",920000000,],
+				["Rock On 2",106000000,23.55,"Nov",450000000,],
+				["Force 2",299400000,66.53,"Nov",450000000,],
+				["Tum Bin 2 ",35000000,23.33,"Nov",150000000,],
+				["Dear Zindagi ",637000000,141.55,"Nov",450000000,],
+				["Kahaani 2",252500000,72.14,"Dec",350000000,],
+				["Befikre",586900000,83.84,"Dec",700000000,],
+				["Dangal ",1769300000,141.54,"Dec",1250000000,]
+
+			]);
+
+			var options = {
+				chartArea: {width: '100%', height: '100%'},
+				legend: {position: 'in'},
+				titlePosition: 'in',
+				axisTitlesPosition: 'in',
+				hAxis: {
+					title: 'BO Collection (in Rs)',
+					textPosition: 'in',
+					gridlines: {
+						color: 'transparent',
+						count: -1,
+					},
+					ticks: [],
+					logScale:true
+				},
+				vAxis: {
+					title: '% of Budget Recovered',
+					format:'percent',
+					textPosition: 'in',
+					gridlines:{color:'transparent'},
+					baselineColor:'transparent',
+					logScale:true,
+					ticks: [],
+				},
+				title: 'Movie Performances in 2016',
+				
+				bubble: {textStyle: {fontSize: 0,color:'transparent'},opacity:0.5},
+				colorAxis: {colors: ['#4DD0E1', '#00838F']}
+			};
+
+			var chart = new google.visualization.BubbleChart(document.getElementById('series_chart_div'));
+			chart.draw(data, options);
+		}
+	</script>
+</body>
+</html>

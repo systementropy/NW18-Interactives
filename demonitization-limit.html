@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Demonitization</title>
+</head>
+<body style="font-family: 'Ariel'">
+  <style>
+    div.google-visualization-tooltip { color: #FFFFFF;background: #333; }
+    .google-visualization-tooltip-square {border-radius: 50%;margin-top: 5px;border: none;}
+    li.google-visualization-tooltip-item>span {color: #FFF !important;}
+    .bgCont {max-width: 860px;margin: 0 auto;overflow: hidden;position: absolute;top: 65px;left: 145px;}
+  </style>
+  <div id="chart_container" style="max-width: 860px;margin: 0 auto; overflow: hidden;position: relative;">
+    <div class="bgCont"><img src="rupee.jpg" alt="" style="width: 708px;height: 259px;opacity: 0.7;"></div>
+    <div id="curve_chart" style="max-width: 860px;margin: 0 auto; overflow: hidden;">
+
+    </div>
+  </div>
+  <div style="text-align: left;width: 800px; margin: 0 auto;padding-left: 222px;">
+    <span style="display: inline-block;padding-right: 40px; color: #3366CC;">Exchange Limit</span>
+    <span style="display: inline-block;padding-right: 40px; color: #DC3912;">Bank Withdrawal Limit</span>
+    <span style="display: inline-block;padding-right: 40px; color: #FF9900;">ATM Withdrawal Limit</span>
+    <span style="display: inline-block;padding-right: 40px; color: #109618;">Special Withdrawal Limit</span>
+    <div style="clear: both;"></div>
+  </div>
+  <p id="infoBox" style="margin: 0 auto; padding-top: 15px; text-align: left;width: 650px; list-style-type: none;padding-left: 70px;">
+    
+  </p>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('date', 'Day');
+        data.addColumn('number', 'Exchange Limit');
+        data.addColumn('number', 'Bank Withdrawal Limit');
+        data.addColumn('number', 'ATM Withdrawal Limit');
+        data.addColumn('number', 'Special Withdrawal Limit');
+        
+        data.addRows([
+          [new Date(2016,10,08), 4000, 10000, 2000,null],
+          [new Date(2016,10,09), 4000, 10000, 2000,null],
+          [new Date(2016,10,10), 4000, 10000, 2000,null],
+          [new Date(2016,10,11), 4000, 10000, 2000,null],
+          [new Date(2016,10,12), 4000, 10000, 2000,null],
+          [new Date(2016,10,13), 4500, 24000, 2500,null],
+          [new Date(2016,10,14), 4500, 50000, 2500,null],
+          [new Date(2016,10,15), 4500, 50000, 2500,null],
+          [new Date(2016,10,16), 4500, 50000, 2500,null],
+          [new Date(2016,10,17), 2000, 50000, 2500,50000],
+          [new Date(2016,10,18), 2000, 50000, 2500,50000],
+          [new Date(2016,10,19), 2000, 50000, 2500,50000],
+          [new Date(2016,10,20), 2000, 50000, 2500,50000],
+          [new Date(2016,10,21), 2000, 50000, 2500,250000],
+          [new Date(2016,10,22), 2000, 50000, 2500,250000],
+          [new Date(2016,10,23), 2000, 50000, 2500,250000],
+          [new Date(2016,10,24), 0, 50000, 2500,250000],
+          [new Date(2016,10,25), 0, 50000, 2500,250000],
+          [new Date(2016,10,26), 0, 50000, 2500,250000],
+          [new Date(2016,10,27), 0, 50000, 2500,250000],
+          [new Date(2016,10,28), 0, 50000, 2500,250000],
+          [new Date(2016,10,29), 0, 50000, 2500,250000],
+          [new Date(2016,10,30), 0, 50000, 2500,250000],
+          [new Date(2016,11,01), 0, 50000, 2500,250000],
+          [new Date(2016,11,02), 0, 50000, 2500,250000],
+          [new Date(2016,11,03), 0, 50000, 2500,250000],
+          [new Date(2016,11,04), 0, 50000, 2500,250000],
+          [new Date(2016,11,05), 0, 50000, 2500,250000],
+          [new Date(2016,11,06), 0, 50000, 2500,250000],
+          [new Date(2016,11,07), 0, 50000, 2500,250000],
+          [new Date(2016,11,08), 0, 50000, 2500,250000]
+        ]);
+
+        var options = {
+          height:400,
+          width:1000,
+          title: 'How Your Withdrawals Changed With Demonetization',
+          titleTextStyle: {
+              color: "#363636",
+              fontSize: 27,
+              bold: true
+          },
+          vAxes: {
+            0: {
+              ticks: [],
+              baselineColor: '#fff',
+              gridlineColor: '#fff',
+              textPosition: 'none',
+              viewWindowMode:'explicit',
+              viewWindow:{
+                max:60000,
+                min:0
+              },
+              gridlines: {color: 'transparent'}
+            },
+            1: {
+              title:'Special Limits',
+              ticks: [],
+              textPosition:'none',
+              viewWindowMode:'explicit',
+              viewWindow:{
+                max:250000,
+                min:0
+              },
+              gridlines: {color: 'transparent'}
+            },
+          },
+          series: {
+              0: {targetAxisIndex:0, type:'line'},
+              1:{targetAxisIndex:0, type:'line'},
+              2:{targetAxisIndex:0, type:'line'},
+              3:{targetAxisIndex:1,type:'line'},
+              
+          },
+          legend: 'none',
+          tooltip: { isHtml: true },
+          hAxis:{
+            //gridlines:{color: 'transparent'},
+            viewWindow: {
+              min: new Date(2016,10,08),
+              max: new Date(2016,11,08)
+            },
+            gridlines: {
+              color: 'transparent',
+              count: -1,
+              units: {
+                days: {format: ['MMM dd']}
+              }
+            }
+          },
+
+          gridlines:{color: 'none'},
+          focusTarget: 'category',
+          backgroundColor: { fill:'transparent' }
+        };
+
+        var chart = new google.visualization.ComboChart(document.getElementById('curve_chart'));
+        chart.draw(data, options);
+
+        google.visualization.events.addListener(chart, 'select', function (data) {
+          chart.setSelection([]);
+        });
+
+        google.visualization.events.addListener(chart, 'onmouseover', function (data) {
+          document.getElementById('infoBox').innerHTML="";
+
+          if(data.row==0){
+            var node = document.createElement("LI");
+            var textnode = document.createTextNode("Exchange of currency up to Rs 4,000 allowed at banks");
+            node.appendChild(textnode);
+            node.style.color= "#3366CC";
+            var node1 = document.createElement("LI");
+            var textnode1 = document.createTextNode("Daily Cap Rs 10000 Weekly cap Rs 20000");
+            node1.appendChild(textnode1);
+            node1.style.color= "#DC3912";
+            var node2 = document.createElement("LI");
+            var textnode2 = document.createTextNode("ATM withdrawal limited to Rs 2,000");
+            node2.appendChild(textnode2);
+            node2.style.color= "#FF9900";
+            document.getElementById("infoBox").appendChild(node);
+            document.getElementById("infoBox").appendChild(node1);
+            document.getElementById("infoBox").appendChild(node2);
+          }else if(data.row==5){
+            var node = document.createElement("LI");
+            var textnode = document.createTextNode("RBI raises OTC exchange of old bills");
+            node.appendChild(textnode);
+            node.style.color= "#3366CC";
+            var node1 = document.createElement("LI");
+            var textnode1 = document.createTextNode("No daily cap, Rs 24,000 per week");
+            node1.appendChild(textnode1);
+            node1.style.color= "#DC3912";
+            var node2 = document.createElement("LI");
+            var textnode2 = document.createTextNode("Daily limit upped to Rs 2,500 for ATMs that are recalibrated");
+            node2.appendChild(textnode2);
+            node2.style.color= "#FF9900";
+            document.getElementById("infoBox").appendChild(node);
+            document.getElementById("infoBox").appendChild(node1);
+            document.getElementById("infoBox").appendChild(node2);
+          }else if(data.row==6){
+            var node = document.createElement("LI");
+            var textnode = document.createTextNode("Current account holders can withdraw Rs 50,000 per week");
+            node.appendChild(textnode);
+            node.style.color= "#DC3912";
+            document.getElementById("infoBox").appendChild(node);
+            
+          }else if(data.row==9){
+            var node = document.createElement("LI");
+            var textnode = document.createTextNode("Exchange rate lowered to reduce misuse");
+            node.appendChild(textnode);
+            node.style.color= "#3366CC";
+            var node1 = document.createElement("LI");
+            var textnode1 = document.createTextNode("Govt allows registered agri-traders to withdraw up to Rs 50,000 a week.");
+            node1.appendChild(textnode1);
+            node1.style.color= "#109618";
+            var node2 = document.createElement("LI");
+            var textnode2 = document.createTextNode("Farmers can withdraw Rs 25,000 a week against crop loans.");
+            node2.appendChild(textnode2);
+            node2.style.color= "#109618";
+            document.getElementById("infoBox").appendChild(node);
+            document.getElementById("infoBox").appendChild(node1);
+            document.getElementById("infoBox").appendChild(node2);
+            
+          }else if(data.row==13){
+            var node = document.createElement("LI");
+            var textnode = document.createTextNode("In case of wedding, families can encash Rs 2.5 lakh from accounts.");
+            node.appendChild(textnode);
+            node.style.color= "#109618";
+            document.getElementById("infoBox").appendChild(node);
+            
+          }else if(data.row==16){
+            var node = document.createElement("LI");
+            var textnode = document.createTextNode("Indian citizens can only deposit (not exchange) old notes.");
+            node.appendChild(textnode);
+            node.style.color= "#3366CC";
+            var node1 = document.createElement("LI");
+            var textnode1 = document.createTextNode("Only foreigners can exchange old notes upto Rs 5000 per week.");
+            node1.appendChild(textnode1);
+            node1.style.color= "#3366CC";
+            document.getElementById("infoBox").appendChild(node);
+            document.getElementById("infoBox").appendChild(node1);
+          }
+
+        });
+      }
+
+
+
+    </script>
+</body>
+</html>

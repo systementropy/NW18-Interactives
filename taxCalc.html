@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+    <style type="text/css">
+    	body{
+    		color: #333;
+    		font-family: sans-serif;
+            font-size: 14px;
+            font-family: 'Roboto', sans-serif;
+		}
+		div.inputCont{position:relative;padding-top:15px;color: #999;float: left; }
+		div.row:after,div.clearCont:after,div.clear:after{content: " "; height: 0px; display: block; clear: both; }
+		.inputCont input:focus ~ .floating-label, .inputCont input:not(:focus):valid ~ .floating-label{
+		  top: 0px;
+		  bottom: 10px;
+		  left: 4px;
+		  font-size: 11px;
+		  opacity: 1;
+		}
+
+
+		.inputCont input:focus ~ .floating-label.big, .inputCont input:not(:focus):valid ~ .floating-label.big{
+			left: 40px;
+		}
+
+
+		.inputText {
+		  	font-size: 14px;
+		  	width: 170px;
+		  	height: 21px;
+			padding: 8px 0 8px 5px;
+			font-size: 12px;
+			border-radius: 0;
+			border: 1px solid #333;
+
+		}
+
+		.floating-label {
+		  position: absolute;
+		  pointer-events: none;
+		  left: 10px;
+		  top: 25px;
+		  transition: 0.2s ease all;
+		}
+		.floating-label.big{left:45px;}
+		#submit{
+			background: #E1261C;
+			border: none;
+			border-radius: 4px;
+			padding: 8px 10px;
+			color: #FAFAFA;
+			margin-top: 16px;
+			margin-left: 10px;
+			font-size: 16px;
+			float: right;
+		}
+		.textFill {
+		    color: #b2deec;
+		    font-size: 44px;
+		    font-weight: bold;
+		    margin: 0;
+		    line-height: 30px;
+		    border-bottom: 10px solid #0091bf;
+		}
+		.ipLabel{
+		    height: 100%;
+		    background: #333;
+		    color: #fff;
+		    display: inline-block;
+		    padding: 9px 10px;
+		    line-height: 19px;
+		    margin: 0;
+		    border: 1px solid #333;
+		    float: left;
+		}
+		.row{
+			background: #b2deec;
+			 padding: 15px;
+		}
+		.row h2{margin:0; font-weight: normal;font-size: 26px;letter-spacing: -0.3px;}
+		#infoRow h2{letter-spacing: -0.8px;}
+		.container{background: transparent;width: 300px; margin: 0 auto;padding: 15px 0px 25px 15px;}
+		.clearCont {
+			color: #363636;
+			padding: 15px 0;
+		}
+		#infoRow{display: none;height: 134px;position: relative;}
+		.clearCont>div p{margin:0;font-size: 12px;color: #666;}
+		.clearCont>div p:last-child{font-size: 16px;color: #333;}
+		.infoTri p{margin:0;}
+		.infoTri{
+			background: #EC0100;
+			color: #F9FFF3;
+			padding: 8px;
+			width: 64px;
+			position: relative;
+		}
+		div#taxChange {
+		    margin-left: 25px;
+		    line-height: 35px;
+		    font-size: 32px;
+		}
+		.infoTri:after{
+		    content: "";
+		    display: block;
+		    position: absolute;
+		    width: 0;
+		    height: 0;
+		    border-top: 5px solid transparent;
+		    border-left: 10px solid #EC0100;
+		    border-bottom: 5px solid transparent;
+		    right: -10px;
+		    bottom: 12px;
+
+		}
+		button#closeTax {
+		    position: absolute;
+		    bottom: 26px;
+		    right: 10px;
+		    background: transparent;
+		    border: none;
+		    font-size: 21px;
+		    display: inline-block;
+		    transform: rotate(0deg);
+		    background: rgba(255,255,255,0.6);
+		    border-radius: 50%;
+		    cursor: pointer;
+		    color: #999;
+		    transition: all 0.4s ease-in-out;
+		}
+		button#closeTax:hover{
+			color: #333;
+			transform: rotate(360deg);
+		}
+		button#closeTax>span {
+		    width: 16px;
+		    display: inline-block;
+		    overflow: hidden;
+		    
+		    line-height: 17px;
+		}
+		/* button#closeTax:before{
+			content:'\25BA';
+		} */
+    </style>
+</head>
+<body>
+	<div class="container">
+		<div class="textFill">Tax Calculator</div>
+		<div class="row" id="inputRow">
+			<h2>How much tax you pay?</h2>
+	    	<div class="inputCont">
+				<input type="text" class="inputText" id="ageIp" style="width: 90px;" required/>
+				<span class="floating-label">Your age</span>
+			</div>
+			<div class="inputCont" style="float: right;">
+				<label class="ipLabel" for="#incIp">Rs</label>
+				<input type="text" class="inputText" id="incIp" style="width: 113px;" required/>
+				<span class="floating-label big">Annual income</span>
+			</div>
+			<button id="submit" class="">Calculate</button>
+		</div>
+		<div class="row" id="infoRow">
+			<button id="closeTax"><span>&#8592;</span></button>
+			<h2>How much tax you save?</h2>
+			<div class="clearCont">
+				<div style="width: 50%;float: left;">
+					<p>Current (2017-18)</p>
+					<p>Rs. <b id="tax_curr"></b></p>
+				</div>
+				<div style="width: 50%;float: left;">
+					<p>Previous (2016-17)</p>
+					<p>Rs. <b id="tax_prev"></b></p>
+				</div>
+			</div>
+			<div class="changeTaxCont clear" style="padding: 0;">
+				<div class="infoTri" style="float: left;">
+					<p id="taxChangeWord"></p>
+				</div>
+				<div style="float: left;" id="taxChange"></div>
+			</div>
+			<!-- <div id="taxStatement"></div>	 -->
+		</div>
+		
+	</div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript">
+
+    	$(document).ready(function(){
+    		$('#submit').on('click',function(e){
+    			$('#taxStatement').html('');
+    			$('#taxChangeWord').html('');
+    			$('#taxChange').html('');
+    			$('#tax_curr').html('');
+    			$('#tax_prev').html('');
+    			var age = parseInt($('#ageIp').val());
+    			var income = parseInt($('#incIp').val());
+    			var tax_old = 0;
+    			if(age <60){
+    				if(income<250000){
+    					tax_old  = 0;
+    				}else if(income>=250000 && income<500000){
+    					tax_old = (income-250000)/10;
+    				}else if(income>=500000 && income<1000000){
+    					tax_old = ((income-500000)/5)+25000;
+    				}else if(income>=1000000){
+    					tax_old = ((income-1000000)*3/10)+125000;
+    				}
+    			}else if(age >=60 && age <80){
+    				if(income<300000){
+    					tax_old  = 0;
+    				}else if(income>=300000 && income<500000){
+    					tax_old = (income-300000)/10;
+    				}else if(income>=500000 && income<1000000){
+    					tax_old = ((income-500000)/5)+20000;
+    				}else if(income>=1000000){
+    					tax_old = ((income-1000000)*3/10)+120000;
+    				}
+    			}else if(age>=80){
+    				if(income<500000){
+    					tax_old  = 0;
+    				}else if(income>=500000 && income<1000000){
+    					tax_old = ((income-500000)/5);
+    				}else if(income>=1000000){
+    					tax_old = ((income-1000000)*3/10)+100000;
+    				}
+    			}
+
+
+
+    			if(age <60){
+    				if(income<250000){
+    					tax_new  = 0;
+    				}else if(income>=250000 && income<500000){
+    					tax_new = (income-250000)/10;
+    				}else if(income>=500000 && income<1000000){
+    					tax_new = ((income-500000)/5)+25000;
+    				}else if(income>=1000000){
+    					tax_new = ((income-1000000)*3/10)+125000;
+    				}
+    			}else if(age >=60 && age <80){
+    				if(income<300000){
+    					tax_new  = 0;
+    				}else if(income>=300000 && income<500000){
+    					tax_new = (income-300000)/10;
+    				}else if(income>=500000 && income<1000000){
+    					tax_new = ((income-500000)/5)+20000;
+    				}else if(income>=1000000){
+    					tax_new = ((income-1000000)*3/10)+120000;
+    				}
+    			}else if(age>=80){
+    				if(income<500000){
+    					tax_new  = 0;
+    				}else if(income>=500000 && income<1000000){
+    					tax_new = ((income-500000)/5);
+    				}else if(income>=1000000){
+    					tax_new = ((income-1000000)*3/10)+100000;
+    				}
+    			}
+    			$('#inputRow').fadeOut('fast', function() {
+    				$('#infoRow').fadeIn('fast', function() {
+    					$('#ageIp').val('');
+		    			$('#incIp').val('');
+		    			$('#tax_curr').append('<span>'+tax_new+'</span>');
+		    			$('#tax_prev').append('<span>'+tax_old+'</span>');
+		    			/*$('#taxStatement').append('<p>Net payable tax is '+tax_old+'/-</p>');*/
+		    			if(tax_new-tax_old>=0){
+		    				$('#taxChangeWord').append('You save');
+		    				$('#taxChange').append('<span>'+(tax_new-tax_old)+'</span>');	
+		    			}else{
+		    				$('#taxChangeWord').append('You lose');
+		    				$('#taxChange').append('<span>'+(tax_old-tax_new)+'</span>');	
+		    			}
+		    			
+    				});
+    				
+    			});
+    			
+    		});
+
+    		$('#closeTax').on('click', function(event) {
+    			event.preventDefault();
+    			$('#infoRow').fadeOut('fast', function() {
+    				$('#inputRow').fadeIn('fast', function() {
+    				});
+    			});
+    		});
+    	});
+    </script>
+</body>
+</html>

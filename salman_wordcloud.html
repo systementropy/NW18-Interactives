@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<!-- <script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="d3.layout.cloud.js"></script> -->
+<head>
+    <title>Salman: The names of Bhai</title>
+</head>
+<style>
+    body {
+        font-family:"Lucida Grande","Droid Sans",Arial,Helvetica,sans-serif;
+    }
+    .legend {
+        border: 1px solid #555555;
+        border-radius: 5px 5px 5px 5px;
+        font-size: 0.8em;
+        margin: 10px;
+        padding: 8px;
+    }
+    .bld {
+        font-weight: bold;
+    }
+    #tooltipList{
+        background: rgb(51, 51, 51);width: 200px;z-index: 9999;position: absolute;color: rgb(255, 255, 255);display: none; padding: 15px; font-size: 13px; line-height: 16px;box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+    }
+    #tooltipList p{margin: 0;}
+</style>
+<body>
+    <div>
+        <div id="vis" style="cursor: default;"><svg width="960" height="600" version="1.1" xmlns="http://www.w3.org/2000/svg"><g transform="translate(480,300)scale(1.5625,1.5625)"><text text-anchor="middle" transform="translate(64,-10)" style="font-size: 100px; font-family: Impact; fill: rgb(107, 110, 207);">PREM</text><text text-anchor="middle" transform="translate(56,-140)" style="font-size: 62px; font-family: Impact; fill: rgb(156, 158, 222);">SURAJ</text><text text-anchor="middle" transform="translate(-37,-91)" style="font-size: 55px; font-family: Impact; fill: rgb(99, 121, 57);">RAJ</text><text text-anchor="middle" transform="translate(127,59)" style="font-size: 55px; font-family: Impact; fill: rgb(140, 162, 82);">RAJA</text><text text-anchor="middle" transform="translate(26,22)" style="font-size: 32px; font-family: Impact; fill: rgb(206, 219, 156);">AKASH</text><text text-anchor="middle" transform="translate(-111,57)" style="font-size: 32px; font-family: Impact; fill: rgb(140, 109, 49);">CHULBUL</text><text text-anchor="middle" transform="translate(225,22)" style="font-size: 32px; font-family: Impact; fill: rgb(189, 158, 57);">RADHE</text><text text-anchor="middle" transform="translate(44,-108)" style="font-size: 32px; font-family: Impact; fill: rgb(231, 186, 82);">AMAN</text><text text-anchor="middle" transform="translate(-87,28)" style="font-size: 32px; font-family: Impact; fill: rgb(231, 203, 148);">RAHUL</text><text text-anchor="middle" transform="translate(-169,-126)" style="font-size: 32px; font-family: Impact; fill: rgb(132, 60, 57);">SALMAN</text><text text-anchor="middle" transform="translate(-87,0)" style="font-size: 32px; font-family: Impact; fill: rgb(173, 73, 74);">VEER</text><text text-anchor="middle" transform="translate(-84,-29)" style="font-size: 32px; font-family: Impact; fill: rgb(214, 97, 107);">VICKY</text><text text-anchor="middle" transform="translate(17,147)" style="font-size: 32px; font-family: Impact; fill: rgb(231, 150, 156);">VIJAY</text><text text-anchor="middle" transform="translate(-135,84)" style="font-size: 10px; font-family: Impact; fill: rgb(123, 65, 115);">ADITYA</text><text text-anchor="middle" transform="translate(202,98)" style="font-size: 10px; font-family: Impact; fill: rgb(165, 81, 148);">AJAY</text><text text-anchor="middle" transform="translate(-91,108)" style="font-size: 10px; font-family: Impact; fill: rgb(206, 109, 189);">ALOK</text><text text-anchor="middle" transform="translate(-192,-53)" style="font-size: 10px; font-family: Impact; fill: rgb(222, 158, 214);">ANAND</text><text text-anchor="middle" transform="translate(-61,-58)" style="font-size: 10px; font-family: Impact; fill: rgb(57, 59, 121);">ARJUN</text><text text-anchor="middle" transform="translate(-23,57)" style="font-size: 10px; font-family: Impact; fill: rgb(82, 84, 163);">ARUN</text><text text-anchor="middle" transform="translate(-195,74)" style="font-size: 10px; font-family: Impact; fill: rgb(107, 110, 207);">AVINASH</text><text text-anchor="middle" transform="translate(-21,111)" style="font-size: 10px; font-family: Impact; fill: rgb(156, 158, 222);">AYAAN</text><text text-anchor="middle" transform="translate(130,-108)" style="font-size: 10px; font-family: Impact; fill: rgb(99, 121, 57);">BALKAR</text><text text-anchor="middle" transform="translate(109,95)" style="font-size: 10px; font-family: Impact; fill: rgb(140, 162, 82);">BHAU</text><text text-anchor="middle" transform="translate(-63,117)" style="font-size: 10px; font-family: Impact; fill: rgb(181, 207, 107);">DEVEN</text><text text-anchor="middle" transform="translate(-44,42)" style="font-size: 10px; font-family: Impact; fill: rgb(206, 219, 156);">DEVI</text><text text-anchor="middle" transform="translate(-145,19)" style="font-size: 10px; font-family: Impact; fill: rgb(140, 109, 49);">GOPAL</text><text text-anchor="middle" transform="translate(-152,29)" style="font-size: 10px; font-family: Impact; fill: rgb(189, 158, 57);">HERO</text><text text-anchor="middle" transform="translate(-239,-74)" style="font-size: 10px; font-family: Impact; fill: rgb(231, 186, 82);">IMAAN</text><text text-anchor="middle" transform="translate(-234,-84)" style="font-size: 10px; font-family: Impact; fill: rgb(231, 203, 148);">JAI</text><text text-anchor="middle" transform="translate(170,-119)" style="font-size: 10px; font-family: Impact; fill: rgb(132, 60, 57);">JASWINDER</text><text text-anchor="middle" transform="translate(-204,-44)" style="font-size: 10px; font-family: Impact; fill: rgb(173, 73, 74);">JEET</text><text text-anchor="middle" transform="translate(151,-91)" style="font-size: 10px; font-family: Impact; fill: rgb(214, 97, 107);">JUGNU</text><text text-anchor="middle" transform="translate(-100,-138)" style="font-size: 10px; font-family: Impact; fill: rgb(231, 150, 156);">KARAN</text><text text-anchor="middle" transform="translate(-55,-67)" style="font-size: 10px; font-family: Impact; fill: rgb(123, 65, 115);">KHAN</text><text text-anchor="middle" transform="translate(101,-131)" style="font-size: 10px; font-family: Impact; fill: rgb(165, 81, 148);">KISHAN</text><text text-anchor="middle" transform="translate(144,8)" style="font-size: 10px; font-family: Impact; fill: rgb(206, 109, 189);">LOVELY</text><text text-anchor="middle" transform="translate(-95,-125)" style="font-size: 10px; font-family: Impact; fill: rgb(222, 158, 214);">MANJEET</text><text text-anchor="middle" transform="translate(-235,-47)" style="font-size: 10px; font-family: Impact; fill: rgb(57, 59, 121);">PATHAN</text><text text-anchor="middle" transform="translate(-62,-76)" style="font-size: 10px; font-family: Impact; fill: rgb(82, 84, 163);">PAWAN</text><text text-anchor="middle" transform="translate(-116,93)" style="font-size: 10px; font-family: Impact; fill: rgb(107, 110, 207);">PRITHVI</text><text text-anchor="middle" transform="translate(177,-144)" style="font-size: 10px; font-family: Impact; fill: rgb(156, 158, 222);">RAUL</text><text text-anchor="middle" transform="translate(-43,-142)" style="font-size: 10px; font-family: Impact; fill: rgb(99, 121, 57);">RISHABH</text><text text-anchor="middle" transform="translate(-119,-77)" style="font-size: 10px; font-family: Impact; fill: rgb(140, 162, 82);">ROHAN</text><text text-anchor="middle" transform="translate(221,31)" style="font-size: 10px; font-family: Impact; fill: rgb(181, 207, 107);">ROHIT</text><text text-anchor="middle" transform="translate(-55,107)" style="font-size: 10px; font-family: Impact; fill: rgb(206, 219, 156);">SAAJAN</text><text text-anchor="middle" transform="translate(-238,-132)" style="font-size: 10px; font-family: Impact; fill: rgb(140, 109, 49);">SHYAM</text><text text-anchor="middle" transform="translate(21,-93)" style="font-size: 10px; font-family: Impact; fill: rgb(189, 158, 57);">SUHAAN</text><text text-anchor="middle" transform="translate(-185,63)" style="font-size: 10px; font-family: Impact; fill: rgb(231, 186, 82);">SULTAN</text><text text-anchor="middle" transform="translate(-151,-90)" style="font-size: 10px; font-family: Impact; fill: rgb(231, 203, 148);">TIGER</text><text text-anchor="middle" transform="translate(-167,5)" style="font-size: 10px; font-family: Impact; fill: rgb(132, 60, 57);">VASUDEV</text><text text-anchor="middle" transform="translate(-26,95)" style="font-size: 45px; font-family: Impact; fill: rgb(173, 73, 74);">SAMEER</text></g></svg></div>
+    </div>
+    <div id="tooltipList" style="">
+        
+    </div>
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function(){
+            //console.log($('#vis').children('svg').children('g').children('text'));
+             var frequency_list = {
+                "PREM":['Maine Pyar Kiya','Hum Aapke Hain Koun...!','Andaz Apna Apna','Judwaa','Deewana Mastana','Biwi No. 1','Hum Saath-Saath Hain: We Stand United','Sirf Tum','Chal Mere Bhai','To Fall In Love','No Entry','Marigold','Partner','Ready','Prem Ratan Dhan Payo','No Entry Mein Entry*'],
+                "SURAJ":['Patthar Ke Phool','Auzaar','Pyaar Kiya To Darna Kya','Jab Pyaar Kisise Hota Hai','Hum Tumhare Hain Sanam'],
+                "RAJ":['Khamoshi:The Musical','Har Dil Jo Pyar Karega...','Chori Chori Chupke Chupke','Yeh Hai Jalwa'],
+                "RAJA":['Ek Ladka Ek Ladki','Chandramukhi','Judwaa','Dulhan Hum Le Jayenge'],
+                "SAMEER":['Straight From The Heart','Mujhse Shaadi Karogi','Maine Pyaar Kyun Kiya','Main Aurr Mrs Khanna'],
+                "RAJU":['Jeet','Bandhan','Yeh Hai Jalwa'],
+                "AKASH":['Kurbaan','Saajan'],
+                "CHULBUL":['Dabangg','Dabangg 2'],
+                "RADHE":['Tere Naam','Wanted'],
+                "AMAN":['Kuch Kuch Hota Hai','Koochie Koochie Hota Hai'],
+                "RAHUL":['Jaanam Samjha Karo','Salaam-E-Ishq'],
+                "SALMAN":['Sanam Bewafa','Dushman Duniya Ka'],
+                "VEER":['Tumko Na Bhool Paayenge','Veer'],
+                "VICKY":['Biwi ho to Aisi','Suryavanshi'],
+                "VIJAY":['Dil Tera Aashiq','Prem Ratan Dhan Payo'],
+                "ADITYA":['Lucky: No Time for Love'],
+                "AJAY":['Veergati'],
+                "ALOK":['Baghban'],
+                "ANAND":['Kyon Ki...'],
+                "ARJUN":['Garv: Pride and Honour'],
+                "ARUN":['God Tussi Great Ho'],
+                "AVINASH":['Baabul'],
+                "AYAAN":['Shaadi Karke Phas Gaya Yaar'],
+                "BALKAR":['Heroes'],
+                "BHAU":['Lai Bhaari'],
+                "DEVEN":['Yuvvraaj'],
+                "DEVI":['Kick'],
+                "GOPAL":['Yeh Majhdhaar'],
+                "HERO":['Hello Brother'],
+                "IMAAN":['Saawariya'],
+                "JAI":['Jai Ho'],
+                "JASWINDER":['Heroes'],
+                "JEET":['Dus'],
+                "JUGNU":['Jaagruti'],
+                "KARAN":['Karan Arjun'],
+                "KHAN":['Hello'],
+                "KISHAN":['Sangdil Sanam'],
+                "LOVELY":['Bodyguard'],
+                "MANJEET":['London Dreams'],
+                "PATHAN":['Son of Sardaar'],
+                "PAWAN":['Bajrangi Bhaijaan'],
+                "PRITHVI":['Love'],
+                "RAUL":['Salaam-E-Ishq'],
+                "RISHABH":['Dil Ne Jise Apna Kaha'],
+                "ROHAN":['Nishchaiy'],
+                "ROHIT":['Phir Milenge'],
+                "SAAJAN":['Baaghi: A rebel for love'],
+                "SHYAM":['Chaand kaa Tukdaa'],
+                "SUHAAN":["Jaan-E-Mann: Let's Fall in Love... Again"],
+                "SULTAN":['Sultan'],
+                "TIGER":['Ek Tha Tiger'],
+                "VASUDEV":['Nishchaiy']
+            };
+            $("body").mousemove(function(e) {
+                document.posCursorX = e.pageX;
+                document.posCursorY = e.pageY;
+                //console.log(e.pageY,e.pageX);
+            })
+            $('#vis').children('svg').children('g').children('text').on('mouseenter', function(event) {
+                event.preventDefault();
+                //console.log($(this)[0].innerHTML);
+                
+                $('#tooltipList').css({'left':document.posCursorX+'px','top':document.posCursorY+'px'});
+                /*$('#tooltipList').append()*/
+                for (var i = 0; i < frequency_list[$(this)[0].innerHTML].length; i++) {
+                    $('#tooltipList').append('<p>'+frequency_list[$(this)[0].innerHTML][i]+'</p>');
+                }
+                $('#tooltipList').show();
+                /* Act on the event */
+            }).mouseleave(function(event) {
+                /* Act on the event */
+                $('#tooltipList').html('');
+                $('#tooltipList').hide();
+            });;
+        });
+    </script>
+</body>
+
+    
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCPWLIwkrq01PRx4F6fgijOLwDl2PRTN8s&callback=initMap" type="text/javascript"></script>
+	<style>
+		#map{width: 100%;height: 400px;}
+	</style>
+</head>
+<body>
+	<div id="map"></div>
+	<!-- <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script> -->
+	<script>
+	      function initMap() {
+	        var uluru = {lat: 27.0313142, lng: 81.1636354};
+	        var map = new google.maps.Map(document.getElementById('map'), {
+	          zoom: 7,
+	          center: uluru
+	        });
+	        var marker = new google.maps.Marker({
+	          position: uluru,
+	          map: map
+	        });
+	      }
+	</script>
+	<!-- <script>
+		/*AIzaSyCPWLIwkrq01PRx4F6fgijOLwDl2PRTN8s*/
+		$(document).ready(function() {
+			var map;
+	
+			function initMap() {
+			  map = new google.maps.Map(document.getElementById('map'), {
+			    center: {lat: 45.518, lng: -122.672},
+			    zoom: 18,
+			    mapTypeId: 'satellite',
+			    heading: 90,
+			    tilt: 45
+			  });
+			}
+	
+			function rotate90() {
+			  var heading = map.getHeading() || 0;
+			  map.setHeading(heading + 90);
+			}
+	
+			function autoRotate() {
+			  // Determine if we're showing aerial imagery.
+			  if (map.getTilt() !== 0) {
+			    window.setInterval(rotate90, 3000);
+			  }
+			}
+			
+		});
+	</script> -->
+</body>
+</html>

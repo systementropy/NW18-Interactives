@@ -286,6 +286,7 @@
 				},
 				title: "Trump's tweet and reaction analysis",
 				bubble: {textStyle: {fontSize: 0,color:'transparent'},opacity:0.5},
+				sizeAxis:{maxSize:10,minSize:2},
 				colorAxis: {colors: ['#4DD0E1', '#00838F']}
 			};
 
@@ -480,6 +481,7 @@
 					logScale:true,
 					//ticks: [],
 				},
+				sizeAxis:{maxSize:7,minSize:2},
 				title: "Trump's tweet and reaction analysis",
 				bubble: {textStyle: {fontSize: 0,color:'transparent'},opacity:0.5},
 				colorAxis: {colors: ['#4DD0E1', '#00838F']}
@@ -655,7 +657,7 @@
 			]);
 
 			var options = {
-				chartArea: {width: '100%', height: '100%'},
+				chartArea: {width: '100%', height: '80%',marginTop:'40px'},
 				legend: {position: 'in'},
 				titlePosition: 'in',
 				axisTitlesPosition: 'in',
@@ -670,7 +672,7 @@
 					//logScale:true
 				},
 				vAxis: {
-					title: 'Likes',
+					title: 'Number of Tweets',
 					textPosition: 'in',
 					gridlines:{color:'transparent'},
 					baselineColor:'transparent',
@@ -679,7 +681,8 @@
 				},
 				title: "Trump's tweet and reaction analysis",
 				bubble: {textStyle: {fontSize: 0,color:'transparent'},opacity:0.5},
-				colorAxis: {colors: ['#4DD0E1', '#00838F']}
+				colorAxis: {colors: ['#4DD0E1', '#00838F']},
+				sizeAxis:{maxSize:7,minSize:1}
 			};
 
 			var chart = new google.visualization.BubbleChart(document.getElementById('series_chart_div3'));

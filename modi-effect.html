@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAn2vLVeXXK2KK-htz7_PEDSrEKhMiRmKc" type="text/javascript"></script>
+	<script type='text/javascript' src='https://www.gstatic.com/charts/loader.js'></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<style>
+		#chart_div path {
+			stroke-width:0; /* control the countries borders width */
+			stroke:#6699cc; /* choose a color for the border */
+		}
+	</style>
+	<script type='text/javascript'>
+
+		
+
+		$(document).ready(function() {
+			google.charts.load('upcoming', {'packages': ['geochart']});
+			google.charts.setOnLoadCallback(initMap);
+			var data;
+			var opts;
+			var geochart;
+			function initMap() {
+				data = new google.visualization.DataTable();
+				data.addColumn('string', 'State');
+				data.addColumn('number', 'Presence of BJP');
+				data.addRows([[
+					'Bihar',0
+				]]);
+				opts = {
+
+					region: 'IN',
+					domain:'IN',
+					displayMode: 'regions',
+					resolution: 'provinces',
+					width: 640, 
+					height: 480,
+					defaultColor:"#FFFFFF",
+					datalessRegionColor:"#FFF",
+					animation:{
+						startup:'true',
+						duration:2000,
+						easing:'out'
+					},
+					colorAxis:{colors: ['#FFF', '#FF9933']}
+				};
+				geochart = new google.visualization.GeoChart(
+					document.getElementById('chart_div')
+				);
+				geochart.draw(data, opts);
+				//console.log(data);
+				var dataArr= [
+					[{'name':'Gujarat','val':1}],
+					[{'name':'Chhattisgarh','val':1}],
+					[{'name':'Madhya Pradesh','val':1}],
+					[{'name':'Punjab', 'val':0.5}],
+					[{'name':'Nagaland', 'val':0.5}],
+					[{'name':'Goa','val':1}],
+					[{'name':'Rajasthan','val':1}],
+					[{'name':'Andhra Pradesh', 'val':0.5}],
+					[{'name':'Maharashtra','val':1}],
+					[{'name':'Haryana','val':1}],
+					[{'name':'Jammu and Kashmir', 'val':0.5}],
+					[{'name':'Jharkhand','val':1}],
+					[{'name':'Assam','val':1}],
+					[{'name':'Sikkim', 'val':0.5}],
+					[{'name':'Arunachal Pradesh','val':1}],
+					
+				];
+				function plotData(){
+					for(var i=0;i<7;i++){
+						
+						data.addRows([[
+							dataArr[i][0]['name'],
+							dataArr[i][0]['val']
+						]]);	
+					}
+					geochart.draw(data, opts);
+					setTimeout(function() {
+						data.addRows([[
+							dataArr[7][0]['name'],dataArr[7][0]['val']
+						]]);
+						geochart.draw(data, opts);
+						setTimeout(function() {
+							for(var i=8;i<10;i++){
+								data.addRows([[
+									dataArr[i][0]['name'],
+									dataArr[i][0]['val']
+								]]);
+								geochart.draw(data, opts);
+								setTimeout(function() {
+									for(var i=10;i<12;i++){
+										data.addRows([[
+											dataArr[i][0]['name'],
+											dataArr[i][0]['val']
+										]]);
+										geochart.draw(data, opts);
+										setTimeout(function() {
+											for(var i=12;i<14;i++){
+												data.addRows([[
+													dataArr[i][0]['name'],
+													dataArr[i][0]['val']
+												]]);
+												geochart.draw(data, opts);
+												setTimeout(function() {
+													for(var i=14;i<15;i++){
+														data.addRows([[
+															dataArr[i][0]['name'],
+															dataArr[i][0]['val']
+														]]);
+														geochart.draw(data, opts);
+													}
+												},1000);
+											}
+										},1000);
+									}
+								},1000);
+							}
+						},1000);
+					}, 1000);
+				};
+				plotData();
+				//data.addRows([['Maharashtra', 1]]);
+				
+			};
+
+		});
+	</script>
+</head>
+<body>
+	<div id="chart_div" style="width: 900px; height: 500px;margin:0 auto;"></div>
+</body>
+</html>

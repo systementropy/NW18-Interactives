@@ -5,16 +5,38 @@
 	<script type='text/javascript' src='https://www.gstatic.com/charts/loader.js'></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<style>
-		#chart_div path {
+		/*#main_container{display: none;}*/
+		#chart_div path ,#chart_div1 path{
 			stroke-width:0; /* control the countries borders width */
 			stroke:#6699cc; /* choose a color for the border */
 		}
+		object.svgUtr {
+			position: absolute;
+			height: 52px;
+			top: 111.5px;
+			left: 372.5px;
+		}
+		object#svg4 {
+		        left: 407px;
+    top: 221px;
+    height: 116px;
+		}
+		object#svg5 {
+		    height: 110px;
+		    left: 359px;
+		    top: 294px;
+		    display: none;	
+		}
+		#svg2,#svg3{display: none;z-index: 5}
 	</style>
 	<script type='text/javascript'>
 
 		
 
 		$(document).ready(function() {
+			var yearObj={
+
+			};
 			google.charts.load('upcoming', {'packages': ['geochart']});
 			google.charts.setOnLoadCallback(initMap);
 			var data;
@@ -24,30 +46,67 @@
 				data = new google.visualization.DataTable();
 				data.addColumn('string', 'State');
 				data.addColumn('number', 'Presence of BJP');
-				data.addRows([[
-					'Bihar',0
-				]]);
+				data.addRows([
+					['Bihar',0],
+					['Orissa',0],
+					['Uttar Pradesh',0],
+					['Punjab',0],
+					['Gujarat',0],	
+					['Chhattisgarh',0],	
+					['Madhya Pradesh',0],	
+					['Punjab]',0],	
+					['Nagaland]',0],	
+					['Goa',0],	
+					['Rajasthan',0],	
+					['Andhra Pradesh',0],	
+					['Maharashtra',0],	
+					['Haryana',0],	
+					['Jammu and Kashmir',0],	
+					['Jharkhand',0],	
+					['Assam',0],	
+					['Sikkim]',0],	
+					['Arunachal Pradesh',0],
+					['Himachal Pradesh',0],
+					['West Bengal',0],
+					['Kerala',0],
+					['Karnataka',0],
+					['Tamil Nadu',0],
+					['Uttarakhand',0],
+					['Manipur',0],
+					['Sikkim',0],
+					['Meghalaya',0],
+					['Telangana',0],
+					['Mizoram',0],
+					['Tripura',0],
+					['Delhi',0]
+				]);
 				opts = {
 
 					region: 'IN',
 					domain:'IN',
 					displayMode: 'regions',
 					resolution: 'provinces',
-					width: 640, 
-					height: 480,
-					defaultColor:"#FFFFFF",
+					width: '100%', 
+					defaultColor:"#EEE",
 					datalessRegionColor:"#FFF",
 					animation:{
 						startup:'true',
 						duration:2000,
 						easing:'out'
 					},
-					colorAxis:{colors: ['#FFF', '#FF9933']}
+					region_type:'instates',
+					legend: 'none',
+					tooltip :{
+				       trigger: 'none'
+				    },
+					colorAxis:{colors: ['#EEE', '#FF9933']},
+
 				};
 				geochart = new google.visualization.GeoChart(
 					document.getElementById('chart_div')
 				);
 				geochart.draw(data, opts);
+
 				//console.log(data);
 				var dataArr= [
 					[{'name':'Gujarat','val':1}],
@@ -57,7 +116,7 @@
 					[{'name':'Nagaland', 'val':0.5}],
 					[{'name':'Goa','val':1}],
 					[{'name':'Rajasthan','val':1}],
-					[{'name':'Andhra Pradesh', 'val':0.5}],
+					[{'name':'Andhra Pradesh', 'val':0}],
 					[{'name':'Maharashtra','val':1}],
 					[{'name':'Haryana','val':1}],
 					[{'name':'Jammu and Kashmir', 'val':0.5}],
@@ -65,9 +124,14 @@
 					[{'name':'Assam','val':1}],
 					[{'name':'Sikkim', 'val':0.5}],
 					[{'name':'Arunachal Pradesh','val':1}],
-					
 				];
 				function plotData(){
+					/*setTimeout(function(){
+						opts.displayMode='text';
+						geochart.draw(data, opts);
+						
+					},1000);*/
+
 					for(var i=0;i<7;i++){
 						
 						data.addRows([[
@@ -75,59 +139,144 @@
 							dataArr[i][0]['val']
 						]]);	
 					}
+					opts.displayMode='region';
 					geochart.draw(data, opts);
-					setTimeout(function() {
-						data.addRows([[
-							dataArr[7][0]['name'],dataArr[7][0]['val']
-						]]);
+					setTimeout(function(){
+						$('#svg5').show();
 						geochart.draw(data, opts);
-						setTimeout(function() {
+						setTimeout(function(){
 							for(var i=8;i<10;i++){
 								data.addRows([[
 									dataArr[i][0]['name'],
 									dataArr[i][0]['val']
 								]]);
+							}
+							geochart.draw(data, opts);
+							setTimeout(function(){
+								for(var i=10;i<12;i++){
+									data.addRows([[
+										dataArr[i][0]['name'],
+										dataArr[i][0]['val']
+									]]);
+								}
 								geochart.draw(data, opts);
-								setTimeout(function() {
-									for(var i=10;i<12;i++){
+								setTimeout(function(){
+									for(var i=12;i<14;i++){
 										data.addRows([[
 											dataArr[i][0]['name'],
 											dataArr[i][0]['val']
 										]]);
-										geochart.draw(data, opts);
-										setTimeout(function() {
-											for(var i=12;i<14;i++){
-												data.addRows([[
-													dataArr[i][0]['name'],
-													dataArr[i][0]['val']
-												]]);
-												geochart.draw(data, opts);
-												setTimeout(function() {
-													for(var i=14;i<15;i++){
-														data.addRows([[
-															dataArr[i][0]['name'],
-															dataArr[i][0]['val']
-														]]);
-														geochart.draw(data, opts);
-													}
-												},1000);
-											}
-										},1000);
 									}
+									geochart.draw(data, opts);
+									setTimeout(function(){
+										for(var i=14;i<15;i++){
+											data.addRows([[
+												dataArr[i][0]['name'],
+												dataArr[i][0]['val']
+											]]);
+										}
+										geochart.draw(data, opts);
+										setTimeout(function(){
+											data.addRows([['Uttar Pradesh',1]]);
+											data.addRows([['Goa',0]]);
+											data.addRows([['Punjab',0]]);
+											geochart.draw(data, opts);
+											$('#svg2').show();
+											
+										},1000);
+									},1000);
 								},1000);
-							}
+							},1000);
 						},1000);
-					}, 1000);
+					},1000);
 				};
 				plotData();
 				//data.addRows([['Maharashtra', 1]]);
-				
+				data1 = new google.visualization.DataTable();
+				data1.addColumn('string', 'State');
+				data1.addColumn('number', 'Presence of BJP');
+				data1.addRows([
+					['Uttar Pradesh',1],
+					['Gujarat',1],	
+					['Madhya Pradesh',1],	
+					['Rajasthan',1],	
+					['Andhra Pradesh',1],	
+					['Maharashtra',1],	
+					['Haryana',1],	
+					['Jammu and Kashmir',1],	
+					['Jharkhand',1],	
+					['Assam',1],	
+					['Sikkim',1],	
+					['Arunachal Pradesh',1],
+					['Uttarakhand',1],
+					['Chhattisgarh',1]
+				]);
+				opts1 = {
+
+					region: 'IN',
+					domain:'IN',
+					displayMode: 'text',
+					resolution: 'provinces',
+					width: '100%', 
+					defaultColor:"transparent",
+					datalessRegionColor:"transparent",
+					animation:{
+						startup:'true',
+						duration:2000,
+						easing:'out'
+					},
+					backgroundColor:'transparent',
+					region_type:'instates',
+					legend: 'none',
+					tooltip :{
+				       trigger: 'none'
+				    },
+				    regionColor:'#666',
+					colorAxis:{colors: ['#333', '#666']},
+
+				};
+				geochart1 = new google.visualization.GeoChart(
+					document.getElementById('chart_div1')
+				);
+				geochart1.draw(data1, opts1);
+				google.visualization.events.addListener(geochart1, 'ready', function(){
+
+					var dataDisplay = {
+						'Uttar Pradesh':'11/03/2017',
+						'Gujarat':'28/02/1998',	
+						'Chhattisgarh':'04/12/2003',
+						'Madhya Pradesh':'04/12/2003',	
+						'Rajasthan':'08/12/2013',	
+						'Andhra Pradesh':'16/05/2014',	
+						'Maharashtra':'19/10/2014',	
+						'Haryana':'19/10/2014',	
+						'Jammu and Kashmir':'23/12/2014',	
+						'Jharkhand':'23/12/2014',	
+						'Assam':'24/05/2016',	
+						'Sikkim':'24/05/2016',	
+						'Arunachal Pradesh':'16/09/2016',
+						'Uttarakhand':'11/03/2017',
+					};
+
+					$('text').each(function(){
+						var key = $(this).text();
+						$(this).html(dataDisplay[key]);
+					});
+					
+				});
+
 			};
 
 		});
 	</script>
 </head>
 <body>
-	<div id="chart_div" style="width: 900px; height: 500px;margin:0 auto;"></div>
+	<div id="main_container" style="position: relative;width: 900px; height: 500px;margin:0 auto;">
+		<div id="chart_div" style="width: 900px; height: 500px;margin:0 auto;"></div>
+		<div id="chart_div1" style="width: 900px; height: 500px;margin:0 auto;position: absolute;top: 0;z-index: 10;"></div>
+		<object class="svgUtr" id="svg1" data="images/utr.svg" type="image/svg+xml" fill="#FFF000"></object>
+		<object class="svgUtr" id="svg2" data="images/utr_fill.svg" type="image/svg+xml" fill="#FFF000"></object>
+ 		<object class="svgUtr" id="svg5" data="images/ap.svg" type="image/svg+xml" fill="#FFF000"></object>
+	</div>
 </body>
 </html>

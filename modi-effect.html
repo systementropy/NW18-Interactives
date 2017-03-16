@@ -86,7 +86,7 @@
 					domain:'IN',
 					displayMode: 'regions',
 					resolution: 'provinces',
-					width: '100%', 
+					height: '700px', 
 					defaultColor:"#EEE",
 					datalessRegionColor:"#FFF",
 					animation:{
@@ -178,8 +178,9 @@
 										geochart.draw(data, opts);
 										setTimeout(function(){
 											data.addRows([['Uttar Pradesh',1]]);
-											data.addRows([['Goa',0]]);
+											data.addRows([['Goa',1]]);
 											data.addRows([['Punjab',0]]);
+											data.addRows([['Manipur',0]]);
 											geochart.draw(data, opts);
 											$('#svg2').show();
 											
@@ -192,7 +193,7 @@
 				};
 				plotData();
 				//data.addRows([['Maharashtra', 1]]);
-				data1 = new google.visualization.DataTable();
+				/*data1 = new google.visualization.DataTable();
 				data1.addColumn('string', 'State');
 				data1.addColumn('number', 'Presence of BJP');
 				data1.addRows([
@@ -209,7 +210,9 @@
 					['Sikkim',1],	
 					['Arunachal Pradesh',1],
 					['Uttarakhand',1],
-					['Chhattisgarh',1]
+					['Chhattisgarh',1],
+					['Goa',1],
+					['Manipur',1]
 				]);
 				opts1 = {
 
@@ -217,7 +220,7 @@
 					domain:'IN',
 					displayMode: 'text',
 					resolution: 'provinces',
-					width: '100%', 
+					height: '700px', 
 					defaultColor:"transparent",
 					datalessRegionColor:"transparent",
 					animation:{
@@ -256,6 +259,8 @@
 						'Sikkim':'24/05/2016',	
 						'Arunachal Pradesh':'16/09/2016',
 						'Uttarakhand':'11/03/2017',
+						'Goa':'11/03/2017',
+						'Manipur':'11/03/2017',
 					};
 
 					$('text').each(function(){
@@ -263,7 +268,7 @@
 						$(this).html(dataDisplay[key]);
 					});
 					
-				});
+				});*/
 
 			};
 
@@ -273,7 +278,7 @@
 <body>
 	<div id="main_container" style="position: relative;width: 900px; height: 500px;margin:0 auto;">
 		<div id="chart_div" style="width: 900px; height: 500px;margin:0 auto;"></div>
-		<div id="chart_div1" style="width: 900px; height: 500px;margin:0 auto;position: absolute;top: 0;z-index: 10;"></div>
+		<!-- <div id="chart_div1" style="width: 900px; height: 500px;margin:0 auto;position: absolute;top: 0;z-index: 10;"></div> -->
 		<object class="svgUtr" id="svg1" data="images/utr.svg" type="image/svg+xml" fill="#FFF000"></object>
 		<object class="svgUtr" id="svg2" data="images/utr_fill.svg" type="image/svg+xml" fill="#FFF000"></object>
  		<object class="svgUtr" id="svg5" data="images/ap.svg" type="image/svg+xml" fill="#FFF000"></object>

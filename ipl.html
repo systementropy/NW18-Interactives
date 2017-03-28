@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>IPL: An insight into the decade</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<style>
+		.no-point{pointer-events: none;}
+		.pull-left{float: left}
+		.pull-right{float: right}
+		.clearAfter:after{
+			display: block;
+			height: 0px;
+			clear: both;
+			content: " ";
+		}
+		.teamNameSelc,.teamAgainst,.teamAgainstTop{
+			width: 11.1%;
+			background: transparent;
+		}
+		.teamNameSelc{
+			cursor: pointer;
+		}
+		.eachTeamRow>div,.eachTeamRowMain>div{
+			background: transparent;
+			box-shadow: 2px 2px 2px rgba(0,0,0,0.05);
+			
+		}
+		.eachTeamRow,.eachTeamRowMain{
+			background: transparent;
+			transition: all 0.4s ease-in-out;
+		}
+		.iplInner{
+			/*background: -webkit-gradient(linear, left top, right top, from(rgba(75, 140, 200, 0.7)), to(rgba(18, 52, 133, 0.7)));
+			background: -webkit-linear-gradient(left, rgba(18, 52, 133, 0.7), rgba(75, 140, 200, 0.7));
+			background: -moz-linear-gradient(left, rgba(18, 52, 133, 0.7), rgba(75, 140, 200, 0.7));
+			background: -ms-linear-gradient(left, rgba(18, 52, 133, 0.7), rgba(75, 140, 200, 0.7));
+			background: -o-linear-gradient(left, rgba(18, 52, 133, 0.7), rgba(75, 140, 200, 0.7));*/
+			-khtml-opacity:.20; 
+			-moz-opacity:.20; 
+			-ms-filter:"alpha(opacity=20)";
+			filter:alpha(opacity=20);
+			filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0.7);
+			opacity:.20;
+			width: 100%;
+			height: 100%;
+			z-index: -1;
+			position: absolute;
+			background: url('images/ipl_bg.jpg') no-repeat center;
+			filter: blur(20px);
+		}
+		.eachTeamRow.MI.active{
+			/*background: -webkit-gradient(linear, left top, right top, from(#F4CD3E), to(#034B8F));
+			background: -webkit-linear-gradient(left, #034B8F, #F4CD3E);
+			background: -moz-linear-gradient(left, #034B8F, #F4CD3E);
+			background: -ms-linear-gradient(left, #034B8F, #F4CD3E);
+			background: -o-linear-gradient(left, #034B8F, #F4CD3E);*/
+			transition: all 0.4s ease-in-out;
+		}
+		.eachTeamRow.MI>.teamAgainst{
+			transform: scale(1);
+			background: -webkit-linear-gradient(left, rgba(244, 205, 62, 0), rgba(3, 75, 143, 0));
+			background: -moz-linear-gradient(left, rgba(244, 205, 62, 0), rgba(3, 75, 143, 0));
+			background: -ms-linear-gradient(left, rgba(244, 205, 62, 0), rgba(3, 75, 143, 0));
+			background: -o-linear-gradient(left, rgba(244, 205, 62, 0), rgba(3, 75, 143, 0));
+			transition: all 0.4s ease-in-out;
+		}
+		/*.eachTeamRow.MI>.teamAgainst:hover{
+			transform: scale(1.2);
+			background: -webkit-linear-gradient(left, rgba(244, 205, 62, 1), rgba(3, 75, 143, 1));
+			background: -moz-linear-gradient(left, rgba(244, 205, 62, 1), rgba(3, 75, 143, 1));
+			background: -ms-linear-gradient(left, rgba(244, 205, 62, 1), rgba(3, 75, 143, 1));
+			background: -o-linear-gradient(left, rgba(244, 205, 62, 1), rgba(3, 75, 143, 1));
+			transition: all 0.4s ease-in-out;
+		}*/
+		.blur{
+			filter: blur(6px);
+			pointer-events: none;
+		}
+		.flip-container {
+			perspective: 1000px;
+		}
+		/* flip the pane when hovered */
+		.flip-container:hover .flipper, .flip-container.hover .flipper {
+			transform: rotateY(180deg);
+		}
+
+		.front, .back {
+			width: 100%;
+			height: 100%;	
+		}
+
+		/* flip speed goes here */
+		.flipper {
+			transition: 0.6s linear;
+			transform-style: preserve-3d;
+			height: 100%;
+			position: relative;
+			font-size: 24px;
+    		font-weight: bold;
+		}
+
+		/* hide back of pane during swap */
+		.front, .back {
+			backface-visibility: hidden;
+			height: 100%;
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+
+		/* front pane, placed above back */
+		.front {
+			z-index: 2;
+			/* for firefox 31 */
+			background: rgba(255,255,255,0.25);
+			transform: rotateY(0deg);
+		}
+
+		/* back, initially hidden pane */
+		.back {
+			background: rgba(0,0,0,0.4);
+			transform: rotateY(180deg);
+			color: #FFF;
+		}
+	</style>
+</head>
+<body>
+	<div class="iplMain container-fluid">
+		<div class=" row">
+			<div class="iplInner"></div>
+			<div class="eachTeamRowMain eachTeamRow text-center clearAfter">
+				<div class="teamNameSelc pull-left"></div>
+				<div class="teamAgainstTop pull-left ">
+					<div class="">
+						<span class="frontDisp">MI</span>
+						
+					</div>
+				</div>
+				<div class="teamAgainstTop pull-left ">
+					<div class="">
+						<span class="frontDisp">RCB</span>
+						
+					</div>
+				</div>
+				<div class="teamAgainstTop pull-left ">
+					<div class="">
+						<span class="frontDisp">KKR</span>
+						
+					</div>
+				</div>
+				<div class="teamAgainstTop pull-left ">
+					<div class="">
+						<span class="frontDisp">GL</span>
+						
+					</div>
+				</div>
+				<div class="teamAgainstTop pull-left ">
+					<div class="">
+						<span class="frontDisp">SRH</span>
+						
+					</div>
+				</div>
+				<div class="teamAgainstTop pull-left ">
+					<div class="">
+						<span class="frontDisp">RPS</span>
+						
+					</div>
+				</div>
+				<div class="teamAgainstTop pull-left ">
+					<div class="">
+						<span class="frontDisp">DD</span>
+						
+					</div>
+				</div>
+				<div class="teamAgainstTop pull-left ">
+					<div class="">
+						<span class="frontDisp">KXIP</span>
+						
+					</div>
+				</div>
+			</div>
+			<div class="eachTeamRow text-center clearAfter MI">
+				<div class="teamNameSelc pull-left">MI</div>
+				<div class="teamAgainst pull-left flip-container no-point">
+					<div class="flipper">
+						<span class="front frontDisp"></span>
+						<span class="backDisp back"></span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">11/8</span>
+						<span class="backDisp back">57.9%</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">13/5</span>
+						<span class="backDisp back">72.2%</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">0/2</span>
+						<span class="backDisp back">0%</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">4/4</span>
+						<span class="backDisp back">50%</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">1/1</span>
+						<span class="backDisp back">50%</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">9/9</span>
+						<span class="backDisp back">50%</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">9/9</span>
+						<span class="backDisp back">50%</span>
+					</div>
+				</div>
+			</div>
+			<div class="eachTeamRow text-center clearAfter RCB">
+				<div class="teamNameSelc pull-left">RCB</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">8/11</span>
+						<span class="backDisp back">42.1%</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container no-point">
+					<div class="flipper">
+						<span class="front frontDisp"></span>
+						<span class="backDisp back"></span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">9/9</span>
+						<span class="backDisp back">50%</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">2/1</span>
+						<span class="backDisp back">66.7%</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">4/5</span>
+						<span class="backDisp back">44.4%</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">2/0</span>
+						<span class="backDisp back">100%</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">10/6/1</span>
+						<span class="backDisp back">58.8%</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">8/10</span>
+						<span class="backDisp back">44.4%</span>
+					</div>
+				</div>
+			</div>
+			<div class="eachTeamRow text-center clearAfter KKR">
+				<div class="teamNameSelc pull-left">KKR</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">5/13</span>
+						<span class="backDisp back">27.8%</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">9/9</span>
+						<span class="backDisp back">50%</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container no-point">
+					<div class="flipper">
+						<span class="front frontDisp"></span>
+						<span class="backDisp back">	</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">0/2</span>
+						<span class="backDisp back">0%</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">6/3</span>
+						<span class="backDisp back">66.6%</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">2/0</span>
+						<span class="backDisp back">100%</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">10/7/1</span>
+						<span class="backDisp back">55.6%</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">12/7</span>
+						<span class="backDisp back">63.2%</span>
+					</div>
+				</div>
+			</div>
+			<div class="eachTeamRow text-center clearAfter GL">
+				<div class="teamNameSelc pull-left">GL</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">2/0</span>
+						<span class="backDisp back">100%</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">1/2</span>
+						<span class="backDisp back">50%</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">2/0</span>
+						<span class="backDisp back">100%</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container no-point">
+					<div class="flipper">
+						<span class="front frontDisp"></span>
+						<span class="backDisp back">	</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">0/3</span>
+						<span class="backDisp back">0%</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">2/0</span>
+						<span class="backDisp back">100%</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">1/1</span>
+						<span class="backDisp back">50%</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">1/1</span>
+						<span class="backDisp back">50%</span>
+					</div>
+				</div>
+			</div>
+			<div class="eachTeamRow text-center clearAfter SRH">
+				<div class="teamNameSelc pull-left">SRH</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">4/4</span>
+						<span class="backDisp back">50%</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">5/4</span>
+						<span class="backDisp back">55.6%</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">3/6</span>
+						<span class="backDisp back">33.3%</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">3/0</span>
+						<span class="backDisp back">100%</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container no-point">
+					<div class="flipper">
+						<span class="front frontDisp"></span>
+						<span class="backDisp back">	</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">1/1</span>
+						<span class="backDisp back">50%</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">5/3</span>
+						<span class="backDisp back">62.5%</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">6/2</span>
+						<span class="backDisp back">75%</span>
+					</div>
+				</div>
+			</div>
+			<div class="eachTeamRow text-center clearAfter RPS">
+				<div class="teamNameSelc pull-left">RPS</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">1/1</span>
+						<span class="backDisp back">50%</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">0/2</span>
+						<span class="backDisp back">0%</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">0/2</span>
+						<span class="backDisp back">0%</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">0/2</span>
+						<span class="backDisp back">0%</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">1/1</span>
+						<span class="backDisp back">50%</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container no-point">
+					<div class="flipper">
+						<span class="front frontDisp"></span>
+						<span class="backDisp back">	</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">2/0</span>
+						<span class="backDisp back">100%</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">1/1</span>
+						<span class="backDisp back">50%</span>
+					</div>
+				</div>
+			</div>
+			<div class="eachTeamRow text-center clearAfter DD">
+				<div class="teamNameSelc pull-left">DD</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">9/9</span>
+						<span class="backDisp back">50%</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">6/10/1</span>
+						<span class="backDisp back">35.3%</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">7/10/1</span>
+						<span class="backDisp back">38.9%</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">1/1</span>
+						<span class="backDisp back">50%</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">3/5</span>
+						<span class="backDisp back">37.5%</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">0/2</span>
+						<span class="backDisp back">0%</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container no-point">
+					<div class="flipper">
+						<span class="front frontDisp"></span>
+						<span class="backDisp back">	</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">8/10</span>
+						<span class="backDisp back">44.4%</span>
+					</div>
+				</div>
+			</div>
+			<div class="eachTeamRow text-center clearAfter KXIP">
+				<div class="teamNameSelc pull-left">KXIP</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">9/9</span>
+						<span class="backDisp back">50%</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">10/8</span>
+						<span class="backDisp back">55.6%</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">7/12</span>
+						<span class="backDisp back">36.9%</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">1/1</span>
+						<span class="backDisp back">50%</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">6/2</span>
+						<span class="backDisp back">25%</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">1/1</span>
+						<span class="backDisp back">50%</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="front frontDisp">10/8</span>
+						<span class="backDisp back">55.6%</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container no-point">
+					<div class="flipper">
+						<span class="front frontDisp"></span>
+						<span class="backDisp back">	</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			var windowHeight = $(window).height();
+			var windowWidth = $(window).width();
+			var gridHeight = windowHeight/9;
+			$('.eachTeamRow').css({
+				width: 100+'%',
+				height: gridHeight+'px',
+				lineHeight: gridHeight+'px'
+			});
+			$('.teamNameSelc').css({
+				height: gridHeight+'px'
+			});
+			$('.teamAgainst').css({
+				height: gridHeight+'px'
+			});
+			$('div.teamAgainstTop').on('click', function(){
+				
+				if($(this).hasClass('active')){
+					$(this).removeClass('active');
+				}else {
+					var index = $('div.teamAgainstTop').index(this);
+					$('.teamAgainst').addClass('blur');
+					$('.eachTeamRow').children('teamAgainst:eq('+index+')').removeClass('blur');
+					console.log($('.eachTeamRow').children('teamAgainst:eq('+index+')'));	
+				}
+				
+			});
+			$('.teamNameSelc').on('click', function(){
+				if ( $(this).parent('.eachTeamRow').hasClass('active') ) {
+					$('.eachTeamRow').children('.teamAgainst').removeClass('blur');
+					
+					$(this).parent('.eachTeamRow').removeClass('active');	
+				}else{
+					$('.eachTeamRow').removeClass('active');
+					$('.eachTeamRow').children('.teamAgainst').addClass('blur');
+					
+					$(this).parent('.eachTeamRow').children('.teamAgainst').removeClass('blur');
+					$(this).parent('.eachTeamRow').addClass('active');
+				}
+				
+			});
+
+		});
+	</script>
+</body>
+</html>

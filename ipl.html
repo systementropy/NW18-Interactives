@@ -45,7 +45,8 @@
 			height: 100%;
 			z-index: -1;
 			position: absolute;
-			background: url('images/ipl_bg.jpg') no-repeat center;
+			/*background: url('images/ipl_bg.jpg') no-repeat center;*/
+			background: #333;
 			filter: blur(20px);
 		}
 		.eachTeamRow.MI.active{
@@ -122,12 +123,26 @@
 			transform: rotateY(180deg);
 			color: #FFF;
 		}
+		/*html,body,svg{
+		  margin:0;
+		  border:0;
+		  padding:0;
+		  height:100%;
+		  width:100%;
+		}*/
+		canvas{
+			position: absolute;
+			z-index: -1;
+			height: 120%;
+			left: 0;
+		}
 	</style>
 </head>
 <body>
 	<div class="iplMain container-fluid">
-		<div class=" row">
+		<div class="row">
 			<div class="iplInner"></div>
+			
 			<div class="eachTeamRowMain eachTeamRow text-center clearAfter">
 				<div class="teamNameSelc pull-left"></div>
 				<div class="teamAgainstTop pull-left ">
@@ -183,50 +198,50 @@
 				<div class="teamNameSelc pull-left">MI</div>
 				<div class="teamAgainst pull-left flip-container no-point">
 					<div class="flipper">
-						<span class="front frontDisp"></span>
-						<span class="backDisp back"></span>
+						<span class="front frontDisp">		</span>
+						<span class="backDisp back"><canvas id="this11" data-atrrrr="canvas"></canvas></span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">11/8</span>
-						<span class="backDisp back">57.9%</span>
+						<span class="backDisp back"><canvas id="this12" data-atrrrr="57.9"></canvas>57.9%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">13/5</span>
-						<span class="backDisp back">72.2%</span>
+						<span class="backDisp back"><canvas id="this13" data-atrrrr="72.2"></canvas>72.2%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">0/2</span>
-						<span class="backDisp back">0%</span>
+						<span class="backDisp back"><canvas id="this14" data-atrrrr="0"></canvas>0%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">4/4</span>
-						<span class="backDisp back">50%</span>
+						<span class="backDisp back"><canvas id="this15" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">1/1</span>
-						<span class="backDisp back">50%</span>
+						<span class="backDisp back"><canvas id="this16" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">9/9</span>
-						<span class="backDisp back">50%</span>
+						<span class="backDisp back"><canvas id="this17" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">9/9</span>
-						<span class="backDisp back">50%</span>
+						<span class="backDisp back"><canvas id="this18" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 			</div>
@@ -235,49 +250,49 @@
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">8/11</span>
-						<span class="backDisp back">42.1%</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr="42.1"></canvas>42.1%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container no-point">
 					<div class="flipper">
-						<span class="front frontDisp"></span>
-						<span class="backDisp back"></span>
+						<span class="front frontDisp">		</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr="canvas"></canvas></span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">9/9</span>
-						<span class="backDisp back">50%</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">2/1</span>
-						<span class="backDisp back">66.7%</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr="66.7"></canvas>66.7%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">4/5</span>
-						<span class="backDisp back">44.4%</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr="44.4"></canvas>44.4%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">2/0</span>
-						<span class="backDisp back">100%</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr="100"></canvas>100%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">10/6/1</span>
-						<span class="backDisp back">58.8%</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr="58.8"></canvas>58.8%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">8/10</span>
-						<span class="backDisp back">44.4%</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr="44.4"></canvas>44.4%</span>
 					</div>
 				</div>
 			</div>
@@ -286,49 +301,49 @@
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">5/13</span>
-						<span class="backDisp back">27.8%</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr="27.8"></canvas>27.8%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">9/9</span>
-						<span class="backDisp back">50%</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container no-point">
 					<div class="flipper">
-						<span class="front frontDisp"></span>
-						<span class="backDisp back">	</span>
+						<span class="front frontDisp">		</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr=""></canvas>	</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">0/2</span>
-						<span class="backDisp back">0%</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr="0"></canvas>0%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">6/3</span>
-						<span class="backDisp back">66.6%</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr="66.6"></canvas>66.6%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">2/0</span>
-						<span class="backDisp back">100%</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr="100"></canvas>100%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">10/7/1</span>
-						<span class="backDisp back">55.6%</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr="55.6"></canvas>55.6%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">12/7</span>
-						<span class="backDisp back">63.2%</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr="63.2"></canvas>63.2%</span>
 					</div>
 				</div>
 			</div>
@@ -337,49 +352,49 @@
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">2/0</span>
-						<span class="backDisp back">100%</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr="100"></canvas>100%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">1/2</span>
-						<span class="backDisp back">50%</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">2/0</span>
-						<span class="backDisp back">100%</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr="100"></canvas>100%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container no-point">
 					<div class="flipper">
-						<span class="front frontDisp"></span>
-						<span class="backDisp back">	</span>
+						<span class="front frontDisp">		</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr=""></canvas>	</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">0/3</span>
-						<span class="backDisp back">0%</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr="0"></canvas>0%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">2/0</span>
-						<span class="backDisp back">100%</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr="100"></canvas>100%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">1/1</span>
-						<span class="backDisp back">50%</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">1/1</span>
-						<span class="backDisp back">50%</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 			</div>
@@ -388,49 +403,49 @@
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">4/4</span>
-						<span class="backDisp back">50%</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">5/4</span>
-						<span class="backDisp back">55.6%</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr="55.6"></canvas>55.6%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">3/6</span>
-						<span class="backDisp back">33.3%</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr="33.3"></canvas>33.3%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">3/0</span>
-						<span class="backDisp back">100%</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr="100"></canvas>100%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container no-point">
 					<div class="flipper">
-						<span class="front frontDisp"></span>
-						<span class="backDisp back">	</span>
+						<span class="front frontDisp">		</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr=""></canvas>	</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">1/1</span>
-						<span class="backDisp back">50%</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">5/3</span>
-						<span class="backDisp back">62.5%</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr="62.5"></canvas>62.5%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">6/2</span>
-						<span class="backDisp back">75%</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr="75"></canvas>75%</span>
 					</div>
 				</div>
 			</div>
@@ -439,49 +454,49 @@
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">1/1</span>
-						<span class="backDisp back">50%</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">0/2</span>
-						<span class="backDisp back">0%</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr="0"></canvas>0%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">0/2</span>
-						<span class="backDisp back">0%</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr="0"></canvas>0%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">0/2</span>
-						<span class="backDisp back">0%</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr="0"></canvas>0%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">1/1</span>
-						<span class="backDisp back">50%</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container no-point">
 					<div class="flipper">
-						<span class="front frontDisp"></span>
-						<span class="backDisp back">	</span>
+						<span class="front frontDisp">		</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr=""></canvas>	</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">2/0</span>
-						<span class="backDisp back">100%</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr="100"></canvas>100%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">1/1</span>
-						<span class="backDisp back">50%</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 			</div>
@@ -490,49 +505,49 @@
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">9/9</span>
-						<span class="backDisp back">50%</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">6/10/1</span>
-						<span class="backDisp back">35.3%</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr="35.3"></canvas>35.3%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">7/10/1</span>
-						<span class="backDisp back">38.9%</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr="38.9"></canvas>38.9%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">1/1</span>
-						<span class="backDisp back">50%</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">3/5</span>
-						<span class="backDisp back">37.5%</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr="37.5"></canvas>37.5%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">0/2</span>
-						<span class="backDisp back">0%</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr="0"></canvas>0%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container no-point">
 					<div class="flipper">
-						<span class="front frontDisp"></span>
-						<span class="backDisp back">	</span>
+						<span class="front frontDisp">		</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr=""></canvas>	</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">8/10</span>
-						<span class="backDisp back">44.4%</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr="44.4"></canvas>44.4%</span>
 					</div>
 				</div>
 			</div>
@@ -541,49 +556,49 @@
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">9/9</span>
-						<span class="backDisp back">50%</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">10/8</span>
-						<span class="backDisp back">55.6%</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr="55.6"></canvas>55.6%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">7/12</span>
-						<span class="backDisp back">36.9%</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr="36.9"></canvas>36.9%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">1/1</span>
-						<span class="backDisp back">50%</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">6/2</span>
-						<span class="backDisp back">25%</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr="25"></canvas>25%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">1/1</span>
-						<span class="backDisp back">50%</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="front frontDisp">10/8</span>
-						<span class="backDisp back">55.6%</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr="55.6"></canvas>55.6%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container no-point">
 					<div class="flipper">
-						<span class="front frontDisp"></span>
-						<span class="backDisp back">	</span>
+						<span class="front frontDisp">		</span>
+						<span class="backDisp back"><canvas id="this" data-atrrrr=""></canvas>	</span>
 					</div>
 				</div>
 			</div>
@@ -591,6 +606,39 @@
 	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script>
+		// var startTime;
+		// var paths = document.querySelectorAll('#modes path');
+
+		// function animate(time){
+		//   if(startTime === undefined){
+		//     startTime = time;
+		//   }
+		  
+
+		  
+		//   for(var i=0; i<paths.length; i++){
+		//     var angleA = time * 0.00017;
+		//     var angleB = time * 0.001;
+		    
+		//     if(i>1){
+		//       angleA *= -1;
+		//       angleB *= -1;
+		//     }  
+		    
+		//     var d = ['M'];
+		//     d.push(Math.cos(angleA) * 40 + 100);
+		//     d.push(Math.sin(angleA) * 40 + (i*100 + 100));
+		//     d.push('A 40 40 0');
+		//     d.push(paths[i].getAttribute('data-big'));
+		//     d.push(paths[i].getAttribute('data-sweep'));
+		//     d.push(Math.cos(angleB) * 40 + 100);
+		//     d.push(Math.sin(angleB) * 40 + (i*100 + 100));
+		//     paths[i].setAttributeNS(null,'d',d.join(' '));
+		//   }
+		//   window.requestAnimationFrame(animate);
+		// }
+		// window.requestAnimationFrame(animate);
+
 		$(document).ready(function() {
 			var windowHeight = $(window).height();
 			var windowWidth = $(window).width();
@@ -609,12 +657,16 @@
 			$('div.teamAgainstTop').on('click', function(){
 				
 				if($(this).hasClass('active')){
+					$('.teamAgainst').removeClass('blur');
 					$(this).removeClass('active');
 				}else {
 					var index = $('div.teamAgainstTop').index(this);
 					$('.teamAgainst').addClass('blur');
-					$('.eachTeamRow').children('teamAgainst:eq('+index+')').removeClass('blur');
-					console.log($('.eachTeamRow').children('teamAgainst:eq('+index+')'));	
+					$('.eachTeamRow').each(function(){
+						$(this).children('.teamAgainst:eq('+index+')').removeClass('blur');
+					});
+					$(this).addClass('active');
+					console.log($('.eachTeamRow').children('.teamAgainst:eq('+index+')'));	
 				}
 				
 			});
@@ -633,6 +685,84 @@
 				
 			});
 
+
+
+			function createArc(id,perc,redCont,greenCont){
+				// if (perc == 100){
+				// 	perc = 0;
+				// }
+				var x = 0;
+				var y = 0;
+				var r = 0;
+				var thisHeight = $('#'+id).height();
+				var thisWidth = $('#'+id).width();
+				diff = $('#'+id).width()-$('#'+id).parent('span').width();
+				$('#'+id).css({
+					left: -(diff/2)+'px',
+				});
+				if(thisWidth>thisHeight){
+					r = (thisHeight/2)-10;
+					y = (thisHeight/2)-2;
+					x = (thisWidth/2)+(diff/4);
+				}
+				console.log($('#'+id).width()-$('#'+id).parent('span').width());
+				//x = $('#'+id).parent('span').width()/2;
+				var color = 'rgb('+redCont+','+greenCont+',00)';
+				var anticolor = 'rgb('+greenCont+','+redCont+',00)';
+				var angle = ((perc)/100)*2*Math.PI;
+				var c = document.getElementById(id);
+				var ctx = c.getContext("2d");
+				ctx.strokeStyle=color;
+				ctx.lineWidth = 7;
+				ctx.shadowBlur=5;
+				ctx.shadowColor='black';
+				ctx.beginPath();
+				ctx.arc(x, y, r, 0,angle);
+				ctx.stroke();
+				ctx.strokeStyle = '#999';
+				ctx.lineWidth = 2;
+				ctx.beginPath();
+				ctx.arc(x, y, r, angle , 0);
+				ctx.stroke();
+				// ctx.strokeStyle = '#000';
+				// ctx.lineWidth = 5;
+				// ctx.shadowBlur=0;
+				// ctx.beginPath();
+				// ctx.arc(x, $('#'+id).height()/2, 2, 0 , 2*Math.PI);
+				// ctx.stroke();					
+
+			}
+			// $.each(array/object, function(index, val) {
+			// 	 /* iterate through array or object */
+			// });
+			var counter = 0;
+			$('canvas').each(function(){
+				var height = $(this).parent('span').height();
+				var width = $(this).parent('span').width();
+				if (width>height) {
+					width = height;
+				}else {
+					height = width;
+				}
+				$(this).width = width;
+				$(this).height = height;
+				$(this).attr('id','cnavas'+counter);
+				id = $(this).attr('id');
+				counter++;
+				perc = $(this).attr('data-atrrrr');
+				var greenCont = Math.round((perc/100)*255);
+				var redCont = Math.round(((100-perc)/100)*255);
+				
+				createArc(id,perc,redCont, greenCont);
+			})
+			// $('canvas').mouseenter(function(e){
+			// 	id = $(this).attr('id');
+			// 	perc = $(this).attr('data-atrrrr');
+			// 	var greenCont = Math.round((perc/100)*255);
+			// 	var redCont = Math.round(((100-perc)/100)*255);
+				
+			// 	createArc(id,perc,redCont, greenCont);
+			// });
 		});
 	</script>
 </body>

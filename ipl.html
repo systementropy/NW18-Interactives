@@ -19,6 +19,34 @@
 			clear: both;
 			content: " ";
 		}
+		.teamAgainstTop>div, .teamAgainstTop>div>span {
+		    height: inherit;
+		}
+		.teamAgainstTop.active .frontDisp img{
+			-webkit-filter: grayscale(0%);
+			filter: grayscale(0%);
+		}
+		.eachTeamRow .teamNameSelc img,.frontDisp img{
+			-webkit-filter: grayscale(100%);
+			filter: grayscale(100%);
+			max-height: 100%;
+			max-width: 100%;
+			transform: scale(1);
+			transition: all 0.4s ease-in-out;
+		}
+		.eachTeamRow .teamNameSelc img:hover,.frontDisp img:hover{
+			-webkit-filter: grayscale(0%);
+			transform: scale(1.2);
+			filter: grayscale(0%);
+		}
+
+		.eachTeamRow.active .teamNameSelc img{
+			-webkit-filter: grayscale(0%);
+			filter: grayscale(0%);
+			transform: scale(1.2);
+		}
+
+
 		.teamNameSelc,.teamAgainst,.teamAgainstTop{
 			width: 11.1%;
 			background: transparent;
@@ -48,7 +76,7 @@
 			z-index: -1;
 			position: absolute;
 			/*background: url('images/ipl_bg.jpg') no-repeat center;*/
-			background: #333;
+			background: #aaa;
 			filter: blur(20px);
 		}
 		.eachTeamRow.MI.active{
@@ -59,23 +87,46 @@
 		span.onSelActiveDisp {
 		    width: 100%;
 		    height: 100%;
-		    z-index: 999;
+		    z-index: 0;
 		    display: block;
-		    display: none;
 		    position: absolute;
 		    font-size: 16px;
-		    box-shadow: 2px 2px 2px rgba(0,0,0,0.2);
+		}
+		span.onSelNowActiveDisp{
+			width: 100%;
+			height: 100%;
+			display: block;
+			position: absolute;
+			font-size: 16px;
+			z-index: 3;
+			border: 1px solid rgba(223, 223, 223, 0.1);
+			box-shadow: 1px 1px 2px 3px rgba(223, 223, 223, 0.1)
 		}
 		span.onSelActiveDisp.front{
-			background: #E0E0E0;
+			background: #FAFAFA;
+		}
+		span.onSelNowActiveDisp.front{
+			background: #FAFAFA;
+		}
+		span.onSelNowActiveDisp.back{
+			background: #333;
 		}
 		span.onSelActiveDisp.back{
-			background: #595959;
+			background: #333;
 		}
-		span.onSelActiveDisp p {
+		span.onSelActiveDisp p, span.onSelNowActiveDisp p {
 		    margin: 0;
 		}
+		span.onSelActiveDisp.front{
+			display: none;
+		}
+		.active .activeElt.blur.activeTop span.onSelNowActiveDisp{
+			display: none;
+		}
+
 		.active .activeElt.blur.activeTop span.onSelActiveDisp{
+			box-shadow: 2px 2px 2px rgba(0,0,0,0.2);
+			z-index: 9;
 			display: block;
 		}
 		.blur{
@@ -156,936 +207,927 @@
 			<div class="iplInner"></div>
 			
 			<div class="eachTeamRowMain eachTeamRow text-center clearAfter">
-				<div class="teamNameSelc pull-left"></div>
+				<div class="teamNameSelc pull-left no-point"></div>
 				<div class="teamAgainstTop pull-left ">
 					<div class="">
-						<span class="frontDisp">MI</span>
+						<span class="frontDisp"><img src="images/MI.png" alt=""></span>
 						
 					</div>
 				</div>
 				<div class="teamAgainstTop pull-left ">
 					<div class="">
-						<span class="frontDisp">RCB</span>
+						<span class="frontDisp"><img src="images/RCB.png" alt=""></span>
 						
 					</div>
 				</div>
 				<div class="teamAgainstTop pull-left ">
 					<div class="">
-						<span class="frontDisp">KKR</span>
+						<span class="frontDisp"><img src="images/KKR.png" alt=""></span>
 						
 					</div>
 				</div>
 				<div class="teamAgainstTop pull-left ">
 					<div class="">
-						<span class="frontDisp">GL</span>
+						<span class="frontDisp"><img src="images/GL.png" alt=""></span>
 						
 					</div>
 				</div>
 				<div class="teamAgainstTop pull-left ">
 					<div class="">
-						<span class="frontDisp">SRH</span>
+						<span class="frontDisp"><img src="images/SRH.png" alt=""></span>
 						
 					</div>
 				</div>
 				<div class="teamAgainstTop pull-left ">
 					<div class="">
-						<span class="frontDisp">RPS</span>
+						<span class="frontDisp"><img src="images/RPS.png" alt=""></span>
 						
 					</div>
 				</div>
 				<div class="teamAgainstTop pull-left ">
 					<div class="">
-						<span class="frontDisp">DD</span>
+						<span class="frontDisp"><img src="images/DD.png" alt=""></span>
 						
 					</div>
 				</div>
 				<div class="teamAgainstTop pull-left ">
 					<div class="">
-						<span class="frontDisp">KXIP</span>
+						<span class="frontDisp"><img src="images/KEP.png" alt=""></span>
 						
 					</div>
 				</div>
 			</div>
 			<div class="eachTeamRow text-center clearAfter MI">
-				<div class="teamNameSelc pull-left">MI</div>
+				<div class="teamNameSelc pull-left"><img src="images/MI.png" alt=""></div>
 				<div class="teamAgainst pull-left flip-container no-point">
 					<div class="flipper">
-						
-						<span class="front frontDisp">		</span>
-						<span class="backDisp back"><canvas id="this11" data-atrrrr="canvas"></canvas></span>
+						<span class="onSelNowActiveDisp front frontDisp text-center"></span>
+						<span class="front frontDisp onSelActiveDisp">		</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this11" data-atrrrr="canvas"></canvas></span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
+						<span class="onSelNowActiveDisp front frontDisp text-center">
 							<p>Apr 14 (4 PM)</p>
 							<p>Bangalore</p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
+						<span class="onSelNowActiveDisp backDisp back text-center">
 							<p>May 1 (4 PM)</p>
 							<p>Mumbai</p>
 						</span>
-						<span class="front frontDisp">11W / 8L</span>
-						<span class="backDisp back"><canvas id="this12" data-atrrrr="57.9"></canvas>57.9%</span>
+						<span class="front frontDisp onSelActiveDisp">11W / 8L</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this12" data-atrrrr="57.9"></canvas>57.9%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
+						<span class="onSelNowActiveDisp front frontDisp text-center">
 							<p>April 9 (8 PM)</p>
 							<p>Mumbai</p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
+						<span class="onSelNowActiveDisp backDisp back text-center">
 							<p>May 13 (8 PM)</p>
 							<p>Kolkata</p>
 						</span>
-						<span class="front frontDisp">13W / 5L</span>
-						<span class="backDisp back"><canvas id="this13" data-atrrrr="72.2"></canvas>72.2%</span>
+						<span class="front frontDisp onSelActiveDisp">13W / 5L</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this13" data-atrrrr="72.2"></canvas>72.2%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
+						<span class="onSelNowActiveDisp front frontDisp text-center">
 							<p>Apr 16 (4 PM)</p>
 							<p>Mumbai</p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
+						<span class="onSelNowActiveDisp backDisp back text-center">
 							<p>April 29 (8 PM)</p>
 							<p>Rajkot</p>
 						</span>
-						<span class="front frontDisp">0W / 2L</span>
-						<span class="backDisp back"><canvas id="this14" data-atrrrr="0"></canvas>0%</span>
+						<span class="front frontDisp onSelActiveDisp">0W / 2L</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this14" data-atrrrr="0"></canvas>0%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
+						<span class="onSelNowActiveDisp front frontDisp text-center">
 							<p>Apr 12 (8 PM)</p>
 							<p>Mumbai</p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
+						<span class="onSelNowActiveDisp backDisp back text-center">
 							<p>May 8 ( 8 PM)</p>
 							<p>Hyderabad</p>
 						</span>
-						<span class="front frontDisp">4W / 4L</span>
-						<span class="backDisp back"><canvas id="this15" data-atrrrr="50"></canvas>50%</span>
+						<span class="front frontDisp onSelActiveDisp">4W / 4L</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this15" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
+						<span class="onSelNowActiveDisp front frontDisp text-center">
 							<p>April 6 (8 PM)</p>
 							<p>Pune</p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
+						<span class="onSelNowActiveDisp backDisp back text-center">
 							<p>Apr 24 (8 PM)</p>
 							<p>Mumbai</p>
 						</span>
-						<span class="front frontDisp">1W / 1L</span>
-						<span class="backDisp back"><canvas id="this16" data-atrrrr="50"></canvas>50%</span>
+						<span class="front frontDisp onSelActiveDisp">1W / 1L</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this16" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
+						<span class="onSelNowActiveDisp front frontDisp text-center">
 							<p>April 22 (8 PM)</p>
 							<p>Mumbai</p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
+						<span class="onSelNowActiveDisp backDisp back text-center">
 							<p>May 6 ( 8 PM)</p>
 							<p>Delhi</p>
 						</span>
-						<span class="front frontDisp">9W / 9L</span>
-						<span class="backDisp back"><canvas id="this17" data-atrrrr="50"></canvas>50%</span>
+						<span class="front frontDisp onSelActiveDisp">9W / 9L</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this17" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
+						<span class="onSelNowActiveDisp front frontDisp text-center">
 							<p>April 20 (8 PM)</p>
 							<p>Indore</p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
+						<span class="onSelNowActiveDisp backDisp back text-center">
 							<p>May 11 ( 8 PM)</p>
 							<p>Mumbai</p>
 						</span>
-						<span class="front frontDisp">9W / 9L</span>
-						<span class="backDisp back"><canvas id="this18" data-atrrrr="50"></canvas>50%</span>
+						<span class="front frontDisp onSelActiveDisp">9W / 9L</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this18" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 			</div>
 			<div class="eachTeamRow text-center clearAfter RCB">
-				<div class="teamNameSelc pull-left">RCB</div>
+				<div class="teamNameSelc pull-left"><img src="images/RCB.png" alt=""></div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
+						<span class="onSelNowActiveDisp front frontDisp text-center">
 							<p>Apr 14 (4 PM)</p>
 							<p>Bangalore</p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
+						<span class="onSelNowActiveDisp backDisp back text-center">
 							<p>May 1 (4 PM)</p>
 							<p>Mumbai</p>
 						</span>
-						<span class="front frontDisp">8W / 11L</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr="42.1"></canvas>42.1%</span>
+						<span class="front frontDisp onSelActiveDisp">8W / 11L</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="42.1"></canvas>42.1%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container no-point">
 					<div class="flipper">
-						
-						<span class="front frontDisp">		</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr="canvas"></canvas></span>
+						<span class="onSelNowActiveDisp front frontDisp text-center"></span>
+						<span class="front frontDisp onSelActiveDisp">		</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="canvas"></canvas></span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
+						<span class="onSelNowActiveDisp front frontDisp text-center">
 							<p>Apr 23 (8 PM)</p>
 							<p>Kolkata</p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
+						<span class="onSelNowActiveDisp backDisp back text-center">
 							<p>May 7 (8 PM)</p>
 							<p>Bangalore</p>
 						</span>
-						<span class="front frontDisp">9W / 9L</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
+						<span class="front frontDisp onSelActiveDisp">9W / 9L</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
+						<span class="onSelNowActiveDisp front frontDisp text-center">
 							<p>April 18 (8 PM)</p>
 							<p>Rajkot</p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
+						<span class="onSelNowActiveDisp backDisp back text-center">
 							<p>April 27</p>
 							<p>Bangalore</p>
 						</span>
-						<span class="front frontDisp">2W / 1L</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr="66.7"></canvas>66.7%</span>
+						<span class="front frontDisp onSelActiveDisp">2W / 1L</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="66.7"></canvas>66.7%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
+						<span class="onSelNowActiveDisp front frontDisp text-center">
 							<p>April 5 (8 PM)</p>
 							<p>Hyderabad</p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
+						<span class="onSelNowActiveDisp backDisp back text-center">
 							<p>April 25 (8 PM)</p>
 							<p>Bangalore</p>
 						</span>
-						<span class="front frontDisp">4W / 5L</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr="44.4"></canvas>44.4%</span>
+						<span class="front frontDisp onSelActiveDisp">4W / 5L</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="44.4"></canvas>44.4%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
-							<p>April 5 (8 PM)</p>
-							<p>Hyderabad</p>
-						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
-							<p>April 25</p>
+						
+						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<p>Apr 16 (8 PM)</p>
 							<p>Bangalore</p>
 						</span>
-						<span class="front frontDisp">2W / 0L</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr="100"></canvas>100%</span>
-					</div>
-				</div>
-				<div class="teamAgainst pull-left flip-container">
-					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
-							<p>Apr 16 (8 PM)</p>
-							<p>Hyderabad</p>
-						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
+						<span class="onSelNowActiveDisp backDisp back text-center">
 							<p>Apr 29 (4 PM)</p>
 							<p>Pune</p>
 						</span>
-						<span class="front frontDisp">10W / 6L / NR1</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr="58.8"></canvas>58.8%</span>
+						<span class="front frontDisp onSelActiveDisp">2W / 0L</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="100"></canvas>100%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
+						
+						<span class="onSelNowActiveDisp front frontDisp text-center">
 							<p>Apr 8 (8 PM)</p>
 							<p>Bangalore</p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
+						<span class="onSelNowActiveDisp backDisp back text-center">
 							<p>May 14 (8 PM)</p>
 							<p>Delhi</p>
 						</span>
-						<span class="front frontDisp">8W / 10L</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr="44.4"></canvas>44.4%</span>
+						<span class="front frontDisp onSelActiveDisp">10W / 6L / 1NR</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="58.8"></canvas>58.8%</span>
+					</div>
+				</div>
+				<div class="teamAgainst pull-left flip-container">
+					<div class="flipper">
+						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<p>April 10 (8 PM)</p>
+							<p>Indore</p>
+						</span>
+						<span class="onSelNowActiveDisp backDisp back text-center">
+							<p>May 5 (8 PM)</p>
+							<p>Bangalore</p>
+						</span>
+						<span class="front frontDisp onSelActiveDisp">8W / 10L</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="44.4"></canvas>44.4%</span>
 					</div>
 				</div>
 			</div>
 			<div class="eachTeamRow text-center clearAfter KKR">
-				<div class="teamNameSelc pull-left">KKR</div>
+				<div class="teamNameSelc pull-left"><img src="images/KKR.png" alt=""></div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
+						<span class="onSelNowActiveDisp front frontDisp text-center">
 							<p>April 9 (8 PM)</p>
 							<p>Mumbai</p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
+						<span class="onSelNowActiveDisp backDisp back text-center">
 							<p>May 13 (8 PM)</p>
 							<p>Kolkata</p>
 						</span>
-						<span class="front frontDisp">5W / 13L</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr="27.8"></canvas>27.8%</span>
+						<span class="front frontDisp onSelActiveDisp">5W / 13L</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="27.8"></canvas>27.8%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
+						<span class="onSelNowActiveDisp front frontDisp text-center">
 							<p>Apr 23 (8 PM)</p>
 							<p>Kolkata</p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
+						<span class="onSelNowActiveDisp backDisp back text-center">
 							<p>May 7 (8 PM)</p>
 							<p>Bangalore</p>
 						</span>
-						<span class="front frontDisp">9W / 9L</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
+						<span class="front frontDisp onSelActiveDisp">9W / 9L</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container no-point">
 					<div class="flipper">
-						<span class="front frontDisp">		</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr=""></canvas>	</span>
+						<span class="onSelNowActiveDisp front frontDisp text-center"></span>
+						<span class="front frontDisp onSelActiveDisp">		</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr=""></canvas>	</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
+						<span class="onSelNowActiveDisp front frontDisp text-center">
 							<p>April 7 (8 PM)</p>
 							<p>Rajkot</p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
+						<span class="onSelNowActiveDisp backDisp back text-center">
 							<p>April 21 (8 PM)</p>
 							<p>Kolkata</p>
 						</span>
-						<span class="front frontDisp">0W / 2L</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr="0"></canvas>0%</span>
+						<span class="front frontDisp onSelActiveDisp">0W / 2L</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="0"></canvas>0%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
+						<span class="onSelNowActiveDisp front frontDisp text-center">
 							<p>April 15 (4 PM)</p>
 							<p>Kolkata</p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
+						<span class="onSelNowActiveDisp backDisp back text-center">
 							<p>April 30 (8 PM)</p>
 							<p>Hyderabad</p>
 						</span>
-						<span class="front frontDisp">6W / 3L</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr="66.6"></canvas>66.6%</span>
+						<span class="front frontDisp onSelActiveDisp">6W / 3L</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="66.6"></canvas>66.6%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
+						<span class="onSelNowActiveDisp front frontDisp text-center">
 							<p>April 26 (8 PM)</p>
 							<p>Pune</p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
+						<span class="onSelNowActiveDisp backDisp back text-center">
 							<p>May 3 (8 PM)</p>
 							<p>Kolkata</p>
 						</span>
-						<span class="front frontDisp">2W / 0L</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr="100"></canvas>100%</span>
+						<span class="front frontDisp onSelActiveDisp">2W / 0L</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="100"></canvas>100%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
+						<span class="onSelNowActiveDisp front frontDisp text-center">
 							<p>April 17 (4 PM)</p>
 							<p>Delhi</p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
-							<p>May 28 (4 PM)</p>
+						<span class="onSelNowActiveDisp backDisp back text-center">
+							<p>April 28 (4 PM)</p>
 							<p>Kolkata</p>
 						</span>
-						<span class="front frontDisp">10W / 7L / NR1</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr="55.6"></canvas>55.6%</span>
+						<span class="front frontDisp onSelActiveDisp">10W / 7L / 1NR</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="55.6"></canvas>55.6%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
+						<span class="onSelNowActiveDisp front frontDisp text-center">
 							<p>April 13 (8 PM)</p>
 							<p>Kolkata</p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
+						<span class="onSelNowActiveDisp backDisp back text-center">
 							<p>May 9 (8 PM)</p>
 							<p>Chandigarh</p>
 						</span>
-						<span class="front frontDisp">12W / 7L</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr="63.2"></canvas>63.2%</span>
+						<span class="front frontDisp onSelActiveDisp">12W / 7L</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="63.2"></canvas>63.2%</span>
 					</div>
 				</div>
 			</div>
 			<div class="eachTeamRow text-center clearAfter GL">
-				<div class="teamNameSelc pull-left">GL</div>
+				<div class="teamNameSelc pull-left"><img src="images/GL.png" alt=""></div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
+						<span class="onSelNowActiveDisp front frontDisp text-center">
 							<p>Apr 16 (4 PM)</p>
 							<p>Mumbai</p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
+						<span class="onSelNowActiveDisp backDisp back text-center">
 							<p>April 29 (8 PM)</p>
 							<p>Rajkot</p>
 						</span>
-						<span class="front frontDisp">2W / 0L</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr="100"></canvas>100%</span>
+						<span class="front frontDisp onSelActiveDisp">2W / 0L</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="100"></canvas>100%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
+						<span class="onSelNowActiveDisp front frontDisp text-center">
 							<p>April 18 (8 PM)</p>
 							<p>Rajkot</p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
+						<span class="onSelNowActiveDisp backDisp back text-center">
 							<p>April 27 (8 PM)</p>
 							<p>Bangalore</p>
 						</span>
-						<span class="front frontDisp">1W / 2L</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
+						<span class="front frontDisp onSelActiveDisp">1W / 2L</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
+						<span class="onSelNowActiveDisp front frontDisp text-center">
 							<p>April 7 (8 PM)</p>
 							<p>Rajkot</p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
+						<span class="onSelNowActiveDisp backDisp back text-center">
 							<p>April 21 (8 PM)</p>
 							<p>Kolkata</p>
 						</span>
-						<span class="front frontDisp">2W / 0L</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr="100"></canvas>100%</span>
+						<span class="front frontDisp onSelActiveDisp">2W / 0L</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="100"></canvas>100%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container no-point">
 					<div class="flipper">
-						<span class="front frontDisp">		</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr=""></canvas>	</span>
+						<span class="onSelNowActiveDisp front frontDisp text-center"></span>
+						<span class="front frontDisp onSelActiveDisp">		</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr=""></canvas>	</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
+						<span class="onSelNowActiveDisp front frontDisp text-center">
 							<p>April 9 (4 PM)</p>
 							<p>Hyderabad</p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
+						<span class="onSelNowActiveDisp backDisp back text-center">
 							<p>May 13 (4 PM)</p>
 							<p>Kanpur</p>
 						</span>
-						<span class="front frontDisp">0W / 3L</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr="0"></canvas>0%</span>
+						<span class="front frontDisp onSelActiveDisp">0W / 3L</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="0"></canvas>0%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
+						<span class="onSelNowActiveDisp front frontDisp text-center">
 							<p>April 14 (8 PM)</p>
 							<p>Rajkot</p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
+						<span class="onSelNowActiveDisp backDisp back text-center">
 							<p>May 1 (8 PM)</p>
 							<p>Pune</p>
 						</span>
-						<span class="front frontDisp">2W / 0L</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr="100"></canvas>100%</span>
+						<span class="front frontDisp onSelActiveDisp">2W / 0L</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="100"></canvas>100%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
+						<span class="onSelNowActiveDisp front frontDisp text-center">
 							<p>May 4 (8 PM)</p>
 							<p>Delhi</p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
+						<span class="onSelNowActiveDisp backDisp back text-center">
 							<p>May 10 (8 PM)</p>
 							<p>Kanpur</p>
 						</span>
-						<span class="front frontDisp">1W / 1L</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
+						<span class="front frontDisp onSelActiveDisp">1W / 1L</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
+						<span class="onSelNowActiveDisp front frontDisp text-center">
 							<p>April 23 (4 PM)</p>
 							<p>Rajkot</p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
+						<span class="onSelNowActiveDisp backDisp back text-center">
 							<p>May 7 (8 PM)</p>
 							<p>Chandigarh</p>
 						</span>
-						<span class="front frontDisp">1W / 1L</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
+						<span class="front frontDisp onSelActiveDisp">1W / 1L</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 			</div>
 			<div class="eachTeamRow text-center clearAfter SRH">
-				<div class="teamNameSelc pull-left">SRH</div>
+				<div class="teamNameSelc pull-left"><img src="images/SRH.png" alt=""></div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
+						<span class="onSelNowActiveDisp front frontDisp text-center">
 							<p>Apr 12 (8 PM)</p>
 							<p>Mumbai</p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
+						<span class="onSelNowActiveDisp backDisp back text-center">
 							<p>May 8 ( 8 PM)</p>
 							<p>Hyderabad</p>
 						</span>
-						<span class="front frontDisp">4W / 4L</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
+						<span class="front frontDisp onSelActiveDisp">4W / 4L</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
+						<span class="onSelNowActiveDisp front frontDisp text-center">
 							<p>April 5 (8 PM)</p>
 							<p>Hyderabad</p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
+						<span class="onSelNowActiveDisp backDisp back text-center">
 							<p>April 25 (8 PM)</p>
 							<p>Bangalore</p>
 						</span>
-						<span class="front frontDisp">5W / 4L</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr="55.6"></canvas>55.6%</span>
+						<span class="front frontDisp onSelActiveDisp">5W / 4L</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="55.6"></canvas>55.6%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
+						<span class="onSelNowActiveDisp front frontDisp text-center">
 							<p>April 15 (4 PM)</p>
 							<p>Kolkata</p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
+						<span class="onSelNowActiveDisp backDisp back text-center">
 							<p>April 30 (8 PM)</p>
 							<p>Hyderabad</p>
 						</span>
-						<span class="front frontDisp">3W / 6L</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr="33.3"></canvas>33.3%</span>
+						<span class="front frontDisp onSelActiveDisp">3W / 6L</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="33.3"></canvas>33.3%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
+						<span class="onSelNowActiveDisp front frontDisp text-center">
 							<p>April 9 (4 PM)</p>
 							<p>Hyderabad</p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
+						<span class="onSelNowActiveDisp backDisp back text-center">
 							<p>May 13 (4 PM)</p>
 							<p>Kanpur</p>
 						</span>
-						<span class="front frontDisp">3W / 0L</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr="100"></canvas>100%</span>
+						<span class="front frontDisp onSelActiveDisp">3W / 0L</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="100"></canvas>100%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container no-point">
 					<div class="flipper">
-
-						<span class="front frontDisp">		</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr=""></canvas>	</span>
+						<span class="onSelNowActiveDisp front frontDisp text-center"></span>
+						<span class="front frontDisp onSelActiveDisp">		</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr=""></canvas>	</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
+						<span class="onSelNowActiveDisp front frontDisp text-center">
 							<p>April 22 (4 PM)</p>
 							<p>Pune</p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
+						<span class="onSelNowActiveDisp backDisp back text-center">
 							<p>May 6 (4 PM)</p>
 							<p>Hyderabad</p>
 						</span>
-						<span class="front frontDisp">1W / 1L</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
+						<span class="front frontDisp onSelActiveDisp">1W / 1L</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
+						<span class="onSelNowActiveDisp front frontDisp text-center">
 							<p>April 19 (8 PM)</p>
 							<p>Hyderabad</p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
+						<span class="onSelNowActiveDisp backDisp back text-center">
 							<p>May 2 (8 PM)</p>
 							<p>Delhi</p>
 						</span>
-						<span class="front frontDisp">5W / 3L</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr="62.5"></canvas>62.5%</span>
+						<span class="front frontDisp onSelActiveDisp">5W / 3L</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="62.5"></canvas>62.5%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
+						<span class="onSelNowActiveDisp front frontDisp text-center">
 							<p>April 17 (8 PM)</p>
 							<p>Hyderabad</p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
+						<span class="onSelNowActiveDisp backDisp back text-center">
 							<p>April 28 (8 PM)</p>
 							<p>Chandigarh</p>
 						</span>
-						<span class="front frontDisp">6W / 2L</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr="75"></canvas>75%</span>
+						<span class="front frontDisp onSelActiveDisp">6W / 2L</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="75"></canvas>75%</span>
 					</div>
 				</div>
 			</div>
 			<div class="eachTeamRow text-center clearAfter RPS">
-				<div class="teamNameSelc pull-left">RPS</div>
+				<div class="teamNameSelc pull-left"><img src="images/RPS.png" alt=""></div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
+						<span class="onSelNowActiveDisp front frontDisp text-center">
 							<p>April 6 (8 PM)</p>
 							<p>Pune</p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
+						<span class="onSelNowActiveDisp backDisp back text-center">
 							<p>Apr 24 (8 PM)</p>
 							<p>Mumbai</p>
 						</span>
-						<span class="front frontDisp">1W / 1L</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
+						<span class="front frontDisp onSelActiveDisp">1W / 1L</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
-							<p></p>
-							<p></p>
+						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<p>April 16 (8 PM)</p>
+							<p>Bangalore</p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
-							<p></p>
-							<p></p>
+						<span class="onSelNowActiveDisp backDisp back text-center">
+							<p>April 29 (4 PM)</p>
+							<p>Pune</p>
 						</span>
-						<span class="front frontDisp">0W / 2L</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr="0"></canvas>0%</span>
+						<span class="front frontDisp onSelActiveDisp">0W / 2L</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="0"></canvas>0%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
-							<p></p>
-							<p></p>
+						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<p>April 26 (8 PM)</p>
+							<p>Pune</p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
-							<p></p>
-							<p></p>
+						<span class="onSelNowActiveDisp backDisp back text-center">
+							<p>May 3 (8 PM)</p>
+							<p>Kolkata</p>
 						</span>
-						<span class="front frontDisp">0W / 2L</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr="0"></canvas>0%</span>
+						<span class="front frontDisp onSelActiveDisp">0W / 2L</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="0"></canvas>0%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
+						<span class="onSelNowActiveDisp front frontDisp text-center">
 							<p>April 14 (8 PM)</p>
 							<p>Rajkot</p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
+						<span class="onSelNowActiveDisp backDisp back text-center">
 							<p>May 1 (8 PM)</p>
 							<p>Pune</p>
 						</span>
-						<span class="front frontDisp">0W / 2L</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr="0"></canvas>0%</span>
+						<span class="front frontDisp onSelActiveDisp">0W / 2L</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="0"></canvas>0%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
+						<span class="onSelNowActiveDisp front frontDisp text-center">
 							<p>April 22 (4 PM)</p>
 							<p>Pune</p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
+						<span class="onSelNowActiveDisp backDisp back text-center">
 							<p>May 6 (4 PM)</p>
 							<p>Hyderabad</p>
 						</span>
-						<span class="front frontDisp">1W / 1L</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
+						<span class="front frontDisp onSelActiveDisp">1W / 1L</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container no-point">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
-							<p></p>
-							<p></p>
-						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
-							<p></p>
-							<p></p>
-						</span>
-						<span class="front frontDisp">		</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr=""></canvas>	</span>
+						<span class="onSelNowActiveDisp front frontDisp text-center"></span>
+						<span class="front frontDisp onSelActiveDisp">		</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr=""></canvas>	</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
-							<p></p>
-							<p></p>
+						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<p>April 11 (8 PM)</p>
+							<p>Pune</p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
-							<p></p>
-							<p></p>
+						<span class="onSelNowActiveDisp backDisp back text-center">
+							<p>May 12 (8 PM)</p>
+							<p>Delhi</p>
 						</span>
-						<span class="front frontDisp">2W / 0L</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr="100"></canvas>100%</span>
+						<span class="front frontDisp onSelActiveDisp">2W / 0L</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="100"></canvas>100%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
-							<p></p>
-							<p></p>
+						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<p>April 8 (4 PM)</p>
+							<p>Indore</p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
-							<p></p>
-							<p></p>
+						<span class="onSelNowActiveDisp backDisp back text-center">
+							<p>May 14 (4 PM)</p>
+							<p>Pune</p>
 						</span>
-						<span class="front frontDisp">1W / 1L</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
+						<span class="front frontDisp onSelActiveDisp">1W / 1L</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 			</div>
 			<div class="eachTeamRow text-center clearAfter DD">
-				<div class="teamNameSelc pull-left">DD</div>
+				<div class="teamNameSelc pull-left"><img src="images/DD.png" alt=""></div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
+						<span class="onSelNowActiveDisp front frontDisp text-center">
 							<p>April 22 (8 PM)</p>
 							<p>Mumbai</p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
+						<span class="onSelNowActiveDisp backDisp back text-center">
 							<p>May 6 ( 8 PM)</p>
 							<p>Delhi</p>
 						</span>
-						<span class="front frontDisp">9W / 9L</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
+						<span class="front frontDisp onSelActiveDisp">9W / 9L</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
-							<p></p>
-							<p></p>
+						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<p>April 8 (8 PM)</p>
+							<p>Bangalore</p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
-							<p></p>
-							<p></p>
+						<span class="onSelNowActiveDisp backDisp back text-center">
+							<p>May 14 (8 PM)</p>
+							<p>Delhi</p>
 						</span>
-						<span class="front frontDisp">6W / 10L / NR1</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr="35.3"></canvas>35.3%</span>
+						<span class="front frontDisp onSelActiveDisp">6W / 10L / 1NR</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="35.3"></canvas>35.3%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
-							<p></p>
-							<p></p>
+						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<p>April 17 (4 PM)</p>
+							<p>Delhi</p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
-							<p></p>
-							<p></p>
+						<span class="onSelNowActiveDisp backDisp back text-center">
+							<p>April 28 (4 PM)</p>
+							<p>Kolkata</p>
 						</span>
-						<span class="front frontDisp">7W / 10L / NR1</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr="38.9"></canvas>38.9%</span>
+						
+						<span class="front frontDisp onSelActiveDisp">7W / 10L / 1NR</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="38.9"></canvas>38.9%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
+						<span class="onSelNowActiveDisp front frontDisp text-center">
 							<p>May 4 (8 PM)</p>
 							<p>Delhi</p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
+						<span class="onSelNowActiveDisp backDisp back text-center">
 							<p>May 10 (8 PM)</p>
 							<p>Kanpur</p>
 						</span>
-						<span class="front frontDisp">1W / 1L</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
+						<span class="front frontDisp onSelActiveDisp">1W / 1L</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
+						<span class="onSelNowActiveDisp front frontDisp text-center">
 							<p>April 19 (8 PM)</p>
 							<p>Hyderabad</p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
+						<span class="onSelNowActiveDisp backDisp back text-center">
 							<p>May 2 (8 PM)</p>
 							<p>Delhi</p>
 						</span>
-						<span class="front frontDisp">3W / 5L</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr="37.5"></canvas>37.5%</span>
+						<span class="front frontDisp onSelActiveDisp">3W / 5L</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="37.5"></canvas>37.5%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
-							<p></p>
-							<p></p>
+						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<p>April 11 (8 PM)</p>
+							<p>Pune</p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
-							<p></p>
-							<p></p>
+						<span class="onSelNowActiveDisp backDisp back text-center">
+							<p>May 12 (8 PM)</p>
+							<p>Delhi</p>
 						</span>
-						<span class="front frontDisp">0W / 2L</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr="0"></canvas>0%</span>
+						<span class="front frontDisp onSelActiveDisp">0W / 2L</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="0"></canvas>0%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container no-point">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
+						<span class="onSelNowActiveDisp front frontDisp text-center">
 							<p></p>
 							<p></p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
+						<span class="onSelNowActiveDisp backDisp back text-center">
 							<p></p>
 							<p></p>
 						</span>
-						<span class="front frontDisp">		</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr=""></canvas>	</span>
+						<span class="front frontDisp onSelActiveDisp">		</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr=""></canvas>	</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
-							<p></p>
-							<p></p>
+						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<p>April 15 (8 PM)</p>
+							<p>Delhi</p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
-							<p></p>
-							<p></p>
+						<span class="onSelNowActiveDisp backDisp back text-center">
+							<p>April 30 (4 PM)</p>
+							<p>Chandigarh</p>
 						</span>
-						<span class="front frontDisp">8W / 10L</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr="44.4"></canvas>44.4%</span>
+						<span class="front frontDisp onSelActiveDisp">8W / 10L</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="44.4"></canvas>44.4%</span>
 					</div>
 				</div>
 			</div>
 			<div class="eachTeamRow text-center clearAfter KXIP">
-				<div class="teamNameSelc pull-left">KXIP</div>
+				<div class="teamNameSelc pull-left"><img src="images/KEP.png" alt=""></div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
+						<span class="onSelNowActiveDisp front frontDisp text-center">
 							<p>April 20 (8 PM)</p>
 							<p>Indore</p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
+						<span class="onSelNowActiveDisp backDisp back text-center">
 							<p>May 11 ( 8 PM)</p>
 							<p>Mumbai</p>
 						</span>
-						<span class="front frontDisp">9W / 9L</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
+						<span class="front frontDisp onSelActiveDisp">9W / 9L</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
-							<p></p>
-							<p></p>
+						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<p>April 10 (8 PM)</p>
+							<p>Indore</p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
-							<p></p>
-							<p></p>
+						<span class="onSelNowActiveDisp backDisp back text-center">
+							<p>May 5 (8 PM)</p>
+							<p>Bangalore</p>
 						</span>
-						<span class="front frontDisp">10W / 8L</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr="55.6"></canvas>55.6%</span>
+						<span class="front frontDisp onSelActiveDisp">10W / 8L</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="55.6"></canvas>55.6%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
-							<p></p>
-							<p></p>
+						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<p>April 13 (8 PM)</p>
+							<p>Kolkata</p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
-							<p></p>
-							<p></p>
+						<span class="onSelNowActiveDisp backDisp back text-center">
+							<p>May 9 (8 PM)</p>
+							<p>Chandigarh</p>
 						</span>
-						<span class="front frontDisp">7W / 12L</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr="36.9"></canvas>36.9%</span>
+						<span class="front frontDisp onSelActiveDisp">7W / 12L</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="36.9"></canvas>36.9%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
+						<span class="onSelNowActiveDisp front frontDisp text-center">
 							<p>April 23 (4 PM)</p>
 							<p>Rajkot</p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
+						<span class="onSelNowActiveDisp backDisp back text-center">
 							<p>May 7 (8 PM)</p>
 							<p>Chandigarh</p>
 						</span>
-						<span class="front frontDisp">1W / 1L</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
+						<span class="front frontDisp onSelActiveDisp">1W / 1L</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
+						<span class="onSelNowActiveDisp front frontDisp text-center">
 							<p>April 17 (8 PM)</p>
 							<p>Hyderabad</p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
+						<span class="onSelNowActiveDisp backDisp back text-center">
 							<p>April 28 (8 PM)</p>
 							<p>Chandigarh</p>
 						</span>
-						<span class="front frontDisp">6W / 2L</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr="25"></canvas>25%</span>
+						<span class="front frontDisp onSelActiveDisp">6W / 2L</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="25"></canvas>25%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
-							<p></p>
-							<p></p>
+						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<p>April 8 (4 PM)</p>
+							<p>Indore</p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
-							<p></p>
-							<p></p>
+						<span class="onSelNowActiveDisp backDisp back text-center">
+							<p>May 14 (4 PM)</p>
+							<p>Pune</p>
 						</span>
-						<span class="front frontDisp">1W / 1L</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
+						<span class="front frontDisp onSelActiveDisp">1W / 1L</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
-							<p></p>
-							<p></p>
+						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<p>April 15 (8 PM)</p>
+							<p>Delhi</p>
 						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
-							<p></p>
-							<p></p>
+						<span class="onSelNowActiveDisp backDisp back text-center">
+							<p>April 30 (4 PM)</p>
+							<p>Chandigarh</p>
 						</span>
-						<span class="front frontDisp">10W / 8L</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr="55.6"></canvas>55.6%</span>
+						<span class="front frontDisp onSelActiveDisp">10W / 8L</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="55.6"></canvas>55.6%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container no-point">
 					<div class="flipper">
-						<span class="onSelActiveDisp front frontDisp text-center">
-							<p></p>
-							<p></p>
-						</span>
-						<span class="onSelActiveDisp backDisp back text-center">
-							<p></p>
-							<p></p>
-						</span>
-						<span class="front frontDisp">		</span>
-						<span class="backDisp back"><canvas id="this" data-atrrrr=""></canvas>	</span>
+						<span class="onSelNowActiveDisp front frontDisp text-center"></span>
+						<span class="front frontDisp onSelActiveDisp">		</span>
+						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr=""></canvas>	</span>
 					</div>
 				</div>
 			</div>
@@ -1133,24 +1175,33 @@
 			$('.eachTeamRow').css({
 				width: 100+'%',
 				height: gridHeight+'px',
-				lineHeight: gridHeight+'px'
 			});
 			$('.teamNameSelc').css({
+				height: gridHeight+'px'
+			});
+			$('.teamAgainstTop').css({
 				height: gridHeight+'px'
 			});
 			$('.teamAgainst').css({
 				height: gridHeight+'px'
 			});
-
-			$('.onSelActiveDisp').css({
-				lineHeight: gridHeight/2+'px'
+			$('.onSelActiveDisp').css({lineHeight: gridHeight+'px'});
+			$('.onSelNowActiveDisp').css({
+				'padding-top': ((gridHeight/2)-22)+'px',
+				'padding-bottom': ((gridHeight/2)-22)+'px'
 			});
 
 			$('div.teamAgainstTop').on('click', function(){
 				
 				if($(this).hasClass('active')){
 					$('div.teamAgainstTop').removeClass('active');
-					$('.teamAgainst').removeClass('blur activeElt activeTop');
+					$('.teamAgainst').each(function(){
+						if ($('.teamAgainst').hasClass('blur')) {$('.teamAgainst').removeClass('blur')};
+						if ($('.teamAgainst').hasClass('activeElt')) {$('.teamAgainst').removeClass('activeElt')};
+						if ($('.teamAgainst').hasClass('activeTop')) {$('.teamAgainst').removeClass('activeTop')};
+					});
+					
+				
 					$(this).removeClass('active');
 				}else {
 					var index = $('div.teamAgainstTop').index(this);
@@ -1164,6 +1215,12 @@
 				}
 				
 			});
+
+
+
+
+
+
 			$('.teamNameSelc').on('click', function(){
 				if ( $(this).parent('.eachTeamRow').hasClass('active') ) {
 					if ($('.teamAgainst').hasClass('blur')) {$('.teamAgainst').removeClass('blur')};
@@ -1190,7 +1247,7 @@
 				var r = 0;
 				var thisHeight = $('#'+id).height();
 				var thisWidth = $('#'+id).width();
-				diff = $('#'+id).width()-$('#'+id).parent('span').width();
+				diff = $('#'+id).width()-$('#'+id).parent('span').parent('div').width();
 				$('#'+id).css({
 					left: -(diff/2)+'px',
 				});
@@ -1199,8 +1256,7 @@
 					y = (thisHeight/2)-2;
 					x = (thisWidth/2)+(diff/4);
 				}
-				console.log($('#'+id).width()-$('#'+id).parent('span').width());
-				//x = $('#'+id).parent('span').width()/2;
+				console.log(thisHeight,thisWidth);
 				var color = 'rgb('+redCont+','+greenCont+',00)';
 				color = '#E92027';
 
@@ -1240,13 +1296,10 @@
 			// });
 			var counter = 0;
 			$('canvas').each(function(){
-				var height = $(this).parent('span').height();
-				var width = $(this).parent('span').width();
-				if (width>height) {
-					width = height;
-				}else {
-					height = width;
-				}
+				var height = $(this).parent('span').parent('div').height();
+				var width = $(this).parent('span').parent('div').width();
+
+				
 				$(this).width = width;
 				$(this).height = height;
 				$(this).attr('id','cnavas'+counter);
@@ -1257,7 +1310,7 @@
 				var redCont = Math.round(((100-perc)/100)*255);
 				
 				createArc(id,perc,redCont, greenCont);
-			})
+			});
 			// $('canvas').mouseenter(function(e){
 			// 	id = $(this).attr('id');
 			// 	perc = $(this).attr('data-atrrrr');

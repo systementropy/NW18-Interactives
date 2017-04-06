@@ -10,6 +10,53 @@
 		body{
 			font-family: 'BenchNine','Roboto', sans-serif;
 		}
+		p{margin:0;}
+		.againstSmRow.container-fluid {
+		    border: 1px solid rgba(0,0,0,0.1);
+		    margin: auto -15px;
+		    border-bottom: none;
+		    padding:0;
+		    font-size: 32px;
+		    line-height: 38px;
+		    letter-spacing: 2px;
+		}
+		.eachTeamRespRow {
+		    position: relative;
+		    padding-right: 0;
+		    overflow: hidden;
+		    border: 1px solid rgba(0,0,0,0.3);
+		    border-bottom: none;
+		}
+		.col-xs-10.col-sm-10.eachVsTeamCont.pull-left {
+		    width: 100%;
+		    padding-left: 68px;
+		}
+		.teamOppColor.col-xs-2.col-sm-2.pull-left {
+		    width: 937px;
+		    transform: rotate(270deg);
+		    float: left;
+		    z-index: 100;
+		    position: absolute;
+		    top: 418px;
+		    left: -449px;
+		    height: 40px;
+		    line-height: 40px;
+		    font-size: 40px;
+		    font-weight: bold;
+		    letter-spacing: 10px;
+		}
+		.againstSmRow.container-fluid>.col-xs-3 {
+		    padding: 15px;
+		    min-height: 107px;
+		}
+		span.teamNameRot.teamOppColor {
+		    position: absolute;
+		    display: block;
+		    transform: rotate(270deg);
+		    left: -69px;
+		    top: 34px;
+		    width: 108px !important;
+		}
 		.no-point{pointer-events: none !important;}
 		.pull-left{float: left}
 		.pull-right{float: right}
@@ -19,26 +66,132 @@
 			clear: both;
 			content: " ";
 		}
+		span.backAbsText {
+		    display: block;
+		    font-size: 10px;
+		    line-height: 10px;
+		    position: absolute;
+		    width: 100%;
+		    color: #777;
+		    top: 36px;
+		}
+		span.topAbsText {
+		    position: absolute;
+		    right: 5px;
+		    font-size: 10px;
+		    line-height: 12px;
+		    top: 5px;
+		    color: #ccc;
+		}
+		span.onSelNowActiveDisp.backDisp.back.text-center .topAbsText {
+		    color: #777;
+		}
 		.teamAgainstTop>div, .teamAgainstTop>div>span {
 		    height: inherit;
 		}
-		.teamAgainstTop.active .frontDisp img{
-			-webkit-filter: grayscale(0%);
-			filter: grayscale(0%);
+
+		.teamAgainstTop.active{
+
 		}
-		.eachTeamRow .teamNameSelc img,.frontDisp img{
-			-webkit-filter: grayscale(100%);
-			filter: grayscale(100%);
-			max-height: 100%;
-			max-width: 100%;
+		.teamOppColor {
+		    height: inherit;
+		}
+
+		.teanColor{
+			color: #333;
+			display: inline-block;
+			font-size: 21px;
+			font-weight: bold;
+			letter-spacing: 5px;
 			transform: scale(1);
 			transition: all 0.4s ease-in-out;
 		}
-		.eachTeamRow .teamNameSelc img:hover,.frontDisp img:hover{
+		.frontDispDiv:hover .teanColor.DD,.active .teanColor.DD, .teamNameSelc:hover .teanColor.DD ,.teanColor.DD:hover {
+			transform: scale(1.5);
+			color: #a93526;
+		}
+		.frontDispDiv:hover .teanColor.RCB,.active .teanColor.RCB, .teamNameSelc:hover .teanColor.RCB ,.teanColor.RCB:hover {
+			transform: scale(1.5);
+			color: #c9920e;
+		}
+		.frontDispDiv:hover .teanColor.MI,.active .teanColor.MI, .teamNameSelc:hover .teanColor.MI ,.teanColor.MI:hover {
+			transform: scale(1.5);
+			color: #0054a2;
+		}
+		.frontDispDiv:hover .teanColor.KKR,.active .teanColor.KKR, .teamNameSelc:hover .teanColor.KKR ,.teanColor.KKR:hover {
+			transform: scale(1.5);
+			color: #3a225c;
+		}
+		.frontDispDiv:hover .teanColor.GL,.active .teanColor.GL, .teamNameSelc:hover .teanColor.GL ,.teanColor.GL:hover {
+			transform: scale(1.5);
+			color: #8c411e;
+		}
+		.frontDispDiv:hover .teanColor.SRH,.active .teanColor.SRH, .teamNameSelc:hover .teanColor.SRH ,.teanColor.SRH:hover {
+			transform: scale(1.5);
+			color: #f47820;
+		}
+		.frontDispDiv:hover .teanColor.KXIP,.active .teanColor.KXIP, .teamNameSelc:hover .teanColor.KXIP ,.teanColor.KXIP:hover {
+			transform: scale(1.5);
+			color: #ed2526;
+		}
+		.frontDispDiv:hover .teanColor.RPS,.active .teanColor.RPS, .teamNameSelc:hover .teanColor.RPS ,.teanColor.RPS:hover {
+			transform: scale(1.5);
+			color: #7c1669;
+		}
+
+
+		.teamOppColor.DD {
+			color: #FAFAFA;
+			background: #a93526;
+		}
+		.teamOppColor.RCB {
+			color: #FAFAFA;
+			background: #c9920e;
+		}
+		.teamOppColor.MI {
+			color: #FAFAFA;
+			background: #0054a2;
+		}
+		.teamOppColor.KKR {
+			color: #FAFAFA;
+			background: #3a225c;
+		}
+		.teamOppColor.GL {
+			color: #FAFAFA;
+			background: #8c411e;
+		}
+		.teamOppColor.SRH {
+			color: #FAFAFA;
+			background: #f47820;
+		}
+		.teamOppColor.KXIP {
+			color: #FAFAFA;
+			background: #ed2526;
+		}
+		.teamOppColor.RPS {
+			color: #FAFAFA;
+			background: #7c1669;
+		}
+		.againstSmRow.container-fluid>.col-xs-3:nth-child(even){
+			background: #595959;
+			color: #CCC;
+		}
+
+		/*.teamAgainstTop.active .frontDisp img{
+			-webkit-filter: grayscale(0%);
+			filter: grayscale(0%);
+		}
+		.eachTeamRow .teamNameSelc{
+			-webkit-filter: grayscale(100%);
+			filter: grayscale(100%);
+			transform: scale(1);
+			transition: all 0.4s ease-in-out;
+		}
+		.eachTeamRow .teamNameSelc:hover{
 			-webkit-filter: grayscale(0%);
 			transform: scale(1.2);
 			filter: grayscale(0%);
-		}
+		}*/
 
 		.eachTeamRow.active .teamNameSelc img{
 			-webkit-filter: grayscale(0%);
@@ -202,936 +355,2491 @@
 	</style>
 </head>
 <body>
-	<div class="iplMain container-fluid">
+	<div class="iplMain hidden-xs hidden-sm container-fluid">
 		<div class="row">
 			<div class="iplInner"></div>
 			
 			<div class="eachTeamRowMain eachTeamRow text-center clearAfter">
 				<div class="teamNameSelc pull-left no-point"></div>
 				<div class="teamAgainstTop pull-left ">
-					<div class="">
-						<span class="frontDisp"><img src="images/MI.png" alt=""></span>
+					<div class="frontDispDiv">
+						<span class="frontDisp"><span class="MI teanColor">MI</span></span>
 						
 					</div>
 				</div>
 				<div class="teamAgainstTop pull-left ">
-					<div class="">
-						<span class="frontDisp"><img src="images/RCB.png" alt=""></span>
+					<div class="frontDispDiv">
+						<span class="frontDisp"><span class="RCB teanColor">RCB</span></span>
 						
 					</div>
 				</div>
 				<div class="teamAgainstTop pull-left ">
-					<div class="">
-						<span class="frontDisp"><img src="images/KKR.png" alt=""></span>
+					<div class="frontDispDiv">
+						<span class="frontDisp"><span class="KKR teanColor">KKR</span></span>
 						
 					</div>
 				</div>
 				<div class="teamAgainstTop pull-left ">
-					<div class="">
-						<span class="frontDisp"><img src="images/GL.png" alt=""></span>
+					<div class="frontDispDiv">
+						<span class="frontDisp"><span class="GL teanColor">GL</span></span>
 						
 					</div>
 				</div>
 				<div class="teamAgainstTop pull-left ">
-					<div class="">
-						<span class="frontDisp"><img src="images/SRH.png" alt=""></span>
+					<div class="frontDispDiv">
+						<span class="frontDisp"><span class="SRH teanColor">SRH</span></span>
 						
 					</div>
 				</div>
 				<div class="teamAgainstTop pull-left ">
-					<div class="">
-						<span class="frontDisp"><img src="images/RPS.png" alt=""></span>
+					<div class="frontDispDiv">
+						<span class="frontDisp"><span class="RPS teanColor">RPS</span></span>
 						
 					</div>
 				</div>
 				<div class="teamAgainstTop pull-left ">
-					<div class="">
-						<span class="frontDisp"><img src="images/DD.png" alt=""></span>
+					<div class="frontDispDiv">
+						<span class="frontDisp"><span class="DD teanColor">DD</span></span>
 						
 					</div>
 				</div>
 				<div class="teamAgainstTop pull-left ">
-					<div class="">
-						<span class="frontDisp"><img src="images/KEP.png" alt=""></span>
+					<div class="frontDispDiv">
+						<span class="frontDisp"><span class="KXIP teanColor">KXIP</span></span>
 						
 					</div>
 				</div>
 			</div>
 			<div class="eachTeamRow text-center clearAfter MI">
-				<div class="teamNameSelc pull-left"><img src="images/MI.png" alt=""></div>
+				<div class="teamNameSelc pull-left"><span class="MI teanColor">MI</span></div>
 				<div class="teamAgainst pull-left flip-container no-point">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center"></span>
+							<span class="topAbsText">Match 1</span>
 						<span class="front frontDisp onSelActiveDisp">		</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this11" data-atrrrr="canvas"></canvas></span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this11" data-atrrrr="canvas"></canvas></span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>Apr 14 (4 PM)</p>
 							<p>Bangalore</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>May 1 (4 PM)</p>
 							<p>Mumbai</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">11W / 8L</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this12" data-atrrrr="57.9"></canvas>57.9%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this12" data-atrrrr="57.9"></canvas>57.9%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>April 9 (8 PM)</p>
 							<p>Mumbai</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>May 13 (8 PM)</p>
 							<p>Kolkata</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">13W / 5L</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this13" data-atrrrr="72.2"></canvas>72.2%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this13" data-atrrrr="72.2"></canvas>72.2%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>Apr 16 (4 PM)</p>
 							<p>Mumbai</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>April 29 (8 PM)</p>
 							<p>Rajkot</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">0W / 2L</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this14" data-atrrrr="0"></canvas>0%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this14" data-atrrrr="0"></canvas>0%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>Apr 12 (8 PM)</p>
 							<p>Mumbai</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>May 8 ( 8 PM)</p>
 							<p>Hyderabad</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">4W / 4L</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this15" data-atrrrr="50"></canvas>50%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this15" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>April 6 (8 PM)</p>
 							<p>Pune</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>Apr 24 (8 PM)</p>
 							<p>Mumbai</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">1W / 1L</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this16" data-atrrrr="50"></canvas>50%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this16" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>April 22 (8 PM)</p>
 							<p>Mumbai</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>May 6 ( 8 PM)</p>
 							<p>Delhi</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">9W / 9L</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this17" data-atrrrr="50"></canvas>50%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this17" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>April 20 (8 PM)</p>
 							<p>Indore</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>May 11 ( 8 PM)</p>
 							<p>Mumbai</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">9W / 9L</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this18" data-atrrrr="50"></canvas>50%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this18" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 			</div>
 			<div class="eachTeamRow text-center clearAfter RCB">
-				<div class="teamNameSelc pull-left"><img src="images/RCB.png" alt=""></div>
+				<div class="teamNameSelc pull-left"><span class="RCB teanColor">RCB</span></div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>Apr 14 (4 PM)</p>
 							<p>Bangalore</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>May 1 (4 PM)</p>
 							<p>Mumbai</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">8W / 11L</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="42.1"></canvas>42.1%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr="42.1"></canvas>42.1%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container no-point">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center"></span>
+							<span class="topAbsText">Match 1</span>
 						<span class="front frontDisp onSelActiveDisp">		</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="canvas"></canvas></span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr="canvas"></canvas></span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>Apr 23 (8 PM)</p>
 							<p>Kolkata</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>May 7 (8 PM)</p>
 							<p>Bangalore</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">9W / 9L</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>April 18 (8 PM)</p>
 							<p>Rajkot</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>April 27</p>
 							<p>Bangalore</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">2W / 1L</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="66.7"></canvas>66.7%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr="66.7"></canvas>66.7%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>April 5 (8 PM)</p>
 							<p>Hyderabad</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>April 25 (8 PM)</p>
 							<p>Bangalore</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">4W / 5L</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="44.4"></canvas>44.4%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr="44.4"></canvas>44.4%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>Apr 16 (8 PM)</p>
 							<p>Bangalore</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>Apr 29 (4 PM)</p>
 							<p>Pune</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">2W / 0L</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="100"></canvas>100%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr="100"></canvas>100%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>Apr 8 (8 PM)</p>
 							<p>Bangalore</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>May 14 (8 PM)</p>
 							<p>Delhi</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">10W / 6L / 1NR</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="58.8"></canvas>58.8%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr="58.8"></canvas>58.8%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>April 10 (8 PM)</p>
 							<p>Indore</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>May 5 (8 PM)</p>
 							<p>Bangalore</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">8W / 10L</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="44.4"></canvas>44.4%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr="44.4"></canvas>44.4%</span>
 					</div>
 				</div>
 			</div>
 			<div class="eachTeamRow text-center clearAfter KKR">
-				<div class="teamNameSelc pull-left"><img src="images/KKR.png" alt=""></div>
+				<div class="teamNameSelc pull-left"><span class="teanColor KKR">KKR</span></div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>April 9 (8 PM)</p>
 							<p>Mumbai</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>May 13 (8 PM)</p>
 							<p>Kolkata</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">5W / 13L</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="27.8"></canvas>27.8%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr="27.8"></canvas>27.8%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>Apr 23 (8 PM)</p>
 							<p>Kolkata</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>May 7 (8 PM)</p>
 							<p>Bangalore</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">9W / 9L</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container no-point">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center"></span>
+							<span class="topAbsText">Match 1</span>
 						<span class="front frontDisp onSelActiveDisp">		</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr=""></canvas>	</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr=""></canvas>	</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>April 7 (8 PM)</p>
 							<p>Rajkot</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>April 21 (8 PM)</p>
 							<p>Kolkata</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">0W / 2L</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="0"></canvas>0%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr="0"></canvas>0%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>April 15 (4 PM)</p>
 							<p>Kolkata</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>April 30 (8 PM)</p>
 							<p>Hyderabad</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">6W / 3L</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="66.6"></canvas>66.6%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr="66.6"></canvas>66.6%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>April 26 (8 PM)</p>
 							<p>Pune</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>May 3 (8 PM)</p>
 							<p>Kolkata</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">2W / 0L</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="100"></canvas>100%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr="100"></canvas>100%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>April 17 (4 PM)</p>
 							<p>Delhi</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>April 28 (4 PM)</p>
 							<p>Kolkata</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">10W / 7L / 1NR</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="55.6"></canvas>55.6%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr="55.6"></canvas>55.6%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>April 13 (8 PM)</p>
 							<p>Kolkata</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>May 9 (8 PM)</p>
 							<p>Chandigarh</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">12W / 7L</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="63.2"></canvas>63.2%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr="63.2"></canvas>63.2%</span>
 					</div>
 				</div>
 			</div>
 			<div class="eachTeamRow text-center clearAfter GL">
-				<div class="teamNameSelc pull-left"><img src="images/GL.png" alt=""></div>
+				<div class="teamNameSelc pull-left"><span class="teanColor GL">GL</span></div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>Apr 16 (4 PM)</p>
 							<p>Mumbai</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>April 29 (8 PM)</p>
 							<p>Rajkot</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">2W / 0L</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="100"></canvas>100%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr="100"></canvas>100%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>April 18 (8 PM)</p>
 							<p>Rajkot</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>April 27 (8 PM)</p>
 							<p>Bangalore</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">1W / 2L</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>April 7 (8 PM)</p>
 							<p>Rajkot</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>April 21 (8 PM)</p>
 							<p>Kolkata</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">2W / 0L</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="100"></canvas>100%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr="100"></canvas>100%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container no-point">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center"></span>
+							<span class="topAbsText">Match 1</span>
 						<span class="front frontDisp onSelActiveDisp">		</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr=""></canvas>	</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr=""></canvas>	</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>April 9 (4 PM)</p>
 							<p>Hyderabad</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>May 13 (4 PM)</p>
 							<p>Kanpur</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">0W / 3L</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="0"></canvas>0%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr="0"></canvas>0%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>April 14 (8 PM)</p>
 							<p>Rajkot</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>May 1 (8 PM)</p>
 							<p>Pune</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">2W / 0L</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="100"></canvas>100%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr="100"></canvas>100%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>May 4 (8 PM)</p>
 							<p>Delhi</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>May 10 (8 PM)</p>
 							<p>Kanpur</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">1W / 1L</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>April 23 (4 PM)</p>
 							<p>Rajkot</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>May 7 (8 PM)</p>
 							<p>Chandigarh</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">1W / 1L</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 			</div>
 			<div class="eachTeamRow text-center clearAfter SRH">
-				<div class="teamNameSelc pull-left"><img src="images/SRH.png" alt=""></div>
+				<div class="teamNameSelc pull-left"><span class="teanColor SRH">SRH</span></div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>Apr 12 (8 PM)</p>
 							<p>Mumbai</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>May 8 ( 8 PM)</p>
 							<p>Hyderabad</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">4W / 4L</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>April 5 (8 PM)</p>
 							<p>Hyderabad</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>April 25 (8 PM)</p>
 							<p>Bangalore</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">5W / 4L</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="55.6"></canvas>55.6%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr="55.6"></canvas>55.6%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>April 15 (4 PM)</p>
 							<p>Kolkata</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>April 30 (8 PM)</p>
 							<p>Hyderabad</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">3W / 6L</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="33.3"></canvas>33.3%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr="33.3"></canvas>33.3%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>April 9 (4 PM)</p>
 							<p>Hyderabad</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>May 13 (4 PM)</p>
 							<p>Kanpur</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">3W / 0L</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="100"></canvas>100%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr="100"></canvas>100%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container no-point">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center"></span>
+							<span class="topAbsText">Match 1</span>
 						<span class="front frontDisp onSelActiveDisp">		</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr=""></canvas>	</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr=""></canvas>	</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>April 22 (4 PM)</p>
 							<p>Pune</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>May 6 (4 PM)</p>
 							<p>Hyderabad</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">1W / 1L</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>April 19 (8 PM)</p>
 							<p>Hyderabad</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>May 2 (8 PM)</p>
 							<p>Delhi</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">5W / 3L</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="62.5"></canvas>62.5%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr="62.5"></canvas>62.5%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>April 17 (8 PM)</p>
 							<p>Hyderabad</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>April 28 (8 PM)</p>
 							<p>Chandigarh</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">6W / 2L</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="75"></canvas>75%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr="75"></canvas>75%</span>
 					</div>
 				</div>
 			</div>
 			<div class="eachTeamRow text-center clearAfter RPS">
-				<div class="teamNameSelc pull-left"><img src="images/RPS.png" alt=""></div>
+				<div class="teamNameSelc pull-left"><span class="teanColor RPS">RPS</span></div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>April 6 (8 PM)</p>
 							<p>Pune</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>Apr 24 (8 PM)</p>
 							<p>Mumbai</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">1W / 1L</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>April 16 (8 PM)</p>
 							<p>Bangalore</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>April 29 (4 PM)</p>
 							<p>Pune</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">0W / 2L</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="0"></canvas>0%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr="0"></canvas>0%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>April 26 (8 PM)</p>
 							<p>Pune</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>May 3 (8 PM)</p>
 							<p>Kolkata</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">0W / 2L</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="0"></canvas>0%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr="0"></canvas>0%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>April 14 (8 PM)</p>
 							<p>Rajkot</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>May 1 (8 PM)</p>
 							<p>Pune</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">0W / 2L</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="0"></canvas>0%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr="0"></canvas>0%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>April 22 (4 PM)</p>
 							<p>Pune</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>May 6 (4 PM)</p>
 							<p>Hyderabad</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">1W / 1L</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container no-point">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center"></span>
+							<span class="topAbsText">Match 1</span>
 						<span class="front frontDisp onSelActiveDisp">		</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr=""></canvas>	</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr=""></canvas>	</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>April 11 (8 PM)</p>
 							<p>Pune</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>May 12 (8 PM)</p>
 							<p>Delhi</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">2W / 0L</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="100"></canvas>100%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr="100"></canvas>100%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>April 8 (4 PM)</p>
 							<p>Indore</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>May 14 (4 PM)</p>
 							<p>Pune</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">1W / 1L</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 			</div>
 			<div class="eachTeamRow text-center clearAfter DD">
-				<div class="teamNameSelc pull-left"><img src="images/DD.png" alt=""></div>
+				<div class="teamNameSelc pull-left"><span class="teanColor DD">DD</span></div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>April 22 (8 PM)</p>
 							<p>Mumbai</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>May 6 ( 8 PM)</p>
 							<p>Delhi</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">9W / 9L</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>April 8 (8 PM)</p>
 							<p>Bangalore</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>May 14 (8 PM)</p>
 							<p>Delhi</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">6W / 10L / 1NR</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="35.3"></canvas>35.3%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr="35.3"></canvas>35.3%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>April 17 (4 PM)</p>
 							<p>Delhi</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>April 28 (4 PM)</p>
 							<p>Kolkata</p>
 						</span>
 						
 						<span class="front frontDisp onSelActiveDisp">7W / 10L / 1NR</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="38.9"></canvas>38.9%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr="38.9"></canvas>38.9%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>May 4 (8 PM)</p>
 							<p>Delhi</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>May 10 (8 PM)</p>
 							<p>Kanpur</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">1W / 1L</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>April 19 (8 PM)</p>
 							<p>Hyderabad</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>May 2 (8 PM)</p>
 							<p>Delhi</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">3W / 5L</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="37.5"></canvas>37.5%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr="37.5"></canvas>37.5%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>April 11 (8 PM)</p>
 							<p>Pune</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>May 12 (8 PM)</p>
 							<p>Delhi</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">0W / 2L</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="0"></canvas>0%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr="0"></canvas>0%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container no-point">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p></p>
 							<p></p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p></p>
 							<p></p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">		</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr=""></canvas>	</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr=""></canvas>	</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>April 15 (8 PM)</p>
 							<p>Delhi</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>April 30 (4 PM)</p>
 							<p>Chandigarh</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">8W / 10L</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="44.4"></canvas>44.4%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr="44.4"></canvas>44.4%</span>
 					</div>
 				</div>
 			</div>
 			<div class="eachTeamRow text-center clearAfter KXIP">
-				<div class="teamNameSelc pull-left"><img src="images/KEP.png" alt=""></div>
+				<div class="teamNameSelc pull-left"><span. class="teanColor KXIP">KXIP</span></div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>April 20 (8 PM)</p>
 							<p>Indore</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>May 11 ( 8 PM)</p>
 							<p>Mumbai</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">9W / 9L</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>April 10 (8 PM)</p>
 							<p>Indore</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>May 5 (8 PM)</p>
 							<p>Bangalore</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">10W / 8L</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="55.6"></canvas>55.6%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr="55.6"></canvas>55.6%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>April 13 (8 PM)</p>
 							<p>Kolkata</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>May 9 (8 PM)</p>
 							<p>Chandigarh</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">7W / 12L</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="36.9"></canvas>36.9%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr="36.9"></canvas>36.9%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>April 23 (4 PM)</p>
 							<p>Rajkot</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>May 7 (8 PM)</p>
 							<p>Chandigarh</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">1W / 1L</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>April 17 (8 PM)</p>
 							<p>Hyderabad</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>April 28 (8 PM)</p>
 							<p>Chandigarh</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">6W / 2L</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="25"></canvas>25%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr="25"></canvas>25%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>April 8 (4 PM)</p>
 							<p>Indore</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>May 14 (4 PM)</p>
 							<p>Pune</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">1W / 1L</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="50"></canvas>50%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr="50"></canvas>50%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center">
+							<span class="topAbsText">Match 1</span>
 							<p>April 15 (8 PM)</p>
 							<p>Delhi</p>
 						</span>
 						<span class="onSelNowActiveDisp backDisp back text-center">
+							<span class="topAbsText">Match 2</span>
 							<p>April 30 (4 PM)</p>
 							<p>Chandigarh</p>
 						</span>
 						<span class="front frontDisp onSelActiveDisp">10W / 8L</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr="55.6"></canvas>55.6%</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr="55.6"></canvas>55.6%</span>
 					</div>
 				</div>
 				<div class="teamAgainst pull-left flip-container no-point">
 					<div class="flipper">
 						<span class="onSelNowActiveDisp front frontDisp text-center"></span>
+							<span class="topAbsText">Match 1</span>
 						<span class="front frontDisp onSelActiveDisp">		</span>
-						<span class="onSelActiveDisp backDisp back"><canvas id="this" data-atrrrr=""></canvas>	</span>
+						<span class="onSelActiveDisp backDisp back"><span class="backAbsText">Winrate</span><canvas id="this" data-atrrrr=""></canvas>	</span>
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
+	<div>
+	<div class="iplMain hidden-lg hidden-md">
+		<div class="eachTeamRespRow text-center container-fluid" style="background: #595959;color: #E0E0E0;">
+			<div class="col-sm-3 col-xs-3">Match 1</div>
+			<div class="col-sm-3 col-xs-3">Match 2</div>
+			<div class="col-sm-3 col-xs-3">Win / Loss / No Result</div>
+			<div class="col-sm-3 col-xs-3">Winrate</div>
+		</div>
+		<div class="eachTeamRespRow text-center container-fluid MI">
+			<div class="teamOppColor col-xs-2 col-sm-2 pull-left MI">MI</div>
+			<div class="col-xs-10 col-sm-10 eachVsTeamCont pull-left MI">
+				<div class="againstSmRow container-fluid">
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor RCB">RCB</span>
+						<span class=" frontDisp text-center">
+							
+							<p>Apr 14 (4 PM)</p>
+							<p>Bangalore</p>
+						</span>	
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>May 1 (4 PM)</p>
+							<p>Mumbai</p>
+						</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" frontDisp ">11W / 8L</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class="backDisp ">57.9%</span>
+						
+					</div>
+				</div>
+				<div class="againstSmRow container-fluid">
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor KKR">KKR</span>
+						<span class=" frontDisp text-center">
+							
+							<p>April 9 (8 PM)</p>
+							<p>Mumbai</p>
+						</span>
+
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>May 13 (8 PM)</p>
+							<p>Kolkata</p>
+						</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class="frontDisp ">13W / 5L</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp">72.2%</span>
+						
+					</div>
+				</div>
+				<div class="againstSmRow container-fluid">
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor GL">GL</span>
+						<span class=" frontDisp text-center">
+							
+							<p>Apr 16 (4 PM)</p>
+							<p>Mumbai</p>
+						</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>April 29 (8 PM)</p>
+							<p>Rajkot</p>
+						</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class="frontDisp ">0W / 2L</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp">0%</span>
+						
+					</div>
+				</div>
+				<div class="againstSmRow container-fluid">
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor SRH">SRH</span>
+						<span class=" frontDisp text-center">
+							
+							<p>Apr 12 (8 PM)</p>
+							<p>Mumbai</p>
+						</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>May 8 ( 8 PM)</p>
+							<p>Hyderabad</p>
+						</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class="frontDisp ">4W / 4L</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp">50%</span>
+						
+					</div>
+				</div>
+				<div class="againstSmRow container-fluid">
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor RPS">RPS</span>
+						<span class=" frontDisp text-center">
+							
+							<p>April 6 (8 PM)</p>
+							<p>Pune</p>
+						</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>Apr 24 (8 PM)</p>
+							<p>Mumbai</p>
+						</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class="frontDisp ">1W / 1L</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp">50%</span>
+						
+					</div>
+				</div>
+				<div class="againstSmRow container-fluid">
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor DD">DD</span>
+						<span class=" frontDisp text-center">
+							
+							<p>April 22 (8 PM)</p>
+							<p>Mumbai</p>
+						</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>May 6 ( 8 PM)</p>
+							<p>Delhi</p>
+						</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class="frontDisp ">9W / 9L</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp">50%</span>
+						
+					</div>
+				</div>
+				<div class="againstSmRow container-fluid">
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor KXIP">KXIP</span>
+						<span class=" frontDisp text-center">
+							
+							<p>April 20 (8 PM)</p>
+							<p>Indore</p>
+						</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>May 11 ( 8 PM)</p>
+							<p>Mumbai</p>
+						</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class="frontDisp ">9W / 9L</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp">50%</span>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="eachTeamRespRow text-center container-fluid RCB">
+			<div class="teamOppColor col-xs-2 col-sm-2 pull-left RCB">RCB</div>
+			<div class="col-xs-10 col-sm-10 eachVsTeamCont pull-left RCB">
+				<div class="againstSmRow container-fluid">
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor MI">MI</span>
+						<span class=" frontDisp text-center">
+							
+							<p>Apr 14 (4 PM)</p>
+							<p>Bangalore</p>
+						</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>May 1 (4 PM)</p>
+							<p>Mumbai</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class="frontDisp ">8W / 11L</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp">42.1%</span>
+					</div>
+				</div>
+				<div class="againstSmRow container-fluid">
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor KKR">KKR</span>
+						<span class=" frontDisp text-center">
+							
+							<p>Apr 23 (8 PM)</p>
+							<p>Kolkata</p>
+						</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>May 7 (8 PM)</p>
+							<p>Bangalore</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class="frontDisp ">9W / 9L</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp">50%</span>
+					</div>
+				</div>
+				<div class="againstSmRow container-fluid">
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor GL">GL</span>
+						<span class=" frontDisp text-center">
+							
+							<p>April 18 (8 PM)</p>
+							<p>Rajkot</p>
+						</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>April 27</p>
+							<p>Bangalore</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class="frontDisp ">2W / 1L</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp">66.7%</span>
+					</div>
+				</div>
+				<div class="againstSmRow container-fluid">
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor SRH">SRH</span>
+						<span class=" frontDisp text-center">
+							
+							<p>April 5 (8 PM)</p>
+							<p>Hyderabad</p>
+						</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>April 25 (8 PM)</p>
+							<p>Bangalore</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class="frontDisp ">4W / 5L</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp">44.4%</span>
+					</div>
+				</div>
+				<div class="againstSmRow container-fluid">
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor RPS">RPS</span>
+						<span class=" frontDisp text-center">
+							
+							<p>Apr 16 (8 PM)</p>
+							<p>Bangalore</p>
+						</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>Apr 29 (4 PM)</p>
+							<p>Pune</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class="frontDisp ">2W / 0L</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp">100%</span>
+					</div>
+				</div>
+				<div class="againstSmRow container-fluid">
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor DD">DD</span>
+						<span class=" frontDisp text-center">
+							
+							<p>Apr 8 (8 PM)</p>
+							<p>Bangalore</p>
+						</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>May 14 (8 PM)</p>
+							<p>Delhi</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class="frontDisp ">10W / 6L / 1NR</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp">58.8%</span>
+					</div>
+				</div>
+				<div class="againstSmRow container-fluid">
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor KXIP">KXIP</span>
+						<span class=" frontDisp text-center">
+							
+							<p>April 10 (8 PM)</p>
+							<p>Indore</p>
+						</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>May 5 (8 PM)</p>
+							<p>Bangalore</p>
+						</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class="frontDisp ">8W / 10L</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp">44.4%</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="eachTeamRespRow text-center container-fluid KKR">
+			<div class="teamOppColor col-xs-2 col-sm-2 pull-left KKR">KKR</div>
+			<div class="col-xs-10 col-sm-10 eachVsTeamCont pull-left KKR">
+				<div class="againstSmRow container-fluid">
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor MI">MI</span>
+						<span class="frontDisp text-center">
+							
+							<p>April 9 (8 PM)</p>
+							<p>Mumbai</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>May 13 (8 PM)</p>
+							<p>Kolkata</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" frontDisp ">5W / 13L</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp ">27.8%</span>
+					</div>
+				</div>
+				<div class="againstSmRow container-fluid">
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor RCB">RCB</span>
+						<span class="frontDisp text-center">
+							
+							<p>Apr 23 (8 PM)</p>
+							<p>Kolkata</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>May 7 (8 PM)</p>
+							<p>Bangalore</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" frontDisp ">9W / 9L</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp ">50%</span>
+					</div>
+				</div>
+				<div class="againstSmRow container-fluid">
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor GL">GL</span>
+						<span class="frontDisp text-center">
+							
+							<p>April 7 (8 PM)</p>
+							<p>Rajkot</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>April 21 (8 PM)</p>
+							<p>Kolkata</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" frontDisp ">0W / 2L</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp ">0%</span>
+					</div>
+				</div>
+				<div class="againstSmRow container-fluid">
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor SRH">SRH</span>
+						<span class="frontDisp text-center">
+							
+							<p>April 15 (4 PM)</p>
+							<p>Kolkata</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						 <span class=" backDisp text-center">
+							
+							<p>April 30 (8 PM)</p>
+							<p>Hyderabad</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" frontDisp ">6W / 3L</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp ">66.6%</span>
+					</div>
+				</div>
+				<div class="againstSmRow container-fluid">
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor RPS">RPS</span>
+						<span class="frontDisp text-center">
+							
+							<p>April 26 (8 PM)</p>
+							<p>Pune</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>May 3 (8 PM)</p>
+							<p>Kolkata</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" frontDisp ">2W / 0L</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp ">100%</span>
+					</div>
+				</div>
+				<div class="againstSmRow container-fluid">
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor DD">DD</span>
+						<span class="frontDisp text-center">
+							
+							<p>April 17 (4 PM)</p>
+							<p>Delhi</p>
+						</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>April 28 (4 PM)</p>
+							<p>Kolkata</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" frontDisp ">10W / 7L / 1NR</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp ">55.6%</span>
+					</div>
+				</div>
+				<div class="againstSmRow container-fluid">
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor KXIP">KXIP</span>
+						<span class="frontDisp text-center">
+							
+							<p>April 13 (8 PM)</p>
+							<p>Kolkata</p>
+						</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>May 9 (8 PM)</p>
+							<p>Chandigarh</p>
+						</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" frontDisp ">12W / 7L</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp ">63.2%</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="eachTeamRespRow text-center container-fluid GL">
+			<div class="teamOppColor col-xs-2 col-sm-2 pull-left GL">GL</div>
+			<div class="col-xs-10 col-sm-10 eachVsTeamCont pull-left GL">
+				<div class="againstSmRow container-fluid">
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor MI">MI</span>
+						<span class=" frontDisp text-center">
+							
+							<p>Apr 16 (4 PM)</p>
+							<p>Mumbai</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>April 29 (8 PM)</p>
+							<p>Rajkot</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" frontDisp ">2W / 0L</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp ">100%</span>
+					</div>
+				</div>
+				<div class="againstSmRow container-fluid">
+					
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor RCB">RCB</span>
+						<span class=" frontDisp text-center">
+							
+							<p>April 18 (8 PM)</p>
+							<p>Rajkot</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>April 27 (8 PM)</p>
+							<p>Bangalore</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" frontDisp ">1W / 2L</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp ">50%</span>
+					</div>
+				</div>
+				<div class="againstSmRow container-fluid">
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor KKR">KKR</span>
+						<span class=" frontDisp text-center">
+							
+							<p>April 7 (8 PM)</p>
+							<p>Rajkot</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>April 21 (8 PM)</p>
+							<p>Kolkata</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" frontDisp ">2W / 0L</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp ">100%</span>
+					</div>
+				</div>
+				
+				<div class="againstSmRow container-fluid">
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor SRH">SRH</span>
+						<span class=" frontDisp text-center">
+							
+							<p>April 9 (4 PM)</p>
+							<p>Hyderabad</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>May 13 (4 PM)</p>
+							<p>Kanpur</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" frontDisp ">0W / 3L</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp ">0%</span>
+					</div>
+				</div>
+				<div class="againstSmRow container-fluid">
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor RPS">RPS</span>
+						<span class=" frontDisp text-center">
+							
+							<p>April 14 (8 PM)</p>
+							<p>Rajkot</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>May 1 (8 PM)</p>
+							<p>Pune</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" frontDisp ">2W / 0L</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp ">100%</span>
+					</div>
+				</div>
+				<div class="againstSmRow container-fluid">
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor DD">DD</span>
+						<span class=" frontDisp text-center">
+							
+							<p>May 4 (8 PM)</p>
+							<p>Delhi</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>May 10 (8 PM)</p>
+							<p>Kanpur</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" frontDisp ">1W / 1L</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp ">50%</span>
+					</div>
+				</div>
+				<div class="againstSmRow container-fluid">
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor KXIP">KXIP</span>
+						<span class=" frontDisp text-center">
+							
+							<p>April 23 (4 PM)</p>
+							<p>Rajkot</p>
+						</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>May 7 (8 PM)</p>
+							<p>Chandigarh</p>
+						</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" frontDisp ">1W / 1L</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp ">50%</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="eachTeamRespRow text-center container-fluid SRH">
+			<div class="teamOppColor col-xs-2 col-sm-2 pull-left SRH">SRH</div>
+			<div class="col-xs-10 col-sm-10 eachVsTeamCont pull-left SRH">
+				<div class="againstSmRow container-fluid">
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor MI">MI</span>
+						<span class=" frontDisp text-center">
+							
+							<p>Apr 12 (8 PM)</p>
+							<p>Mumbai</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>May 8 ( 8 PM)</p>
+							<p>Hyderabad</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class="frontDisp ">4W / 4L</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp ">50%</span>
+					</div>
+				</div>
+				<div class="againstSmRow container-fluid">
+					
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor RCB">RCB</span>
+						<span class=" frontDisp text-center">
+							
+							<p>April 5 (8 PM)</p>
+							<p>Hyderabad</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>April 25 (8 PM)</p>
+							<p>Bangalore</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class="frontDisp ">5W / 4L</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp ">55.6%</span>
+					</div>
+				</div>
+				<div class="againstSmRow container-fluid">
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor KKR">KKR</span>
+						<span class=" frontDisp text-center">
+							
+							<p>April 15 (4 PM)</p>
+							<p>Kolkata</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>April 30 (8 PM)</p>
+							<p>Hyderabad</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class="frontDisp ">3W / 6L</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp ">33.3%</span>
+					</div>
+				</div>
+				<div class="againstSmRow container-fluid">
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor GL">GL</span>
+						<span class=" frontDisp text-center">
+							
+							<p>April 9 (4 PM)</p>
+							<p>Hyderabad</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>May 13 (4 PM)</p>
+							<p>Kanpur</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class="frontDisp ">3W / 0L</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp ">100%</span>
+					</div>
+				</div>
+				
+				<div class="againstSmRow container-fluid">
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor RPS">RPS</span>
+						<span class=" frontDisp text-center">
+							
+							<p>April 22 (4 PM)</p>
+							<p>Pune</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>May 6 (4 PM)</p>
+							<p>Hyderabad</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class="frontDisp ">1W / 1L</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp ">50%</span>
+					</div>
+				</div>
+				<div class="againstSmRow container-fluid">
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor DD">DD</span>
+						<span class=" frontDisp text-center">
+							
+							<p>April 19 (8 PM)</p>
+							<p>Hyderabad</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>May 2 (8 PM)</p>
+							<p>Delhi</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class="frontDisp ">5W / 3L</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp ">62.5%</span>
+					</div>
+				</div>
+				<div class="againstSmRow container-fluid">
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor KXIP">KXIP</span>
+						<span class=" frontDisp text-center">
+							
+							<p>April 17 (8 PM)</p>
+							<p>Hyderabad</p>
+						</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>April 28 (8 PM)</p>
+							<p>Chandigarh</p>
+						</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class="frontDisp ">6W / 2L</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp ">75%</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="eachTeamRespRow text-center container-fluid RPS">
+			<div class="teamOppColor col-xs-2 col-sm-2 pull-left RPS">RPS</div>
+			<div class="col-xs-10 col-sm-10 eachVsTeamCont pull-left RPS">
+				<div class="againstSmRow container-fluid">
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor MI">MI</span>
+						<span class=" frontDisp text-center">
+							
+							<p>April 6 (8 PM)</p>
+							<p>Pune</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>Apr 24 (8 PM)</p>
+							<p>Mumbai</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class="frontDisp ">1W / 1L</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp ">50%</span>
+					</div>
+				</div>
+				<div class="againstSmRow container-fluid">
+					
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor RCB">RCB</span>
+						<span class=" frontDisp text-center">
+							
+							<p>April 16 (8 PM)</p>
+							<p>Bangalore</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>April 29 (4 PM)</p>
+							<p>Pune</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class="frontDisp ">0W / 2L</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp ">0%</span>
+					</div>
+				</div>
+				<div class="againstSmRow container-fluid">
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor KKR">KKR</span>
+						<span class=" frontDisp text-center">
+							
+							<p>April 26 (8 PM)</p>
+							<p>Pune</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>May 3 (8 PM)</p>
+							<p>Kolkata</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class="frontDisp ">0W / 2L</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp ">0%</span>
+					</div>
+				</div>
+				<div class="againstSmRow container-fluid">
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor GL">GL</span>
+						<span class=" frontDisp text-center">
+							
+							<p>April 14 (8 PM)</p>
+							<p>Rajkot</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>May 1 (8 PM)</p>
+							<p>Pune</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class="frontDisp ">0W / 2L</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp ">0%</span>
+					</div>
+				</div>
+				<div class="againstSmRow container-fluid">
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor SRH">SRH</span>
+						<span class=" frontDisp text-center">
+							
+							<p>April 22 (4 PM)</p>
+							<p>Pune</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>May 6 (4 PM)</p>
+							<p>Hyderabad</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class="frontDisp ">1W / 1L</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp ">50%</span>
+					</div>
+				</div>
+				
+				<div class="againstSmRow container-fluid">
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor DD">DD</span>
+						<span class=" frontDisp text-center">
+							
+							<p>April 11 (8 PM)</p>
+							<p>Pune</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>May 12 (8 PM)</p>
+							<p>Delhi</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class="frontDisp ">2W / 0L</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp ">100%</span>
+					</div>
+				</div>
+				<div class="againstSmRow container-fluid">
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor KXIP">KXIP</span>
+						<span class=" frontDisp text-center">
+							
+							<p>April 8 (4 PM)</p>
+							<p>Indore</p>
+						</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>May 14 (4 PM)</p>
+							<p>Pune</p>
+						</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class="frontDisp ">1W / 1L</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp ">50%</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="eachTeamRespRow text-center container-fluid DD">
+			<div class="teamOppColor col-xs-2 col-sm-2 pull-left DD">DD</div>
+			<div class="col-xs-10 col-sm-10 eachVsTeamCont pull-left DD">
+				<div class="againstSmRow container-fluid">
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor MI">MI</span>
+						<span class=" frontDisp text-center">
+							
+							<p>April 22 (8 PM)</p>
+							<p>Mumbai</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>May 6 ( 8 PM)</p>
+							<p>Delhi</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class="front frontDisp ">9W / 9L</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp">50%</span>
+					</div>
+				</div>
+				<div class="againstSmRow container-fluid">
+					
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor RCB">RCB</span>
+						<span class=" frontDisp text-center">
+							
+							<p>April 8 (8 PM)</p>
+							<p>Bangalore</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>May 14 (8 PM)</p>
+							<p>Delhi</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class="front frontDisp ">6W / 10L / 1NR</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp">35.3%</span>
+					</div>
+				</div>
+				<div class="againstSmRow container-fluid">
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor KKR">KKR</span>
+						<span class=" frontDisp text-center">
+							
+							<p>April 17 (4 PM)</p>
+							<p>Delhi</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>April 28 (4 PM)</p>
+							<p>Kolkata</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class="front frontDisp ">7W / 10L / 1NR</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp">38.9%</span>
+					</div>
+				</div>
+				<div class="againstSmRow container-fluid">
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor GL">GL</span>
+						<span class=" frontDisp text-center">
+							
+							<p>May 4 (8 PM)</p>
+							<p>Delhi</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>May 10 (8 PM)</p>
+							<p>Kanpur</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class="front frontDisp ">1W / 1L</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp">50%</span>
+					</div>
+				</div>
+				<div class="againstSmRow container-fluid">
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor SRH">SRH</span>
+						<span class=" frontDisp text-center">
+							
+							<p>April 19 (8 PM)</p>
+							<p>Hyderabad</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>May 2 (8 PM)</p>
+							<p>Delhi</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class="front frontDisp ">3W / 5L</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp">37.5%</span>
+					</div>
+				</div>
+				<div class="againstSmRow container-fluid">
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor RPS">RPS</span>
+						<span class=" frontDisp text-center">
+							
+							<p>April 11 (8 PM)</p>
+							<p>Pune</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>May 12 (8 PM)</p>
+							<p>Delhi</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class="front frontDisp ">0W / 2L</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp">0%</span>
+					</div>
+				</div>
+				
+				<div class="againstSmRow container-fluid">
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor KXIP">KXIP</span>
+						<span class=" frontDisp text-center">
+							
+							<p>April 15 (8 PM)</p>
+							<p>Delhi</p>
+						</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>April 30 (4 PM)</p>
+							<p>Chandigarh</p>
+						</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class="front frontDisp ">8W / 10L</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp">44.4%</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="eachTeamRespRow text-center container-fluid KXIP">
+			<div class="teamOppColor col-xs-2 col-sm-2 pull-left KXIP">KXIP</div>
+			<div class="col-xs-10 col-sm-10 eachVsTeamCont pull-left KXIP">
+				<div class="againstSmRow container-fluid">
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor MI">MI</span>
+						<span class=" frontDisp text-center">
+							
+							<p>April 20 (8 PM)</p>
+							<p>Indore</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>May 11 ( 8 PM)</p>
+							<p>Mumbai</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class="frontDisp ">9W / 9L</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp ">50%</span>
+					</div>
+				</div>
+				<div class="againstSmRow container-fluid">
+				
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor RCB">RCB</span>
+						<span class=" frontDisp text-center">
+							
+							<p>April 10 (8 PM)</p>
+							<p>Indore</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>May 5 (8 PM)</p>
+							<p>Bangalore</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class="frontDisp ">10W / 8L</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp ">55.6%</span>
+					</div>
+				</div>
+				<div class="againstSmRow container-fluid">
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor KKR">KKR</span>
+						<span class=" frontDisp text-center">
+							
+							<p>April 13 (8 PM)</p>
+							<p>Kolkata</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>May 9 (8 PM)</p>
+							<p>Chandigarh</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class="frontDisp ">7W / 12L</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp ">36.9%</span>
+					</div>
+				</div>
+				<div class="againstSmRow container-fluid">
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor GL">GL</span>
+						<span class=" frontDisp text-center">
+							
+							<p>April 23 (4 PM)</p>
+							<p>Rajkot</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>May 7 (8 PM)</p>
+							<p>Chandigarh</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class="frontDisp ">1W / 1L</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp ">50%</span>
+					</div>
+				</div>
+				<div class="againstSmRow container-fluid">
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor SRH">SRH</span>
+						<span class=" frontDisp text-center">
+							
+							<p>April 17 (8 PM)</p>
+							<p>Hyderabad</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>April 28 (8 PM)</p>
+							<p>Chandigarh</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class="frontDisp ">6W / 2L</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp ">25%</span>
+					</div>
+				</div>
+				<div class="againstSmRow container-fluid">
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor RPS">RPS</span>
+						<span class=" frontDisp text-center">
+							
+							<p>April 8 (4 PM)</p>
+							<p>Indore</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>May 14 (4 PM)</p>
+							<p>Pune</p>
+						</span>
+						
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class="frontDisp ">1W / 1L</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp ">50%</span>
+					</div>
+				</div>
+				<div class="againstSmRow container-fluid">
+					<div class="col-sm-3 col-xs-3">
+						<span class="teamNameRot teamOppColor DD">DD</span>
+						<span class=" frontDisp text-center">
+							
+							<p>April 15 (8 PM)</p>
+							<p>Delhi</p>
+						</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp text-center">
+							
+							<p>April 30 (4 PM)</p>
+							<p>Chandigarh</p>
+						</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class="frontDisp ">10W / 8L</span>
+					</div>
+					<div class="col-sm-3 col-xs-3">
+						<span class=" backDisp ">55.6%</span>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		
+	</div>
 	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script>
@@ -1172,25 +2880,35 @@
 			var windowHeight = $(window).height();
 			var windowWidth = $(window).width();
 			var gridHeight = windowHeight/9;
+			var gridHeightSm = windowHeight/8;
 			$('.eachTeamRow').css({
 				width: 100+'%',
 				height: gridHeight+'px',
 			});
 			$('.teamNameSelc').css({
-				height: gridHeight+'px'
+				height: gridHeight+'px',
+				lineHeight: gridHeight+'px'
 			});
+			
 			$('.teamAgainstTop').css({
-				height: gridHeight+'px'
+				height: gridHeight+'px',
+				lineHeight: gridHeight+'px'
 			});
 			$('.teamAgainst').css({
 				height: gridHeight+'px'
 			});
 			$('.onSelActiveDisp').css({lineHeight: gridHeight+'px'});
+			$('.backAbsText').css({
+				top:((gridHeight/2)-22)+'px'
+			});
 			$('.onSelNowActiveDisp').css({
 				'padding-top': ((gridHeight/2)-22)+'px',
 				'padding-bottom': ((gridHeight/2)-22)+'px'
 			});
 
+			$('.teamNameRot').css({
+				width: $('.againstSmRow').height()+'px',
+			});
 			$('div.teamAgainstTop').on('click', function(){
 				
 				if($(this).hasClass('active')){

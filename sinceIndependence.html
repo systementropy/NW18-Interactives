@@ -3,1024 +3,3558 @@
 <head>
   <meta charset="UTF-8">
   <title>Growth of nations</title>
-</head>
-<body style="font-family: 'Ariel'">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,500" rel="stylesheet">
   <style>
+    body{
+      font-family: 'Roboto', sans-serif;
+    }
     div.google-visualization-tooltip { color: #FFFFFF;background: #333; }
     .google-visualization-tooltip-square {border-radius: 50%;margin-top: 5px;border: none;}
     li.google-visualization-tooltip-item>span {color: #FFF !important;}
     .bgCont {max-width: 860px;margin: 0 auto;overflow: hidden;position: absolute;top: 65px;left: 145px;}
-  </style>
+    .mainContainer{
+      display: flex;
+      max-width: 1244px;
+      margin:0 auto;
+      height: 520px;
+    }
+    #chart_container{
+      height: 100%;
+    }
 
-  <div id="chart_container" style="max-width: 860px;margin: 0 auto; overflow: hidden;position: relative;">
-    <select id="myselect">
+    .leftContainer{
+      width: 30%;
+      display: flex;
+      flex-direction: column;
+      z-index: 10;
+      margin-right: 20px;
+    }
+    .mapContainer{
+      position: relative;
+      width: 70%;
+    }
+    .overlay{
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 0%;
+      height: 100%;
+      background: rgba(0,0,0,0.1);
+      z-index: 1;
+      transition: all 0.4s ease-in-out;
+    }
+    .overlay.inact{
+      width: 0;
+      left: 50%;
+    }
+    .optionMain{
+      background: #ccc;
+      width: 100%;
+      display: flex;
+      height: 20%;
+      box-sizing: border-box;
+      margin: 6px 0;
+      font-weight: 100;
+      font-size: 32px;
+      line-height: 32px;
+      cursor: pointer;
+      pointer-events: inherit;
+    }
+    .optionMain.active{
+      background: #7fd4d0;
+      position: relative;
+      cursor: default;
+      pointer-events: none;
+    }
+    .optionMain div{
+      margin:auto 0;
+    }
+    .optionMain.active:after{
+      content: " ";
+      display: block;
+      position: absolute;
+      right: -20px;
+      top: 50%;
+      height: 40px;
+      width: 40px;
+      width: 0;
+      height: 0;
+      border-top: 10px solid transparent;
+      border-left: 20px solid #7fd4d0;
+      border-bottom: 10px solid transparent;
+      -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+      -o-transform: translateY(-50%);
+      transform: translateY(-50%);
+    }
+    .optionMain:first-child{
+      margin-top: 0;
+    }
+    .optionMain:last-child{
+      margin-bottom: 0;
+    }
+    .mainContentHeader{
+      max-width: 1244px;
+      margin:0 auto;
+    }
+    .chartTTl{
+      font-weight: 100;
+      font-size: 127px;
+      letter-spacing: -2px;
+    }
+    .comparisonCont{
+      font-weight: 500;
+      font-size: 36px;
+      padding-left: 30%;
+      margin: 25px 0 20px;
+    }
+    .comparisonCont span{
+      font-weight: 500;
+    }
+    .comparisonCont span span{
+      color: #7fd4d0;
+    }
+    .comparisonCont select{
+      background: #ffc81d;
+      font-size: 36px;
+      border: none;
+      border-radius: 40px;
+      font-weight: 100;
+      font-family: 'Roboto';
+    }
+    .comparisonCont select option{
+      font-size: 16px;
+      font-weight: 100; 
+    }
+    .iconMain{
+      width: 135px;
+      display: flex;
+      padding: 10px 0;
+    }
+    .iconMain img{
+      max-height: 100%;
+      max-width: 100%;
+      text-align: center;
+      margin: auto;
+    }
+    button#b1 {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        left: 50%;
+        position: absolute;
+        top: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        transition: all 0.4s ease-in-out;
+        opacity: 0.3;
+        border: none;background: transparent;
+    }
+    button#b1.inact{
+      
+    }
+    .countryName {
+        position: absolute;
+        bottom: 0;
+        z-index: 1;
+        width: 100%;
+        font-size: 40px;
+        color: #ccc;
+        font-weight: 100;
+    }
+    .countryName span{
+      display: block;
+      width: 50%;
+      float: left;
+      text-align: center;
+      color: #000;
+    }
+    .yrCont {
+      position: absolute;
+      bottom: -150px;
+      z-index: 10;
+      width: 100%;
+      height: 150px;
+    }
+    .chartTTl span {
+        font-size: 54px;
+    }
+    .textOptMain div span{
+      font-size: 21px;
+      line-height: 21px;
+    }
+    button#b1 img {
+      max-width: 100px;
+    }
+    button#b1.play img.play {
+      display: block;
+    }
+    button#b1.play img.pause {
+      display: none;
+    }
+    button#b1.pause img.pause {
+      display: block;
+    }
+    button#b1.pause img.play {
+      display: none;
+    }
+  </style>
+</head>
+<body style="font-family: 'Roboto', sans-serif;">
+  <div class=" mainContentHeader">
+    <div class="chartTTl">Child Mortality</div>
+    <div class="comparisonCont">
+      <span><span>India</span> as compared to  </span>
+      <select id="myselect">
         <option value="Pakistan">Pakistan</option>
         <option value="Israel">Israel</option>
-        <option value="Jordan">Jordan</option>
+        
         <option value="Malaysia">Malaysia</option>
         <option value="Sri-Lanka">Sri Lanka</option>
         <option value="Costa-Rica">Costa Rica</option>
-        <option value="Cambodia">Cambodia</option>
+        
         <option value="South-Korea">South Korea</option>
         <option value="Philippines">Philippines</option>
-        <option value="Croatia">Croatia</option>
+        
         <option value="Indonesia">Indonesia</option>
         <option value="Thailand">Thailand</option>
-        <option value="Monaco">Monaco</option>
+        
     </select>
-    <div class="bgCont"></div>
-    <div id="curve_chart" style="max-width: 860px;margin: 0 auto; overflow: hidden;">
-
     </div>
-    <button id="b1">Play</button>
-    
+   
   </div>
-  <!-- <div style="text-align: left;width: 800px; margin: 0 auto;padding-left: 222px;">
-    <span style="display: inline-block;padding-right: 40px; color: #3366CC;">Exchange Limit</span>
-    <span style="display: inline-block;padding-right: 40px; color: #DC3912;">Bank Withdrawal Limit</span>
-    <span style="display: inline-block;padding-right: 40px; color: #FF9900;">ATM Withdrawal Limit</span>
-    <span style="display: inline-block;padding-right: 40px; color: #109618;">Special Withdrawal Limit</span>
-    <div style="clear: both;"></div>
-  </div> -->
-  <p id="infoBox" style="margin: 0 auto; padding-top: 15px; text-align: left;width: 650px; list-style-type: none;padding-left: 70px;">
-    
-  </p>
+  <div class="mainContainer">
+    <div class="leftContainer">
+      <div class="optionMain active"><span class="iconMain">
+        <img src="images/child.png" alt="">
+      </span><div class="textOptMain"><div>Child <br>Mortality</div></div></div>
+      <div class="optionMain"><span class="iconMain">
+        <img src="images/time.png" alt="">
+      </span><div class="textOptMain"><div>Life <br>Expectancy</div></div></div>
+      <div class="optionMain"><span class="iconMain">
+        <img src="images/gender.png" alt="">
+      </span><div class="textOptMain"><div>Sex Ratio</div></div></div>
+      <div class="optionMain"><span class="iconMain">
+        <img src="images/money.png" alt="">
+      </span><div class="textOptMain"><div>Per Capita <br>Income</div></div></div>
+      <div class="optionMain"><span class="iconMain">
+        <img src="images/urbanisation.png" alt="" style="max-width: 80%;">
+      </span><div class="textOptMain"><div>Urbanisation <br><span>(% of population)</span></div></div></div>
+    </div>
+    <div class="mapContainer">
+      <div class="countryName">
+        <span>India</span>
+        <span class="otherName">Pakistan</span>
+      </div>
+      <div class="yrCont">
+        <p style="position: absolute;right: 0;bottom: 0;">Source: Gapminder.com </p>
+        <p id="infoBox" style="list-style-type: none;text-align: right;font-size: 100px; font-weight: 100; color: #ccc;max-width: 1244px;width:100%;margin: 0 auto;text-align: center;letter-spacing: -6px;">1960</p>
+      </div>
+      
+      <div class="overlay">
+        <button id="b1" class="play">
+          <span class="badgeCont">
+            <span>
+
+              <img src="images/play.png" alt="" class="play">
+              <img src="images/pause.png" alt="" class="pause">
+            </span>
+          </span>
+        </button>
+      </div>
+      <div id="chart_container" style="overflow: hidden;position: relative;">
+        
+        <div class="bgCont"></div>
+        <div id="curve_chart" style="margin: 0 auto; overflow: hidden; height: 100%; width: 100%;">
+
+        </div>
+        
+        
+      </div>
+    </div>
+  </div>
+  
+  
+  
+  
   <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(initialize);
+  <script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(initialize);
+    var indexNum = 1;
+    var flagPause = false;
+    function drawChart(label,name,resetFlag) {
+      if (resetFlag==false) {
 
-      function drawChart(name) {
-        
-        var perCapJson=[
-          {
-            year:1960,
-            India:180.9617325,
-            Pakistan:187.4651214,
-            Israel:5824.524407,
-            Jordan:null,
-            Malaysia:812.6158346,
-            'Sri-Lanka':273.7066885,
-            'Costa-Rica':1797.966457,
-            Cambodia:null,
-            'South-Korea':1153.709962,
-            Philippines:691.6812069,
-            Croatia:null,
-            Indonesia:200.6481494,
-            Thailand:320.9065099,
-            Monaco:null,
-          },
-          {
-            year:1961,
-            India:183.9582104,
-            Pakistan:193.9864663,
-            Israel:6266.688146,
-            Jordan:null,
-            Malaysia:846.5127065,
-            'Sri-Lanka':277.6427289,
-            'Costa-Rica':1719.662799,
-            Cambodia:null,
-            'South-Korea':1180.010131,
-            Philippines:706.5513986,
-            Croatia:null,
-            Indonesia:207.7479244,
-            Thailand:328.0574358,
-            Monaco:null,
-          },
-          {
-            year:1962,
-            India:185.538685,
-            Pakistan:197.7840234,
-            Israel:6578.003328,
-            Jordan:null,
-            Malaysia:871.7634759,
-            'Sri-Lanka':280.6527513,
-            'Costa-Rica':1795.492989,
-            Cambodia:null,
-            'South-Korea':1176.478292,
-            Philippines:716.10745,
-            Croatia:null,
-            Indonesia:206.5496525,
-            Thailand:342.2936643,
-            Monaco:null,
-          },
-          {
-            year:1963,
-            India:192.6580747,
-            Pakistan:209.6807192,
-            Israel:7018.341616,
-            Jordan:null,
-            Malaysia:905.7198234,
-            'Sri-Lanka':283.9367771,
-            'Costa-Rica':1817.026278,
-            Cambodia:null,
-            'South-Korea':1255.237129,
-            Philippines:741.9421791,
-            Croatia:null,
-            Indonesia:196.9290848,
-            Thailand:358.5940036,
-            Monaco:null,
-          },
-          {
-            year:1964,
-            India:202.7516446,
-            Pakistan:219.922976,
-            Israel:7281.567132,
-            Jordan:null,
-            Malaysia:924.6279113,
-            'Sri-Lanka':286.3426659,
-            'Costa-Rica':1829.666748,
-            Cambodia:null,
-            'South-Korea':1316.348846,
-            Philippines:743.2724445,
-            Croatia:null,
-            Indonesia:198.6687944,
-            Thailand:371.5916919,
-            Monaco:null,
-          },
-          {
-            year:1965,
-            India:193.2870608,
-            Pakistan:236.7000443,
-            Israel:7671.003555,
-            Jordan:null,
-            Malaysia:966.2884364,
-            'Sri-Lanka':286.7429199,
-            'Costa-Rica':1945.901543,
-            Cambodia:null,
-            'South-Korea':1351.030613,
-            Philippines:758.330884,
-            Croatia:null,
-            Indonesia:195.5284399,
-            Thailand:389.9389212,
-            Monaco:null,
-          },
-          {
-            year:1966,
-            India:189.098343,
-            Pakistan:243.993907,
-            Israel:7472.469875,
-            Jordan:null,
-            Malaysia:1012.766153,
-            'Sri-Lanka':293.9085304,
-            'Costa-Rica':2035.71387,
-            Cambodia:null,
-            'South-Korea':1486.771804,
-            Philippines:768.1780039,
-            Croatia:null,
-            Indonesia:196.032651,
-            Thailand:420.366839,
-            Monaco:null,
-          },
-          {
-            year:1967,
-            India:199.538561,
-            Pakistan:250.4985864,
-            Israel:7371.037776,
-            Jordan:null,
-            Malaysia:1023.951967,
-            'Sri-Lanka':305.7763507,
-            'Costa-Rica':2088.610594,
-            Cambodia:null,
-            'South-Korea':1541.54643,
-            Philippines:785.4097058,
-            Croatia:null,
-            Indonesia:193.2230674,
-            Thailand:443.034554,
-            Monaco:null,
-          },
-          {
-            year:1968,
-            India:201.8329124,
-            Pakistan:261.5648227,
-            Israel:8390.943579,
-            Jordan:null,
-            Malaysia:1077.494233,
-            'Sri-Lanka':315.718246,
-            'Costa-Rica':2201.295313,
-            Cambodia:null,
-            'South-Korea':1683.820958,
-            Philippines:800.5564433,
-            Croatia:null,
-            Indonesia:210.9932763,
-            Thailand:464.9066055,
-            Monaco:null,
-          },
-          {
-            year:1969,
-            India:210.3124294,
-            Pakistan:268.6497833,
-            Israel:9284.130405,
-            Jordan:null,
-            Malaysia:1102.056987,
-            'Sri-Lanka':332.8647475,
-            'Costa-Rica':2262.92864,
-            Cambodia:null,
-            'South-Korea':1879.800029,
-            Philippines:813.9679888,
-            Croatia:null,
-            Indonesia:221.034814,
-            Thailand:480.8833433,
-            Monaco:null,
-          },
-          {
-            year:1970,
-            India:216.2357161,
-            Pakistan:291.1318585,
-            Israel:9637.613753,
-            Jordan:null,
-            Malaysia:1139.287768,
-            'Sri-Lanka':338.4317237,
-            'Costa-Rica':2371.559757,
-            Cambodia:null,
-            'South-Korea':1993.648299,
-            Philippines:820.633505,
-            Croatia:null,
-            Indonesia:233.0297053,
-            Thailand:520.2359482,
-            Monaco:50458.24756,
-          },
-          {
-            year:1971,
-            India:214.8322477,
-            Pakistan:284.5827678,
-            Israel:10387.552,
-            Jordan:null,
-            Malaysia:1175.357189,
-            'Sri-Lanka':338.0995754,
-            'Costa-Rica':2471.677527,
-            Cambodia:null,
-            'South-Korea':2113.436576,
-            Philippines:840.6701446,
-            Croatia:null,
-            Indonesia:243.0840361,
-            Thailand:530.0656291,
-            Monaco:52478.16721,
-          },
-          {
-            year:1972,
-            India:208.773044,
-            Pakistan:279.0451104,
-            Israel:11510.28914,
-            Jordan:null,
-            Malaysia:1254.427269,
-            'Sri-Lanka':332.2348201,
-            'Costa-Rica':2612.358165,
-            Cambodia:null,
-            'South-Korea':2163.408605,
-            Philippines:861.4201371,
-            Croatia:null,
-            Indonesia:255.712018,
-            Thailand:537.1257574,
-            Monaco:54207.35513,
-          },
-          {
-            year:1973,
-            India:210.6915649,
-            Pakistan:290.4239648,
-            Israel:11423.28869,
-            Jordan:null,
-            Malaysia:1367.737166,
-            'Sri-Lanka':349.4328274,
-            'Costa-Rica':2749.966176,
-            Cambodia:null,
-            'South-Korea':2375.961549,
-            Philippines:911.8395306,
-            Croatia:null,
-            Indonesia:273.7744487,
-            Thailand:575.7697319,
-            Monaco:57001.73469,
-          },
-          {
-            year:1974,
-            India:208.2487865,
-            Pakistan:292.0856028,
-            Israel:11846.87948,
-            Jordan:null,
-            Malaysia:1446.402359,
-            'Sri-Lanka':357.5993993,
-            'Costa-Rica':2835.318007,
-            Cambodia:null,
-            'South-Korea':2497.228577,
-            Philippines:917.7806572,
-            Croatia:null,
-            Indonesia:289.129702,
-            Thailand:585.4724148,
-            Monaco:58842.07457,
-          },
-          {
-            year:1975,
-            India:222.0089305,
-            Pakistan:295.3833393,
-            Israel:11963.66968,
-            Jordan:1118.724641,
-            Malaysia:1424.167388,
-            'Sri-Lanka':373.5452959,
-            'Costa-Rica':2825.086163,
-            Cambodia:null,
-            'South-Korea':2595.125258,
-            Philippines:941.7608066,
-            Croatia:null,
-            Indonesia:299.5848317,
-            Thailand:598.9244741,
-            Monaco:57688.28475,
-          },
-          {
-            year:1976,
-            India:220.4232043,
-            Pakistan:301.1606918,
-            Israel:11853.48997,
-            Jordan:1341.560226,
-            Malaysia:1552.595897,
-            'Sri-Lanka':379.784383,
-            'Costa-Rica':2905.862294,
-            Cambodia:null,
-            'South-Korea':2824.027308,
-            Philippines:996.1570299,
-            Croatia:null,
-            Indonesia:309.9524087,
-            Thailand:638.898629,
-            Monaco:59786.41863,
-          },
-          {
-            year:1977,
-            India:230.8738185,
-            Pakistan:303.2928885,
-            Israel:11590.1034,
-            Jordan:1377.250707,
-            Malaysia:1635.180089,
-            'Sri-Lanka':392.7139875,
-            'Costa-Rica':3082.039196,
-            Cambodia:null,
-            'South-Korea':3058.249262,
-            Philippines:1022.763155,
-            Croatia:null,
-            Indonesia:328.8088491,
-            Thailand:685.5305147,
-            Monaco:61568.19927,
-          },
-          {
-            year:1978,
-            India:238.3482577,
-            Pakistan:317.263003,
-            Israel:11895.4078,
-            Jordan:1605.119331,
-            Malaysia:1704.361802,
-            'Sri-Lanka':407.6658505,
-            'Costa-Rica':3187.500849,
-            Cambodia:null,
-            'South-Korea':3292.159773,
-            Philippines:1045.876294,
-            Croatia:null,
-            Indonesia:350.7537988,
-            Thailand:739.3134383,
-            Monaco:63665.0413,
-          },
-          {
-            year:1979,
-            India:220.5985478,
-            Pakistan:318.4889831,
-            Israel:12322.42677,
-            Jordan:1686.25907,
-            Malaysia:1820.607315,
-            'Sri-Lanka':425.3184829,
-            'Costa-Rica':3254.090647,
-            Cambodia:null,
-            'South-Korea':3462.549239,
-            Philippines:1074.301998,
-            Croatia:null,
-            Indonesia:367.0258703,
-            Thailand:762.3074121,
-            Monaco:65442.48397,
-          },
-          {
-            year:1980,
-            India:230.0085355,
-            Pakistan:339.4258819,
-            Israel:12856.71785,
-            Jordan:1931.681341,
-            Malaysia:1909.618067,
-            'Sri-Lanka':441.7877954,
-            'Costa-Rica':3189.039826,
-            Cambodia:null,
-            'South-Korea':3358.22902,
-            Philippines:1098.398297,
-            Croatia:null,
-            Indonesia:390.0096519,
-            Thailand:785.0234224,
-            Monaco:65841.1961,
-          },
-          {
-            year:1981,
-            India:238.2305665,
-            Pakistan:354.0501924,
-            Israel:13252.0195,
-            Jordan:1945.674956,
-            Malaysia:1992.32596,
-            'Sri-Lanka':463.8223878,
-            'Costa-Rica':3031.481706,
-            Cambodia:null,
-            'South-Korea':3510.047742,
-            Philippines:1104.660503,
-            Croatia:null,
-            Indonesia:412.341375,
-            Thailand:814.6210627,
-            Monaco:65491.66675,
-          },
-          {
-            year:1982,
-            India:240.9096787,
-            Pakistan:364.4733261,
-            Israel:13240.70242,
-            Jordan:2007.454797,
-            Malaysia:2057.941244,
-            'Sri-Lanka':471.9380453,
-            'Costa-Rica':2733.293317,
-            Cambodia:null,
-            'South-Korea':3709.397546,
-            Philippines:1113.174592,
-            Croatia:null,
-            Indonesia:407.6896902,
-            Thailand:841.513292,
-            Monaco:65911.38231,
-          },
-          {
-            year:1983,
-            India:252.6516943,
-            Pakistan:376.0340524,
-            Israel:13458.49244,
-            Jordan:1967.261136,
-            Malaysia:2130.40189,
-            'Sri-Lanka':487.5662179,
-            'Costa-Rica':2734.286881,
-            Cambodia:null,
-            'South-Korea':4048.953231,
-            Philippines:1103.019915,
-            Croatia:null,
-            Indonesia:432.5769957,
-            Thailand:871.6225587,
-            Monaco:65414.04368,
-          },
-          {
-            year:1984,
-            India:256.45344,
-            Pakistan:381.8105677,
-            Israel:13403.80135,
-            Jordan:2057.323839,
-            Malaysia:2234.910073,
-            'Sri-Lanka':506.3194359,
-            'Costa-Rica':2824.580879,
-            Cambodia:null,
-            'South-Korea':4323.28207,
-            Philippines:994.458451,
-            Croatia:null,
-            Indonesia:453.8597054,
-            Thailand:904.4130074,
-            Monaco:65093.1709,
-          },
-          {
-            year:1985,
-            India:263.9605205,
-            Pakistan:397.1574754,
-            Israel:13623.54055,
-            Jordan:2053.809713,
-            Malaysia:2149.417362,
-            'Sri-Lanka':523.6118949,
-            'Costa-Rica':2776.893983,
-            Cambodia:null,
-            'South-Korea':4572.112989,
-            Philippines:896.9576615,
-            Croatia:null,
-            Indonesia:460.1105832,
-            Thailand:928.6739695,
-            Monaco:64977.97348,
-          },
-          {
-            year:1986,
-            India:270.5132774,
-            Pakistan:405.2521461,
-            Israel:14057.12776,
-            Jordan:2117.769951,
-            Malaysia:2112.890278,
-            'Sri-Lanka':536.7616457,
-            'Costa-Rica':2859.065496,
-            Cambodia:null,
-            'South-Korea':5011.198076,
-            Philippines:902.8139894,
-            Croatia:null,
-            Indonesia:478.0198529,
-            Thailand:961.4872544,
-            Monaco:65418.23129,
-          },
-          {
-            year:1987,
-            India:275.1513877,
-            Pakistan:417.4409804,
-            Israel:14826.0989,
-            Jordan:2100.99395,
-            Malaysia:2162.540715,
-            'Sri-Lanka':537.8201946,
-            'Costa-Rica':2974.959654,
-            Cambodia:null,
-            'South-Korea':5515.285718,
-            Philippines:916.8221214,
-            Croatia:null,
-            Indonesia:493.8647534,
-            Thailand:1033.08454,
-            Monaco:65942.13769,
-          },
-          {
-            year:1988,
-            India:295.1969968,
-            Pakistan:435.1088632,
-            Israel:14877.61551,
-            Jordan:1990.73395,
-            Malaysia:2308.568393,
-            'Sri-Lanka':543.6152007,
-            'Costa-Rica':3008.202118,
-            Cambodia:null,
-            'South-Korea':6044.028726,
-            Philippines:953.239354,
-            Croatia:null,
-            Indonesia:515.6944955,
-            Thailand:1149.183997,
-            Monaco:67895.89206,
-          },
-          {
-            year:1989,
-            India:306.1717288,
-            Pakistan:442.8610357,
-            Israel:14754.48205,
-            Jordan:1662.048979,
-            Malaysia:2445.909291,
-            'Sri-Lanka':548.6445742,
-            'Costa-Rica':3079.734066,
-            Cambodia:null,
-            'South-Korea':6390.012581,
-            Philippines:986.6175824,
-            Croatia:null,
-            Indonesia:552.6368974,
-            Thailand:1268.328818,
-            Monaco:69661.31777,
-          },
-          {
-            year:1990,
-            India:316.4285779,
-            Pakistan:449.2745916,
-            Israel:15282.68784,
-            Jordan:1617.880332,
-            Malaysia:2592.517053,
-            'Sri-Lanka':577.2392264,
-            'Costa-Rica':3119.632564,
-            Cambodia:null,
-            'South-Korea':6895.467056,
-            Philippines:991.400335,
-            Croatia:null,
-            Indonesia:592.0960703,
-            Thailand:1390.520211,
-            Monaco:70463.65961,
-          },
-          {
-            year:1991,
-            India:313.2745132,
-            Pakistan:459.1833646,
-            Israel:15498.20512,
-            Jordan:1473.123449,
-            Malaysia:2764.200613,
-            'Sri-Lanka':594.9802981,
-            'Costa-Rica':3121.370058,
-            Cambodia:null,
-            'South-Korea':7473.611029,
-            Philippines:961.9688431,
-            Croatia:null,
-            Indonesia:634.2710005,
-            Thailand:1492.798578,
-            Monaco:70192.94813,
-          },
-          {
-            year:1992,
-            India:323.8575014,
-            Pakistan:481.8264339,
-            Israel:15814.39991,
-            Jordan:1660.043442,
-            Malaysia:2932.017288,
-            'Sri-Lanka':615.4917881,
-            'Costa-Rica':3325.26772,
-            Cambodia:null,
-            'South-Korea':7841.154399,
-            Philippines:942.6405175,
-            Croatia:null,
-            Indonesia:669.1430377,
-            Thailand:1599.211652,
-            Monaco:70222.06249,
-          },
-          {
-            year:1993,
-            India:332.6056849,
-            Pakistan:478.0631904,
-            Israel:16255.31103,
-            Jordan:1660.018529,
-            Malaysia:3140.825774,
-            'Sri-Lanka':649.7576523,
-            'Costa-Rica':3486.846918,
-            Cambodia:209.7954474,
-            'South-Korea':8247.876792,
-            Philippines:940.557041,
-            Croatia:null,
-            Indonesia:706.5088043,
-            Thailand:1718.026934,
-            Monaco:68695.22837,
-          },
-          {
-            year:1994,
-            India:347.951035,
-            Pakistan:483.5766621,
-            Israel:16937.80936,
-            Jordan:1676.305198,
-            Malaysia:3344.567799,
-            'Sri-Lanka':676.747999,
-            'Costa-Rica':3564.271599,
-            Cambodia:222.0830303,
-            'South-Korea':8872.010068,
-            Philippines:959.6490898,
-            Croatia:null,
-            Indonesia:748.3235143,
-            Thailand:1858.003963,
-            Monaco:69311.89485,
-          },
-          {
-            year:1995,
-            India:367.2771625,
-            Pakistan:494.7209888,
-            Israel:17568.40398,
-            Jordan:1723.089546,
-            Malaysia:3581.946302,
-            'Sri-Lanka':704.3240993,
-            'Costa-Rica':3613.881003,
-            Cambodia:229.8906408,
-            'South-Korea':9548.014842,
-            Philippines:982.0315551,
-            Croatia:3900.57775,
-            Indonesia:799.3099303,
-            Thailand:2011.825398,
-            Monaco:69836.00825,
-          },
-          {
-            year:1996,
-            India:387.7415214,
-            Pakistan:505.2459234,
-            Israel:18054.29086,
-            Jordan:1706.167718,
-            Malaysia:3842.637758,
-            'Sri-Lanka':723.114065,
-            'Costa-Rica':3555.542499,
-            Cambodia:236.2080833,
-            'South-Korea':10119.29924,
-            Philippines:1016.311842,
-            Croatia:4292.387366,
-            Indonesia:848.2471059,
-            Thailand:2109.05461,
-            Monaco:69618.4739,
-          },
-          {
-            year:1997,
-            India:396.1844388,
-            Pakistan:496.9950607,
-            Israel:18202.49628,
-            Jordan:1709.60361,
-            Malaysia:4022.843596,
-            'Sri-Lanka':759.818766,
-            'Costa-Rica':3660.070068,
-            Cambodia:243.6909759,
-            'South-Korea':10491.08182,
-            Philippines:1045.458888,
-            Croatia:4495.244255,
-            Indonesia:875.959217,
-            Thailand:2057.066906,
-            Monaco:70151.54957,
-          },
-          {
-            year:1998,
-            India:413.2870519,
-            Pakistan:496.5318923,
-            Israel:18523.47738,
-            Jordan:1708.133111,
-            Malaysia:3636.473102,
-            'Sri-Lanka':786.3702892,
-            'Costa-Rica':3869.523391,
-            Cambodia:250.4546803,
-            'South-Korea':9701.67292,
-            Philippines:1016.775298,
-            Croatia:4656.415629,
-            Indonesia:750.8111959,
-            Thailand:1819.176177,
-            Monaco:71618.37019,
-          },
-          {
-            year:1999,
-            India:440.5693093,
-            Pakistan:502.1246594,
-            Israel:18663.73882,
-            Jordan:1734.700478,
-            Malaysia:3767.637015,
-            'Sri-Lanka':808.4815709,
-            'Costa-Rica':4088.304414,
-            Cambodia:274.8197687,
-            'South-Korea':10546.81217,
-            Philippines:1025.551505,
-            Croatia:4554.228345,
-            Indonesia:746.7927777,
-            Thailand:1877.305197,
-            Monaco:73141.26468,
-          },
-          {
-            year:2000,
-            India:450.4151061,
-            Pakistan:511.7025555,
-            Israel:19859.30215,
-            Jordan:1764.229892,
-            Malaysia:4005.556325,
-            'Sri-Lanka':854.9267252,
-            'Costa-Rica':4068.821351,
-            Cambodia:293.5684654,
-            'South-Korea':11346.66499,
-            Philippines:1048.070513,
-            Croatia:4861.67751,
-            Indonesia:773.3109699,
-            Thailand:1943.237928,
-            Monaco:75382.44663,
-          },
-          {
-            year:2001,
-            India:464.9742607,
-            Pakistan:511.1109972,
-            Israel:19353.34454,
-            Jordan:1811.871989,
-            Malaysia:3933.935077,
-            'Sri-Lanka':855.3725803,
-            'Costa-Rica':4026.557239,
-            Cambodia:311.9854949,
-            'South-Korea':11710.57982,
-            Philippines:1055.807441,
-            Croatia:5023.530276,
-            Indonesia:791.0764547,
-            Thailand:1962.241437,
-            Monaco:76677.97416,
-          },
-          {
-            year:2002,
-            India:475.4570581,
-            Pakistan:517.5966508,
-            Israel:18858.29173,
-            Jordan:1870.859069,
-            Malaysia:4052.878748,
-            'Sri-Lanka':883.4571769,
-            'Costa-Rica':4061.980725,
-            Cambodia:327.8875011,
-            'South-Korea':12478.06366,
-            Philippines:1071.690095,
-            Croatia:5268.59143,
-            Indonesia:816.0164079,
-            Thailand:2042.798299,
-            Monaco:77348.89874,
-          },
-          {
-            year:2003,
-            India:505.2489363,
-            Pakistan:532.9973575,
-            Israel:18800.92652,
-            Jordan:1901.469356,
-            Malaysia:4194.260799,
-            'Sri-Lanka':923.6354395,
-            'Costa-Rica':4241.887772,
-            Cambodia:350.8889852,
-            'South-Korea':12764.27199,
-            Philippines:1102.215971,
-            Croatia:5551.571039,
-            Indonesia:844.1834857,
-            Thailand:2164.301418,
-            Monaco:78229.93981,
-          },
-          {
-            year:2004,
-            India:536.60488,
-            Pakistan:562.283992,
-            Israel:19366.33583,
-            Jordan:2015.048627,
-            Malaysia:4385.96954,
-            'Sri-Lanka':960.7985946,
-            'Costa-Rica':4344.084202,
-            Cambodia:382.1903258,
-            'South-Korea':13303.82,
-            Philippines:1153.022382,
-            Croatia:5782.066433,
-            Indonesia:875.7291576,
-            Thailand:2277.562345,
-            Monaco:80255.75389,
-          },
-          {
-            year:2005,
-            India:577.6567293,
-            Pakistan:594.766855,
-            Israel:19967.98088,
-            Jordan:2129.780417,
-            Malaysia:4529.601248,
-            'Sri-Lanka':1009.908869,
-            'Costa-Rica':4521.011952,
-            Cambodia:427.5292527,
-            'South-Korea':13801.82945,
-            Philippines:1185.37688,
-            Croatia:6025.455477,
-            Indonesia:914.5999046,
-            Thailand:2359.644614,
-            Monaco:81827.95612,
-          },
-          {
-            year:2006,
-            India:621.8994139,
-            Pakistan:620.2956378,
-            Israel:20715.56805,
-            Jordan:2250.274213,
-            Malaysia:4695.229726,
-            'Sri-Lanka':1075.625538,
-            'Costa-Rica':4836.674305,
-            Cambodia:468.031827,
-            'South-Korea':14446.3586,
-            Philippines:1225.045039,
-            Croatia:6325.674267,
-            Indonesia:953.9355312,
-            Thailand:2458.517431,
-            Monaco:85942.67113,
-          },
-          {
-            year:2007,
-            India:673.004691,
-            Pakistan:643.8585182,
-            Israel:21469.53451,
-            Jordan:2380.50934,
-            Malaysia:4905.121369,
-            'Sri-Lanka':1138.366839,
-            'Costa-Rica':5137.485256,
-            Cambodia:510.0197663,
-            'South-Korea':15113.35278,
-            Philippines:1283.46737,
-            Croatia:6651.741476,
-            Indonesia:1003.364434,
-            Thailand:2562.72216,
-            Monaco:98397.08986,
-          },
-          {
-            year:2008,
-            India:689.2731963,
-            Pakistan:642.4275373,
-            Israel:21941.10572,
-            Jordan:2497.539317,
-            Malaysia:5057.826663,
-            'Sri-Lanka':1195.481085,
-            'Costa-Rica':5196.689144,
-            Cambodia:538.1334555,
-            'South-Korea':15349.84987,
-            Philippines:1314.225968,
-            Croatia:6793.44909,
-            Indonesia:1052.433389,
-            Thailand:2608.24726,
-            Monaco:108111.2128,
-          },
-          {
-            year:2009,
-            India:735.6318542,
-            Pakistan:653.6111759,
-            Israel:21602.21001,
-            Jordan:2577.480413,
-            Malaysia:4901.547097,
-            'Sri-Lanka':1223.68571,
-            'Costa-Rica':5066.966003,
-            Cambodia:532.6175229,
-            'South-Korea':15325.94024,
-            Philippines:1307.139627,
-            Croatia:6328.630753,
-            Indonesia:1089.724014,
-            Thailand:2531.233735,
-            Monaco:105147.4377,
-          },
-          {
-            year:2010,
-            India:794.801256,
-            Pakistan:664.7112698,
-            Israel:22239.05126,
-            Jordan:2579.382449,
-            Malaysia:5168.686016,
-            'Sri-Lanka':1308.784019,
-            'Costa-Rica':5226.566178,
-            Cambodia:557.976913,
-            'South-Korea':16219.38807,
-            Philippines:1383.404865,
-            Croatia:6255.239892,
-            Indonesia:1145.385435,
-            Thailand:2712.508016,
-            Monaco:null,
-          },
-          {
-            year:2011,
-            India:837.7464011,
-            Pakistan:672.1547506,
-            Israel:22859.67589,
-            Jordan:2588.668961,
-            Malaysia:5345.213415,
-            'Sri-Lanka':1402.121673,
-            'Costa-Rica':5367.799878,
-            Cambodia:590.4521124,
-            'South-Korea':16684.21278,
-            Philippines:1413.366295,
-            Croatia:6270.035718,
-            Indonesia:1206.991065,
-            Thailand:2699.123242,
-            Monaco:null,
-          }
-        ]
-        
-        var data1 = new google.visualization.DataTable();
-        data1.addColumn('string', 'Country');
-        data1.addColumn('number', 'PerCap');
-        var thisRow=[];
-        thisRow.push('India');
-        thisRow.push(perCapJson[0].India);
-        data1.addRow(thisRow);
-        var thisRow=[];
-        thisRow.push(name);
-        thisRow.push(perCapJson[0][name]);
-        data1.addRow(thisRow);
+      }
+      var perCapJson=[
+        {
+          year:1960,
+          India:180.9617325,
+          Pakistan:187.4651214,
+          Israel:5824.524407,
+          Malaysia:812.6158346,
+          'Sri-Lanka':273.7066885,
+          'Costa-Rica':1797.966457,
+          'South-Korea':1153.709962,
+          Philippines:691.6812069,
+          Indonesia:200.6481494,
+          Thailand:320.9065099,
+          
+        },
+        {
+          year:1961,
+          India:183.9582104,
+          Pakistan:193.9864663,
+          Israel:6266.688146,
+          Malaysia:846.5127065,
+          'Sri-Lanka':277.6427289,
+          'Costa-Rica':1719.662799,
+          'South-Korea':1180.010131,
+          Philippines:706.5513986,
+          Indonesia:207.7479244,
+          Thailand:328.0574358,
+          
+        },
+        {
+          year:1962,
+          India:185.538685,
+          Pakistan:197.7840234,
+          Israel:6578.003328,
+          Malaysia:871.7634759,
+          'Sri-Lanka':280.6527513,
+          'Costa-Rica':1795.492989,
+          'South-Korea':1176.478292,
+          Philippines:716.10745,
+          Indonesia:206.5496525,
+          Thailand:342.2936643,
+          
+        },
+        {
+          year:1963,
+          India:192.6580747,
+          Pakistan:209.6807192,
+          Israel:7018.341616,
+          Malaysia:905.7198234,
+          'Sri-Lanka':283.9367771,
+          'Costa-Rica':1817.026278,
+          'South-Korea':1255.237129,
+          Philippines:741.9421791,
+          Indonesia:196.9290848,
+          Thailand:358.5940036,
+          
+        },
+        {
+          year:1964,
+          India:202.7516446,
+          Pakistan:219.922976,
+          Israel:7281.567132,
+          Malaysia:924.6279113,
+          'Sri-Lanka':286.3426659,
+          'Costa-Rica':1829.666748,
+          'South-Korea':1316.348846,
+          Philippines:743.2724445,
+          Indonesia:198.6687944,
+          Thailand:371.5916919,
+          
+        },
+        {
+          year:1965,
+          India:193.2870608,
+          Pakistan:236.7000443,
+          Israel:7671.003555,
+          Malaysia:966.2884364,
+          'Sri-Lanka':286.7429199,
+          'Costa-Rica':1945.901543,
+          'South-Korea':1351.030613,
+          Philippines:758.330884,
+          Indonesia:195.5284399,
+          Thailand:389.9389212,
+          
+        },
+        {
+          year:1966,
+          India:189.098343,
+          Pakistan:243.993907,
+          Israel:7472.469875,
+          Malaysia:1012.766153,
+          'Sri-Lanka':293.9085304,
+          'Costa-Rica':2035.71387,
+          'South-Korea':1486.771804,
+          Philippines:768.1780039,
+          Indonesia:196.032651,
+          Thailand:420.366839,
+          
+        },
+        {
+          year:1967,
+          India:199.538561,
+          Pakistan:250.4985864,
+          Israel:7371.037776,
+          Malaysia:1023.951967,
+          'Sri-Lanka':305.7763507,
+          'Costa-Rica':2088.610594,
+          'South-Korea':1541.54643,
+          Philippines:785.4097058,
+          Indonesia:193.2230674,
+          Thailand:443.034554,
+          
+        },
+        {
+          year:1968,
+          India:201.8329124,
+          Pakistan:261.5648227,
+          Israel:8390.943579,
+          Malaysia:1077.494233,
+          'Sri-Lanka':315.718246,
+          'Costa-Rica':2201.295313,
+          'South-Korea':1683.820958,
+          Philippines:800.5564433,
+          Indonesia:210.9932763,
+          Thailand:464.9066055,
+          
+        },
+        {
+          year:1969,
+          India:210.3124294,
+          Pakistan:268.6497833,
+          Israel:9284.130405,
+          Malaysia:1102.056987,
+          'Sri-Lanka':332.8647475,
+          'Costa-Rica':2262.92864,
+          'South-Korea':1879.800029,
+          Philippines:813.9679888,
+          Indonesia:221.034814,
+          Thailand:480.8833433,
+          
+        },
+        {
+          year:1970,
+          India:216.2357161,
+          Pakistan:291.1318585,
+          Israel:9637.613753,
+          Malaysia:1139.287768,
+          'Sri-Lanka':338.4317237,
+          'Costa-Rica':2371.559757,
+          'South-Korea':1993.648299,
+          Philippines:820.633505,
+          Indonesia:233.0297053,
+          Thailand:520.2359482,
+          
+        },
+        {
+          year:1971,
+          India:214.8322477,
+          Pakistan:284.5827678,
+          Israel:10387.552,
+          Malaysia:1175.357189,
+          'Sri-Lanka':338.0995754,
+          'Costa-Rica':2471.677527,
+          'South-Korea':2113.436576,
+          Philippines:840.6701446,
+          Indonesia:243.0840361,
+          Thailand:530.0656291,
+          
+        },
+        {
+          year:1972,
+          India:208.773044,
+          Pakistan:279.0451104,
+          Israel:11510.28914,
+          Malaysia:1254.427269,
+          'Sri-Lanka':332.2348201,
+          'Costa-Rica':2612.358165,
+          'South-Korea':2163.408605,
+          Philippines:861.4201371,
+          Indonesia:255.712018,
+          Thailand:537.1257574,
+          
+        },
+        {
+          year:1973,
+          India:210.6915649,
+          Pakistan:290.4239648,
+          Israel:11423.28869,
+          Malaysia:1367.737166,
+          'Sri-Lanka':349.4328274,
+          'Costa-Rica':2749.966176,
+          'South-Korea':2375.961549,
+          Philippines:911.8395306,
+          Indonesia:273.7744487,
+          Thailand:575.7697319,
+          
+        },
+        {
+          year:1974,
+          India:208.2487865,
+          Pakistan:292.0856028,
+          Israel:11846.87948,
+          Malaysia:1446.402359,
+          'Sri-Lanka':357.5993993,
+          'Costa-Rica':2835.318007,
+          'South-Korea':2497.228577,
+          Philippines:917.7806572,
+          Indonesia:289.129702,
+          Thailand:585.4724148,
+          
+        },
+        {
+          year:1975,
+          India:222.0089305,
+          Pakistan:295.3833393,
+          Israel:11963.66968,
+          Malaysia:1424.167388,
+          'Sri-Lanka':373.5452959,
+          'Costa-Rica':2825.086163,
+          'South-Korea':2595.125258,
+          Philippines:941.7608066,
+          Indonesia:299.5848317,
+          Thailand:598.9244741,
+          
+        },
+        {
+          year:1976,
+          India:220.4232043,
+          Pakistan:301.1606918,
+          Israel:11853.48997,
+          Malaysia:1552.595897,
+          'Sri-Lanka':379.784383,
+          'Costa-Rica':2905.862294,
+          'South-Korea':2824.027308,
+          Philippines:996.1570299,
+          Indonesia:309.9524087,
+          Thailand:638.898629,
+          
+        },
+        {
+          year:1977,
+          India:230.8738185,
+          Pakistan:303.2928885,
+          Israel:11590.1034,
+          Malaysia:1635.180089,
+          'Sri-Lanka':392.7139875,
+          'Costa-Rica':3082.039196,
+          'South-Korea':3058.249262,
+          Philippines:1022.763155,
+          Indonesia:328.8088491,
+          Thailand:685.5305147,
+          
+        },
+        {
+          year:1978,
+          India:238.3482577,
+          Pakistan:317.263003,
+          Israel:11895.4078,
+          Malaysia:1704.361802,
+          'Sri-Lanka':407.6658505,
+          'Costa-Rica':3187.500849,
+          'South-Korea':3292.159773,
+          Philippines:1045.876294,
+          Indonesia:350.7537988,
+          Thailand:739.3134383,
+          
+        },
+        {
+          year:1979,
+          India:220.5985478,
+          Pakistan:318.4889831,
+          Israel:12322.42677,
+          Malaysia:1820.607315,
+          'Sri-Lanka':425.3184829,
+          'Costa-Rica':3254.090647,
+          'South-Korea':3462.549239,
+          Philippines:1074.301998,
+          Indonesia:367.0258703,
+          Thailand:762.3074121,
+          
+        },
+        {
+          year:1980,
+          India:230.0085355,
+          Pakistan:339.4258819,
+          Israel:12856.71785,
+          Malaysia:1909.618067,
+          'Sri-Lanka':441.7877954,
+          'Costa-Rica':3189.039826,
+          'South-Korea':3358.22902,
+          Philippines:1098.398297,
+          Indonesia:390.0096519,
+          Thailand:785.0234224,
+          
+        },
+        {
+          year:1981,
+          India:238.2305665,
+          Pakistan:354.0501924,
+          Israel:13252.0195,
+          Malaysia:1992.32596,
+          'Sri-Lanka':463.8223878,
+          'Costa-Rica':3031.481706,
+          'South-Korea':3510.047742,
+          Philippines:1104.660503,
+          Indonesia:412.341375,
+          Thailand:814.6210627,
+          
+        },
+        {
+          year:1982,
+          India:240.9096787,
+          Pakistan:364.4733261,
+          Israel:13240.70242,
+          Malaysia:2057.941244,
+          'Sri-Lanka':471.9380453,
+          'Costa-Rica':2733.293317,
+          'South-Korea':3709.397546,
+          Philippines:1113.174592,
+          Indonesia:407.6896902,
+          Thailand:841.513292,
+          
+        },
+        {
+          year:1983,
+          India:252.6516943,
+          Pakistan:376.0340524,
+          Israel:13458.49244,
+          Malaysia:2130.40189,
+          'Sri-Lanka':487.5662179,
+          'Costa-Rica':2734.286881,
+          'South-Korea':4048.953231,
+          Philippines:1103.019915,
+          Indonesia:432.5769957,
+          Thailand:871.6225587,
+          
+        },
+        {
+          year:1984,
+          India:256.45344,
+          Pakistan:381.8105677,
+          Israel:13403.80135,
+          Malaysia:2234.910073,
+          'Sri-Lanka':506.3194359,
+          'Costa-Rica':2824.580879,
+          'South-Korea':4323.28207,
+          Philippines:994.458451,
+          Indonesia:453.8597054,
+          Thailand:904.4130074,
+          
+        },
+        {
+          year:1985,
+          India:263.9605205,
+          Pakistan:397.1574754,
+          Israel:13623.54055,
+          Malaysia:2149.417362,
+          'Sri-Lanka':523.6118949,
+          'Costa-Rica':2776.893983,
+          'South-Korea':4572.112989,
+          Philippines:896.9576615,
+          Indonesia:460.1105832,
+          Thailand:928.6739695,
+          
+        },
+        {
+          year:1986,
+          India:270.5132774,
+          Pakistan:405.2521461,
+          Israel:14057.12776,
+          Malaysia:2112.890278,
+          'Sri-Lanka':536.7616457,
+          'Costa-Rica':2859.065496,
+          'South-Korea':5011.198076,
+          Philippines:902.8139894,
+          Indonesia:478.0198529,
+          Thailand:961.4872544,
+          
+        },
+        {
+          year:1987,
+          India:275.1513877,
+          Pakistan:417.4409804,
+          Israel:14826.0989,
+          Malaysia:2162.540715,
+          'Sri-Lanka':537.8201946,
+          'Costa-Rica':2974.959654,
+          'South-Korea':5515.285718,
+          Philippines:916.8221214,
+          Indonesia:493.8647534,
+          Thailand:1033.08454,
+          
+        },
+        {
+          year:1988,
+          India:295.1969968,
+          Pakistan:435.1088632,
+          Israel:14877.61551,
+          Malaysia:2308.568393,
+          'Sri-Lanka':543.6152007,
+          'Costa-Rica':3008.202118,
+          'South-Korea':6044.028726,
+          Philippines:953.239354,
+          Indonesia:515.6944955,
+          Thailand:1149.183997,
+          
+        },
+        {
+          year:1989,
+          India:306.1717288,
+          Pakistan:442.8610357,
+          Israel:14754.48205,
+          Malaysia:2445.909291,
+          'Sri-Lanka':548.6445742,
+          'Costa-Rica':3079.734066,
+          'South-Korea':6390.012581,
+          Philippines:986.6175824,
+          Indonesia:552.6368974,
+          Thailand:1268.328818,
+          
+        },
+        {
+          year:1990,
+          India:316.4285779,
+          Pakistan:449.2745916,
+          Israel:15282.68784,
+          Malaysia:2592.517053,
+          'Sri-Lanka':577.2392264,
+          'Costa-Rica':3119.632564,
+          'South-Korea':6895.467056,
+          Philippines:991.400335,
+          Indonesia:592.0960703,
+          Thailand:1390.520211,
+          
+        },
+        {
+          year:1991,
+          India:313.2745132,
+          Pakistan:459.1833646,
+          Israel:15498.20512,
+          Malaysia:2764.200613,
+          'Sri-Lanka':594.9802981,
+          'Costa-Rica':3121.370058,
+          'South-Korea':7473.611029,
+          Philippines:961.9688431,
+          Indonesia:634.2710005,
+          Thailand:1492.798578,
+          
+        },
+        {
+          year:1992,
+          India:323.8575014,
+          Pakistan:481.8264339,
+          Israel:15814.39991,
+          Malaysia:2932.017288,
+          'Sri-Lanka':615.4917881,
+          'Costa-Rica':3325.26772,
+          'South-Korea':7841.154399,
+          Philippines:942.6405175,
+          Indonesia:669.1430377,
+          Thailand:1599.211652,
+          
+        },
+        {
+          year:1993,
+          India:332.6056849,
+          Pakistan:478.0631904,
+          Israel:16255.31103,
+          Malaysia:3140.825774,
+          'Sri-Lanka':649.7576523,
+          'Costa-Rica':3486.846918,
+          'South-Korea':8247.876792,
+          Philippines:940.557041,
+          Indonesia:706.5088043,
+          Thailand:1718.026934,
+          
+        },
+        {
+          year:1994,
+          India:347.951035,
+          Pakistan:483.5766621,
+          Israel:16937.80936,
+          Malaysia:3344.567799,
+          'Sri-Lanka':676.747999,
+          'Costa-Rica':3564.271599,
+          'South-Korea':8872.010068,
+          Philippines:959.6490898,
+          Indonesia:748.3235143,
+          Thailand:1858.003963,
+          
+        },
+        {
+          year:1995,
+          India:367.2771625,
+          Pakistan:494.7209888,
+          Israel:17568.40398,
+          Malaysia:3581.946302,
+          'Sri-Lanka':704.3240993,
+          'Costa-Rica':3613.881003,
+          'South-Korea':9548.014842,
+          Philippines:982.0315551,
+          Indonesia:799.3099303,
+          Thailand:2011.825398,
+          
+        },
+        {
+          year:1996,
+          India:387.7415214,
+          Pakistan:505.2459234,
+          Israel:18054.29086,
+          Malaysia:3842.637758,
+          'Sri-Lanka':723.114065,
+          'Costa-Rica':3555.542499,
+          'South-Korea':10119.29924,
+          Philippines:1016.311842,
+          Indonesia:848.2471059,
+          Thailand:2109.05461,
+          
+        },
+        {
+          year:1997,
+          India:396.1844388,
+          Pakistan:496.9950607,
+          Israel:18202.49628,
+          Malaysia:4022.843596,
+          'Sri-Lanka':759.818766,
+          'Costa-Rica':3660.070068,
+          'South-Korea':10491.08182,
+          Philippines:1045.458888,
+          Indonesia:875.959217,
+          Thailand:2057.066906,
+          
+        },
+        {
+          year:1998,
+          India:413.2870519,
+          Pakistan:496.5318923,
+          Israel:18523.47738,
+          Malaysia:3636.473102,
+          'Sri-Lanka':786.3702892,
+          'Costa-Rica':3869.523391,
+          'South-Korea':9701.67292,
+          Philippines:1016.775298,
+          Indonesia:750.8111959,
+          Thailand:1819.176177,
+          
+        },
+        {
+          year:1999,
+          India:440.5693093,
+          Pakistan:502.1246594,
+          Israel:18663.73882,
+          Malaysia:3767.637015,
+          'Sri-Lanka':808.4815709,
+          'Costa-Rica':4088.304414,
+          'South-Korea':10546.81217,
+          Philippines:1025.551505,
+          Indonesia:746.7927777,
+          Thailand:1877.305197,
+          
+        },
+        {
+          year:2000,
+          India:450.4151061,
+          Pakistan:511.7025555,
+          Israel:19859.30215,
+          Malaysia:4005.556325,
+          'Sri-Lanka':854.9267252,
+          'Costa-Rica':4068.821351,
+          'South-Korea':11346.66499,
+          Philippines:1048.070513,
+          Indonesia:773.3109699,
+          Thailand:1943.237928,
+          
+        },
+        {
+          year:2001,
+          India:464.9742607,
+          Pakistan:511.1109972,
+          Israel:19353.34454,
+          Malaysia:3933.935077,
+          'Sri-Lanka':855.3725803,
+          'Costa-Rica':4026.557239,
+          'South-Korea':11710.57982,
+          Philippines:1055.807441,
+          Indonesia:791.0764547,
+          Thailand:1962.241437,
+          
+        },
+        {
+          year:2002,
+          India:475.4570581,
+          Pakistan:517.5966508,
+          Israel:18858.29173,
+          Malaysia:4052.878748,
+          'Sri-Lanka':883.4571769,
+          'Costa-Rica':4061.980725,
+          'South-Korea':12478.06366,
+          Philippines:1071.690095,
+          Indonesia:816.0164079,
+          Thailand:2042.798299,
+          
+        },
+        {
+          year:2003,
+          India:505.2489363,
+          Pakistan:532.9973575,
+          Israel:18800.92652,
+          Malaysia:4194.260799,
+          'Sri-Lanka':923.6354395,
+          'Costa-Rica':4241.887772,
+          'South-Korea':12764.27199,
+          Philippines:1102.215971,
+          Indonesia:844.1834857,
+          Thailand:2164.301418,
+          
+        },
+        {
+          year:2004,
+          India:536.60488,
+          Pakistan:562.283992,
+          Israel:19366.33583,
+          Malaysia:4385.96954,
+          'Sri-Lanka':960.7985946,
+          'Costa-Rica':4344.084202,
+          'South-Korea':13303.82,
+          Philippines:1153.022382,
+          Indonesia:875.7291576,
+          Thailand:2277.562345,
+          
+        },
+        {
+          year:2005,
+          India:577.6567293,
+          Pakistan:594.766855,
+          Israel:19967.98088,
+          Malaysia:4529.601248,
+          'Sri-Lanka':1009.908869,
+          'Costa-Rica':4521.011952,
+          'South-Korea':13801.82945,
+          Philippines:1185.37688,
+          Indonesia:914.5999046,
+          Thailand:2359.644614,
+          
+        },
+        {
+          year:2006,
+          India:621.8994139,
+          Pakistan:620.2956378,
+          Israel:20715.56805,
+          Malaysia:4695.229726,
+          'Sri-Lanka':1075.625538,
+          'Costa-Rica':4836.674305,
+          'South-Korea':14446.3586,
+          Philippines:1225.045039,
+          Indonesia:953.9355312,
+          Thailand:2458.517431,
+          
+        },
+        {
+          year:2007,
+          India:673.004691,
+          Pakistan:643.8585182,
+          Israel:21469.53451,
+          Malaysia:4905.121369,
+          'Sri-Lanka':1138.366839,
+          'Costa-Rica':5137.485256,
+          'South-Korea':15113.35278,
+          Philippines:1283.46737,
+          Indonesia:1003.364434,
+          Thailand:2562.72216,
+          
+        },
+        {
+          year:2008,
+          India:689.2731963,
+          Pakistan:642.4275373,
+          Israel:21941.10572,
+          Malaysia:5057.826663,
+          'Sri-Lanka':1195.481085,
+          'Costa-Rica':5196.689144,
+          'South-Korea':15349.84987,
+          Philippines:1314.225968,
+          Indonesia:1052.433389,
+          Thailand:2608.24726,
+          
+        },
+        {
+          year:2009,
+          India:735.6318542,
+          Pakistan:653.6111759,
+          Israel:21602.21001,
+          Malaysia:4901.547097,
+          'Sri-Lanka':1223.68571,
+          'Costa-Rica':5066.966003,
+          'South-Korea':15325.94024,
+          Philippines:1307.139627,
+          Indonesia:1089.724014,
+          Thailand:2531.233735,
+          
+        },
+        {
+          year:2010,
+          India:794.801256,
+          Pakistan:664.7112698,
+          Israel:22239.05126,
+          Malaysia:5168.686016,
+          'Sri-Lanka':1308.784019,
+          'Costa-Rica':5226.566178,
+          'South-Korea':16219.38807,
+          Philippines:1383.404865,
+          Indonesia:1145.385435,
+          Thailand:2712.508016,
+          
+        },
+        {
+          year:2011,
+          India:837.7464011,
+          Pakistan:672.1547506,
+          Israel:22859.67589,
+          Malaysia:5345.213415,
+          'Sri-Lanka':1402.121673,
+          'Costa-Rica':5367.799878,
+          'South-Korea':16684.21278,
+          Philippines:1413.366295,
+          Indonesia:1206.991065,
+          Thailand:2699.123242,
+          
+        }
+      ];
+      var lifeExpJson=[
+        {
+          year:1960,
+          India: 41.26,
+          Pakistan:46.79,
+          Israel:68.55,
+          Malaysia:59.89,
+          'Sri-Lanka':59.76,
+          'Costa-Rica':61.97,
+          'South-Korea':53.02,
+          Philippines:58.82,
+          Indonesia:45.01,
+          Thailand:55.46,
+        },
+        {
+          year:1961,
+          India: 41.99,
+          Pakistan:47.73,
+          Israel:68.85,
+          Malaysia:60.48,
+          'Sri-Lanka':60.18,
+          'Costa-Rica':62.56,
+          'South-Korea':53.75,
+          Philippines:59.17,
+          Indonesia:45.83,
+          Thailand:56.01,
+        },
+        {
+          year:1962,
+          India: 42.72,
+          Pakistan:48.63,
+          Israel:69.13,
+          Malaysia:61.07,
+          'Sri-Lanka':60.61,
+          'Costa-Rica':63.13,
+          'South-Korea':54.51,
+          Philippines:59.53,
+          Indonesia:46.65,
+          Thailand:56.51,
+        },
+        {
+          year:1963,
+          India: 43.46,
+          Pakistan:49.47,
+          Israel:69.41,
+          Malaysia:61.63,
+          'Sri-Lanka':61.06,
+          'Costa-Rica':63.7,
+          'South-Korea':55.27,
+          Philippines:59.87,
+          Indonesia:47.45,
+          Thailand:56.98,
+        },
+        {
+          year:1964,
+          India: 44.23,
+          Pakistan:50.27,
+          Israel:69.68,
+          Malaysia:62.17,
+          'Sri-Lanka':61.55,
+          'Costa-Rica':64.26,
+          'South-Korea':56.04,
+          Philippines:60.21,
+          Indonesia:48.24,
+          Thailand:57.4,
+        },
+        {
+          year:1965,
+          India: 44.98,
+          Pakistan:51.01,
+          Israel:69.93,
+          Malaysia:62.71,
+          'Sri-Lanka':62.07,
+          'Costa-Rica':64.8,
+          'South-Korea':56.84,
+          Philippines:60.56,
+          Indonesia:43.77,
+          Thailand:57.8,
+        },
+        {
+          year:1966,
+          India: 45.73,
+          Pakistan:51.7,
+          Israel:70.17,
+          Malaysia:63.21,
+          'Sri-Lanka':62.62,
+          'Costa-Rica':65.33,
+          'South-Korea':57.67,
+          Philippines:60.91,
+          Indonesia:44.18,
+          Thailand:58.18,
+        },
+        {
+          year:1967,
+          India: 46.49,
+          Pakistan:52.34,
+          Israel:70.39,
+          Malaysia:63.7,
+          'Sri-Lanka':63.17,
+          'Costa-Rica':65.85,
+          'South-Korea':58.54,
+          Philippines:61.26,
+          Indonesia:50.54,
+          Thailand:58.56,
+        },
+        {
+          year:1968,
+          India: 47.21,
+          Pakistan:52.95,
+          Israel:70.6,
+          Malaysia:64.17,
+          'Sri-Lanka':63.7,
+          'Costa-Rica':66.35,
+          'South-Korea':59.44,
+          Philippines:61.6,
+          Indonesia:51.27,
+          Thailand:58.96,
+        },
+        {
+          year:1969,
+          India: 47.93,
+          Pakistan:53.52,
+          Israel:70.78,
+          Malaysia:64.63,
+          'Sri-Lanka':64.21,
+          'Costa-Rica':66.84,
+          'South-Korea':60.35,
+          Philippines:61.94,
+          Indonesia:52,
+          Thailand:59.39,
+        },
+        {
+          year:1970,
+          India: 48.65,
+          Pakistan:54.06,
+          Israel:70.96,
+          Malaysia:65.08,
+          'Sri-Lanka':64.69,
+          'Costa-Rica':67.34,
+          'South-Korea':61.22,
+          Philippines:62.26,
+          Indonesia:52.71,
+          Thailand:59.86,
+        },
+        {
+          year:1971,
+          India: 49.35,
+          Pakistan:54.6,
+          Israel:71.13,
+          Malaysia:65.51,
+          'Sri-Lanka':65.15,
+          'Costa-Rica':67.86,
+          'South-Korea':62.02,
+          Philippines:62.54,
+          Indonesia:53.4,
+          Thailand:60.33,
+        },
+        {
+          year:1972,
+          India: 50.08,
+          Pakistan:55.12,
+          Israel:71.33,
+          Malaysia:65.93,
+          'Sri-Lanka':65.56,
+          'Costa-Rica':68.4,
+          'South-Korea':62.73,
+          Philippines:62.77,
+          Indonesia:54.09,
+          Thailand:60.82,
+        },
+        {
+          year:1973,
+          India: 50.81,
+          Pakistan:55.64,
+          Israel:71.54,
+          Malaysia:66.34,
+          'Sri-Lanka':65.97,
+          'Costa-Rica':68.95,
+          'South-Korea':63.34,
+          Philippines:62.95,
+          Indonesia:54.75,
+          Thailand:61.29,
+        },
+        {
+          year:1974,
+          India: 51.53,
+          Pakistan:56.16,
+          Israel:71.78,
+          Malaysia:66.73,
+          'Sri-Lanka':66.36,
+          'Costa-Rica':69.53,
+          'South-Korea':63.84,
+          Philippines:63.1,
+          Indonesia:55.41,
+          Thailand:61.77,
+        },
+        {
+          year:1975,
+          India: 52.25,
+          Pakistan:56.68,
+          Israel:72.04,
+          Malaysia:67.13,
+          'Sri-Lanka':66.76,
+          'Costa-Rica':70.12,
+          'South-Korea':64.26,
+          Philippines:63.21,
+          Indonesia:56.04,
+          Thailand:62.24,
+        },
+        {
+          year:1976,
+          India: 52.93,
+          Pakistan:57.17,
+          Israel:72.33,
+          Malaysia:67.5,
+          'Sri-Lanka':67.17,
+          'Costa-Rica':70.75,
+          'South-Korea':64.62,
+          Philippines:63.32,
+          Indonesia:56.67,
+          Thailand:62.7,
+        },
+        {
+          year:1977,
+          India: 53.56,
+          Pakistan:57.63,
+          Israel:72.62,
+          Malaysia:67.86,
+          'Sri-Lanka':67.6,
+          'Costa-Rica':71.38,
+          'South-Korea':64.95,
+          Philippines:63.44,
+          Indonesia:57.27,
+          Thailand:63.15,
+        },
+        {
+          year:1978,
+          India: 54.14,
+          Pakistan:58.05,
+          Israel:72.9,
+          Malaysia:68.21,
+          'Sri-Lanka':68.06,
+          'Costa-Rica':72,
+          'South-Korea':65.31,
+          Philippines:63.6,
+          Indonesia:57.87,
+          Thailand:63.62,
+        },
+        {
+          year:1979,
+          India: 54.65,
+          Pakistan:58.44,
+          Israel:73.19,
+          Malaysia:68.56,
+          'Sri-Lanka':68.52,
+          'Costa-Rica':72.62,
+          'South-Korea':65.7,
+          Philippines:63.81,
+          Indonesia:58.45,
+          Thailand:64.1,
+        },
+        {
+          year:1980,
+          India: 55.1,
+          Pakistan:58.79,
+          Israel:73.47,
+          Malaysia:68.89,
+          'Sri-Lanka':68.97,
+          'Costa-Rica':73.2,
+          'South-Korea':66.15,
+          Philippines:64.06,
+          Indonesia:59.01,
+          Thailand:64.62,
+        },
+        {
+          year:1981,
+          India: 55.51,
+          Pakistan:59.13,
+          Israel:73.74,
+          Malaysia:69.22,
+          'Sri-Lanka':69.35,
+          'Costa-Rica':73.73,
+          'South-Korea':66.66,
+          Philippines:64.37,
+          Indonesia:59.57,
+          Thailand:65.22,
+        },
+        {
+          year:1982,
+          India: 55.86,
+          Pakistan:59.45,
+          Israel:73.99,
+          Malaysia:69.53,
+          'Sri-Lanka':69.64,
+          'Costa-Rica':74.22,
+          'South-Korea':67.21,
+          Philippines:64.74,
+          Indonesia:60.12,
+          Thailand:65.91,
+        },
+        {
+          year:1983,
+          India: 56.19,
+          Pakistan:59.77,
+          Israel:74.49,
+          Malaysia:69.84,
+          'Sri-Lanka':69.83,
+          'Costa-Rica':74.66,
+          'South-Korea':67.78,
+          Philippines:65.13,
+          Indonesia:60.64,
+          Thailand:66.69,
+        },
+        {
+          year:1984,
+          India: 56.51,
+          Pakistan:60.09,
+          Israel:74.78,
+          Malaysia:70.14,
+          'Sri-Lanka':69.93,
+          'Costa-Rica':75.04,
+          'South-Korea':68.37,
+          Philippines:65.53,
+          Indonesia:61.16,
+          Thailand:67.52,
+        },
+        {
+          year:1985,
+          India: 56.81,
+          Pakistan:60.43,
+          Israel:75.1,
+          Malaysia:70.45,
+          'Sri-Lanka':69.97,
+          'Costa-Rica':75.37,
+          'South-Korea':68.98,
+          Philippines:65.95,
+          Indonesia:61.66,
+          Thailand:68.36,
+        },
+        {
+          year:1986,
+          India: 57.11,
+          Pakistan:60.77,
+          Israel:74.92,
+          Malaysia:70.73,
+          'Sri-Lanka':70,
+          'Costa-Rica':75.66,
+          'South-Korea':69.58,
+          Philippines:66.35,
+          Indonesia:62.15,
+          Thailand:69.15,
+        },
+        {
+          year:1987,
+          India: 57.39,
+          Pakistan:61.11,
+          Israel:75.29,
+          Malaysia:71.01,
+          'Sri-Lanka':70.05,
+          'Costa-Rica':75.9,
+          'South-Korea':70.18,
+          Philippines:66.72,
+          Indonesia:62.63,
+          Thailand:69.84,
+        },
+        {
+          year:1988,
+          India: 57.65,
+          Pakistan:61.45,
+          Israel:75.65,
+          Malaysia:71.28,
+          'Sri-Lanka':70.16,
+          'Costa-Rica':76.14,
+          'South-Korea':70.75,
+          Philippines:67.05,
+          Indonesia:63.1,
+          Thailand:70.38,
+        },
+        {
+          year:1989,
+          India: 57.93,
+          Pakistan:61.78,
+          Israel:76.24,
+          Malaysia:71.54,
+          'Sri-Lanka':70.32,
+          'Costa-Rica':76.37,
+          'South-Korea':71.29,
+          Philippines:67.34,
+          Indonesia:63.55,
+          Thailand:70.76,
+        },
+        {
+          year:1990,
+          India: 58.2,
+          Pakistan:62.1,
+          Israel:76.7,
+          Malaysia:71.8,
+          'Sri-Lanka':70.5,
+          'Costa-Rica':76.6,
+          'South-Korea':71.8,
+          Philippines:67.6,
+          Indonesia:64,
+          Thailand:71,
+        },
+        {
+          year:1991,
+          India: 58.5,
+          Pakistan:62.2,
+          Israel:76.5,
+          Malaysia:72,
+          'Sri-Lanka':71.3,
+          'Costa-Rica':76.5,
+          'South-Korea':72.2,
+          Philippines:67.9,
+          Indonesia:64.5,
+          Thailand:71,
+        },
+        {
+          year:1992,
+          India: 58.8,
+          Pakistan:62.1,
+          Israel:76.3,
+          Malaysia:72.2,
+          'Sri-Lanka':72,
+          'Costa-Rica':76.6,
+          'South-Korea':72.7,
+          Philippines:68.2,
+          Indonesia:64.9,
+          Thailand:70.9,
+        },
+        {
+          year:1993,
+          India: 59.1,
+          Pakistan:62,
+          Israel:76.9,
+          Malaysia:72.4,
+          'Sri-Lanka':72.9,
+          'Costa-Rica':76.6,
+          'South-Korea':73.1,
+          Philippines:68.3,
+          Indonesia:65.3,
+          Thailand:70.8,
+        },
+        {
+          year:1994,
+          India: 59.5,
+          Pakistan:61.9,
+          Israel:77.1,
+          Malaysia:72.4,
+          'Sri-Lanka':72.8,
+          'Costa-Rica':76.7,
+          'South-Korea':73.6,
+          Philippines:68.6,
+          Indonesia:65.7,
+          Thailand:70.6,
+        },
+        {
+          year:1995,
+          India: 59.9,
+          Pakistan:61.8,
+          Israel:77.4,
+          Malaysia:72.4,
+          'Sri-Lanka':71.7,
+          'Costa-Rica':76.8,
+          'South-Korea':74,
+          Philippines:68.8,
+          Indonesia:66.1,
+          Thailand:70.6,
+        },
+        {
+          year:1996,
+          India: 60.2,
+          Pakistan:61.9,
+          Israel:77.7,
+          Malaysia:72.5,
+          'Sri-Lanka':71.3,
+          'Costa-Rica':76.8,
+          'South-Korea':74.5,
+          Philippines:68.9,
+          Indonesia:66.4,
+          Thailand:70.6,
+        },
+        {
+          year:1997,
+          India: 60.5,
+          Pakistan:61.8,
+          Israel:77.9,
+          Malaysia:72.8,
+          'Sri-Lanka':71.4,
+          'Costa-Rica':77,
+          'South-Korea':74.9,
+          Philippines:69,
+          Indonesia:66.7,
+          Thailand:70.5,
+        },
+        {
+          year:1998,
+          India: 60.8,
+          Pakistan:62,
+          Israel:78.1,
+          Malaysia:73,
+          'Sri-Lanka':72,
+          'Costa-Rica':77.2,
+          'South-Korea':75.4,
+          Philippines:69,
+          Indonesia:67,
+          Thailand:70.4,
+        },
+        {
+          year:1999,
+          India: 61.2,
+          Pakistan:62.1,
+          Israel:78.5,
+          Malaysia:73.1,
+          'Sri-Lanka':72.4,
+          'Costa-Rica':77.5,
+          'South-Korea':75.8,
+          Philippines:69.2,
+          Indonesia:67.2,
+          Thailand:70.5,
+        },
+        {
+          year:2000,
+          India: 61.5,
+          Pakistan:62.3,
+          Israel:78.6,
+          Malaysia:73.3,
+          'Sri-Lanka':72.4,
+          'Costa-Rica':77.7,
+          'South-Korea':76.3,
+          Philippines:69.1,
+          Indonesia:67.5,
+          Thailand:70.7,
+        },
+        {
+          year:2001,
+          India: 61.9,
+          Pakistan:62.5,
+          Israel:78.8,
+          Malaysia:73.6,
+          'Sri-Lanka':73.3,
+          'Costa-Rica':78,
+          'South-Korea':76.7,
+          Philippines:69,
+          Indonesia:67.8,
+          Thailand:71.2,
+        },
+        {
+          year:2002,
+          India: 62.3,
+          Pakistan:62.6,
+          Israel:78.6,
+          Malaysia:73.8,
+          'Sri-Lanka':73.7,
+          'Costa-Rica':78.2,
+          'South-Korea':77.1,
+          Philippines:69,
+          Indonesia:68,
+          Thailand:71.7,
+        },
+        {
+          year:2003,
+          India: 62.8,
+          Pakistan:62.8,
+          Israel:79.1,
+          Malaysia:73.9,
+          'Sri-Lanka':74,
+          'Costa-Rica':78.4,
+          'South-Korea':77.7,
+          Philippines:69.1,
+          Indonesia:68.2,
+          Thailand:72.1,
+        },
+        {
+          year:2004,
+          India: 63.2,
+          Pakistan:63.1,
+          Israel:79.5,
+          Malaysia:74,
+          'Sri-Lanka':69.4,
+          'Costa-Rica':78.7,
+          'South-Korea':78.2,
+          Philippines:69.1,
+          Indonesia:66.7,
+          Thailand:72.2,
+        },
+        {
+          year:2005,
+          India: 63.6,
+          Pakistan:62.2,
+          Israel:79.7,
+          Malaysia:74.3,
+          'Sri-Lanka':73.9,
+          'Costa-Rica':79,
+          'South-Korea':78.7,
+          Philippines:69.1,
+          Indonesia:68.7,
+          Thailand:73.1,
+        },
+        {
+          year:2006,
+          India: 63.9,
+          Pakistan:63.7,
+          Israel:79.6,
+          Malaysia:74.5,
+          'Sri-Lanka':73.9,
+          'Costa-Rica':79.3,
+          'South-Korea':79.1,
+          Philippines:69.2,
+          Indonesia:68.9,
+          Thailand:73.5,
+        },
+        {
+          year:2007,
+          India: 64.3,
+          Pakistan:63.8,
+          Israel:80.3,
+          Malaysia:74.5,
+          'Sri-Lanka':74.4,
+          'Costa-Rica':79.6,
+          'South-Korea':79.4,
+          Philippines:69.7,
+          Indonesia:69.2,
+          Thailand:73.8,
+        },
+        {
+          year:2008,
+          India: 64.7,
+          Pakistan:64.1,
+          Israel:80.6,
+          Malaysia:74.5,
+          'Sri-Lanka':74,
+          'Costa-Rica':79.8,
+          'South-Korea':79.8,
+          Philippines:69.8,
+          Indonesia:69.4,
+          Thailand:73.9,
+        },
+        {
+          year:2009,
+          India: 65,
+          Pakistan:64.3,
+          Israel:81,
+          Malaysia:74.3,
+          'Sri-Lanka':74.1,
+          'Costa-Rica':79.8,
+          'South-Korea':80.1,
+          Philippines:69.9,
+          Indonesia:69.6,
+          Thailand:74,
+        },
+        {
+          year:2010,
+          India: 65.4,
+          Pakistan:64.5,
+          Israel:81.6,
+          Malaysia:74.4,
+          'Sri-Lanka':75,
+          'Costa-Rica':79.8,
+          'South-Korea':80.4,
+          Philippines:70.1,
+          Indonesia:69.8,
+          Thailand:74.2,
+        },
+        {
+          year:2011,
+          India: 65.7,
+          Pakistan:64.9,
+          Israel:81.6,
+          Malaysia:74.6,
+          'Sri-Lanka':76.4,
+          'Costa-Rica':79.9,
+          'South-Korea':80.6,
+          Philippines:70.2,
+          Indonesia:70.1,
+          Thailand:74.3,
+        },
+        {
+          year:2012,
+          India: 66.1,
+          Pakistan:65.1,
+          Israel:82.1,
+          Malaysia:74.7,
+          'Sri-Lanka':76.8,
+          'Costa-Rica':80,
+          'South-Korea':80.7,
+          Philippines:70.3,
+          Indonesia:70.3,
+          Thailand:74.4,
+        },
+        {
+          year:2013,
+          India: 66.5,
+          Pakistan:65.4,
+          Israel:82,
+          Malaysia:74.9,
+          'Sri-Lanka':77.1,
+          'Costa-Rica':80.1,
+          'South-Korea':80.9,
+          Philippines:70.3,
+          Indonesia:70.6,
+          Thailand:74.4,
+        },
+        {
+          year:2014,
+          India: 66.9,
+          Pakistan:65.6,
+          Israel:81.3,
+          Malaysia:75.1,
+          'Sri-Lanka':77.4,
+          'Costa-Rica':80.2,
+          'South-Korea':80.9,
+          Philippines:70.7,
+          Indonesia:70.8,
+          Thailand:74.6,
+        },
+        {
+          year:2015,
+          India: 67.2,
+          Pakistan:65.9,
+          Israel:82.1,
+          Malaysia:75.3,
+          'Sri-Lanka':77.6,
+          'Costa-Rica':80.3,
+          'South-Korea':81,
+          Philippines:71,
+          Indonesia:71.1,
+          Thailand:74.7,
+        },
+        {
+          year:2016,
+          India: 67.5,
+          Pakistan:66.2,
+          Israel:82.91,
+          Malaysia:75.5,
+          'Sri-Lanka':77.8,
+          'Costa-Rica':80.4,
+          'South-Korea':81.1,
+          Philippines:71.3,
+          Indonesia:71.4,
+          Thailand:74.8,
+        },
+      ];
+      var chldMortJson = [
+        {
+          year:1960,
+          India:247.7,
+          Pakistan:261.9,
+          Israel:40.15,
+          Malaysia:92.8,
+          'Sri-Lanka':101,
+          'Costa-Rica':106.47,
+          'South-Korea':113,
+          Philippines:106,
+          Indonesia:222.4,
+          Thailand:147.9,
+        },
+        {
+          year:1961,
+          India:243.7,
+          Pakistan:251.6,
+          Israel:38.92,
+          Malaysia:87.8,
+          'Sri-Lanka':96.4,
+          'Costa-Rica':102.67,
+          'South-Korea':106.5,
+          Philippines:102.4,
+          Indonesia:216.5,
+          Thailand:142.7,
+        },
+        {
+          year:1962,
+          India:240,
+          Pakistan:241.9,
+          Israel:37.73,
+          Malaysia:83.1,
+          'Sri-Lanka':92.2,
+          'Costa-Rica':99.01,
+          'South-Korea':100.6,
+          Philippines:99.5,
+          Indonesia:210.7,
+          Thailand:137.7,
+        },
+        {
+          year:1963,
+          India:236.3,
+          Pakistan:232.7,
+          Israel:36.58,
+          Malaysia:78.8,
+          'Sri-Lanka':88.3,
+          'Costa-Rica':95.49,
+          'South-Korea':95.1,
+          Philippines:96.8,
+          Indonesia:205.1,
+          Thailand:132.8,
+        },
+        {
+          year:1964,
+          India:232.9,
+          Pakistan:224.3,
+          Israel:35.46,
+          Malaysia:74.7,
+          'Sri-Lanka':84.8,
+          'Costa-Rica':92.08,
+          'South-Korea':89.5,
+          Philippines:94.6,
+          Indonesia:199.5,
+          Thailand:128,
+        },
+        {
+          year:1965,
+          India:229.6,
+          Pakistan:216.7,
+          Israel:34.37,
+          Malaysia:71,
+          'Sri-Lanka':81.6,
+          'Costa-Rica':88.8,
+          'South-Korea':83.7,
+          Philippines:92.4,
+          Indonesia:193.9,
+          Thailand:123.3,
+        },
+        {
+          year:1966,
+          India:226.3,
+          Pakistan:209.8,
+          Israel:33.32,
+          Malaysia:67.5,
+          'Sri-Lanka':78.8,
+          'Costa-Rica':85,
+          'South-Korea':77.7,
+          Philippines:90.4,
+          Indonesia:188.2,
+          Thailand:118.6,
+        },
+        {
+          year:1967,
+          India:223.1,
+          Pakistan:203.8,
+          Israel:32.3,
+          Malaysia:64.3,
+          'Sri-Lanka':76.4,
+          'Costa-Rica':82.3,
+          'South-Korea':71.6,
+          Philippines:88.5,
+          Indonesia:182.5,
+          Thailand:113.9,
+        },
+        {
+          year:1968,
+          India:219.8,
+          Pakistan:198.3,
+          Israel:31.32,
+          Malaysia:61.3,
+          'Sri-Lanka':74.3,
+          'Costa-Rica':80.4,
+          'South-Korea':65.3,
+          Philippines:86.7,
+          Indonesia:176.8,
+          Thailand:109.2,
+        },
+        {
+          year:1969,
+          India:216.6,
+          Pakistan:193.3,
+          Israel:30.36,
+          Malaysia:58.5,
+          'Sri-Lanka':72.5,
+          'Costa-Rica':78.8,
+          'South-Korea':59,
+          Philippines:85.2,
+          Indonesia:171.1,
+          Thailand:104.5,
+        },
+        {
+          year:1970,
+          India:213.3,
+          Pakistan:188.8,
+          Israel:29.43,
+          Malaysia:55.8,
+          'Sri-Lanka':71,
+          'Costa-Rica':76.4,
+          'South-Korea':52.8,
+          Philippines:84,
+          Indonesia:165.6,
+          Thailand:99.7,
+        },
+        {
+          year:1971,
+          India:209.9,
+          Pakistan:184.7,
+          Israel:29.32,
+          Malaysia:53.1,
+          'Sri-Lanka':69.7,
+          'Costa-Rica':71.8,
+          'South-Korea':46.7,
+          Philippines:83.1,
+          Indonesia:160.3,
+          Thailand:94.9,
+        },
+        {
+          year:1972,
+          India:206.1,
+          Pakistan:181,
+          Israel:29.21,
+          Malaysia:50.5,
+          'Sri-Lanka':68.5,
+          'Costa-Rica':64.9,
+          'South-Korea':41,
+          Philippines:82.6,
+          Indonesia:155.1,
+          Thailand:90.2,
+        },
+        {
+          year:1973,
+          India:202.2,
+          Pakistan:177.7,
+          Israel:29.1,
+          Malaysia:47.8,
+          'Sri-Lanka':67.1,
+          'Costa-Rica':57.8,
+          'South-Korea':35.8,
+          Philippines:82.3,
+          Indonesia:150.1,
+          Thailand:85.7,
+        },
+        {
+          year:1974,
+          India:197.9,
+          Pakistan:174.6,
+          Israel:29.2,
+          Malaysia:45.2,
+          'Sri-Lanka':65.6,
+          'Costa-Rica':51.8,
+          'South-Korea':31.1,
+          Philippines:82.1,
+          Indonesia:145.3,
+          Thailand:81.4,
+        },
+        {
+          year:1975,
+          India:193.4,
+          Pakistan:172,
+          Israel:26.2,
+          Malaysia:42.5,
+          'Sri-Lanka':63.8,
+          'Costa-Rica':46.3,
+          'South-Korea':27,
+          Philippines:82.1,
+          Indonesia:140.8,
+          Thailand:77.4,
+        },
+        {
+          year:1976,
+          India:188.6,
+          Pakistan:169.6,
+          Israel:23.8,
+          Malaysia:40,
+          'Sri-Lanka':61.6,
+          'Costa-Rica':40.3,
+          'South-Korea':23.5,
+          Philippines:82,
+          Indonesia:136.5,
+          Thailand:73.7,
+        },
+        {
+          year:1977,
+          India:183.4,
+          Pakistan:167.3,
+          Israel:21.8,
+          Malaysia:37.4,
+          'Sri-Lanka':59.1,
+          'Costa-Rica':34,
+          'South-Korea':20.4,
+          Philippines:81.8,
+          Indonesia:132.4,
+          Thailand:70.1,
+        },
+        {
+          year:1978,
+          India:178.2,
+          Pakistan:165.3,
+          Israel:20.2,
+          Malaysia:35,
+          'Sri-Lanka':56.3,
+          'Costa-Rica':28.9,
+          'South-Korea':17.9,
+          Philippines:81.5,
+          Indonesia:128.5,
+          Thailand:66.8,
+        },
+        {
+          year:1979,
+          India:172.8,
+          Pakistan:163.4,
+          Israel:19,
+          Malaysia:32.7,
+          'Sri-Lanka':53.2,
+          'Costa-Rica':25.6,
+          'South-Korea':15.9,
+          Philippines:80.9,
+          Indonesia:124.8,
+          Thailand:63.8,
+        },
+        {
+          year:1980,
+          India:167.6,
+          Pakistan:161.5,
+          Israel:18,
+          Malaysia:30.5,
+          'Sri-Lanka':49.9,
+          'Costa-Rica':23.8,
+          'South-Korea':14.3,
+          Philippines:80.1,
+          Indonesia:121.1,
+          Thailand:60.9,
+        },
+        {
+          year:1981,
+          India:162.6,
+          Pakistan:159.6,
+          Israel:17.3,
+          Malaysia:28.5,
+          'Sri-Lanka':46.3,
+          'Costa-Rica':23.1,
+          'South-Korea':13.1,
+          Philippines:79.3,
+          Indonesia:117.5,
+          Thailand:58.2,
+        },
+        {
+          year:1982,
+          India:157.9,
+          Pakistan:157.7,
+          Israel:16.6,
+          Malaysia:26.6,
+          'Sri-Lanka':42.4,
+          'Costa-Rica':22.9,
+          'South-Korea':12.2,
+          Philippines:78.4,
+          Indonesia:113.9,
+          Thailand:55.6,
+        },
+        {
+          year:1983,
+          India:153.5,
+          Pakistan:155.6,
+          Israel:16,
+          Malaysia:24.8,
+          'Sri-Lanka':38.3,
+          'Costa-Rica':22.8,
+          'South-Korea':11.4,
+          Philippines:77.3,
+          Indonesia:110.3,
+          Thailand:53.1,
+        },
+        {
+          year:1984,
+          India:149.2,
+          Pakistan:153.4,
+          Israel:15.2,
+          Malaysia:23.2,
+          'Sri-Lanka':34.1,
+          'Costa-Rica':22.4,
+          'South-Korea':10.6,
+          Philippines:75.9,
+          Indonesia:106.7,
+          Thailand:50.7,
+        },
+        {
+          year:1985,
+          India:145.2,
+          Pakistan:151.1,
+          Israel:14.4,
+          Malaysia:21.8,
+          'Sri-Lanka':30.2,
+          'Costa-Rica':21.6,
+          'South-Korea':9.9,
+          Philippines:74,
+          Indonesia:103.1,
+          Thailand:48.3,
+        },
+        {
+          year:1986,
+          India:141.2,
+          Pakistan:148.7,
+          Israel:13.7,
+          Malaysia:20.5,
+          'Sri-Lanka':26.9,
+          'Costa-Rica':20.5,
+          'South-Korea':9.3,
+          Philippines:71.6,
+          Indonesia:99.5,
+          Thailand:46,
+        },
+        {
+          year:1987,
+          India:137.3,
+          Pakistan:146.2,
+          Israel:13.1,
+          Malaysia:19.4,
+          'Sri-Lanka':24.2,
+          'Costa-Rica':19.3,
+          'South-Korea':8.6,
+          Philippines:68.6,
+          Indonesia:95.9,
+          Thailand:43.7,
+        },
+        {
+          year:1988,
+          India:133.4,
+          Pakistan:143.6,
+          Israel:12.5,
+          Malaysia:18.4,
+          'Sri-Lanka':22.5,
+          'Costa-Rica':18.3,
+          'South-Korea':8,
+          Philippines:65.2,
+          Indonesia:92.2,
+          Thailand:41.5,
+        },
+        {
+          year:1989,
+          India:129.5,
+          Pakistan:141.1,
+          Israel:12.1,
+          Malaysia:17.4,
+          'Sri-Lanka':21.6,
+          'Costa-Rica':17.5,
+          'South-Korea':7.5,
+          Philippines:61.7,
+          Indonesia:88.4,
+          Thailand:39.2,
+        },
+        {
+          year:1990,
+          India:125.8,
+          Pakistan:138.6,
+          Israel:11.6,
+          Malaysia:16.6,
+          'Sri-Lanka':21.3,
+          'Costa-Rica':16.9,
+          'South-Korea':7.1,
+          Philippines:58.2,
+          Indonesia:84.7,
+          Thailand:37,
+        },
+        {
+          year:1991,
+          India:122.2,
+          Pakistan:136,
+          Israel:11.1,
+          Malaysia:15.8,
+          'Sri-Lanka':21.2,
+          'Costa-Rica':16.5,
+          'South-Korea':6.8,
+          Philippines:54.9,
+          Indonesia:80.9,
+          Thailand:35,
+        },
+        {
+          year:1992,
+          India:118.8,
+          Pakistan:133.5,
+          Israel:10.5,
+          Malaysia:15.1,
+          'Sri-Lanka':21.2,
+          'Costa-Rica':16.1,
+          'South-Korea':6.4,
+          Philippines:52.1,
+          Indonesia:77.1,
+          Thailand:33.1,
+        },
+        {
+          year:1993,
+          India:115.4,
+          Pakistan:131,
+          Israel:9.9,
+          Malaysia:14.4,
+          'Sri-Lanka':21.1,
+          'Costa-Rica':15.8,
+          'South-Korea':6.1,
+          Philippines:49.5,
+          Indonesia:73.6,
+          Thailand:31.3,
+        },
+        {
+          year:1994,
+          India:112.1,
+          Pakistan:128.3,
+          Israel:9.2,
+          Malaysia:13.8,
+          'Sri-Lanka':20.8,
+          'Costa-Rica':15.5,
+          'South-Korea':5.8,
+          Philippines:47.4,
+          Indonesia:70.1,
+          Thailand:29.7,
+        },
+        {
+          year:1995,
+          India:108.7,
+          Pakistan:125.7,
+          Israel:8.7,
+          Malaysia:13.3,
+          'Sri-Lanka':20.2,
+          'Costa-Rica':15.2,
+          'South-Korea':5.5,
+          Philippines:45.6,
+          Indonesia:66.7,
+          Thailand:28.3,
+        },
+        {
+          year:1996,
+          India:105.3,
+          Pakistan:123,
+          Israel:8.2,
+          Malaysia:12.9,
+          'Sri-Lanka':19.5,
+          'Costa-Rica':15,
+          'South-Korea':5.3,
+          Philippines:44,
+          Indonesia:63.6,
+          Thailand:27,
+        },
+        {
+          year:1997,
+          India:101.9,
+          Pakistan:120.3,
+          Israel:7.8,
+          Malaysia:12.4,
+          'Sri-Lanka':18.7,
+          'Costa-Rica':14.8,
+          'South-Korea':5.3,
+          Philippines:42.7,
+          Indonesia:60.5,
+          Thailand:25.8,
+        },
+        {
+          year:1998,
+          India:98.3,
+          Pakistan:117.6,
+          Israel:7.5,
+          Malaysia:11.7,
+          'Sri-Lanka':17.8,
+          'Costa-Rica':14.4,
+          'South-Korea':5.4,
+          Philippines:41.6,
+          Indonesia:57.6,
+          Thailand:24.6,
+        },
+        {
+          year:1999,
+          India:94.8,
+          Pakistan:114.9,
+          Israel:7.2,
+          Malaysia:11,
+          'Sri-Lanka':17,
+          'Costa-Rica':13.8,
+          'South-Korea':5.7,
+          Philippines:40.6,
+          Indonesia:54.9,
+          Thailand:23.5,
+        },
+        {
+          year:2000,
+          India:91.2,
+          Pakistan:112.3,
+          Israel:6.9,
+          Malaysia:10.2,
+          'Sri-Lanka':16.3,
+          'Costa-Rica':13,
+          'South-Korea':6.1,
+          Philippines:39.7,
+          Indonesia:52.3,
+          Thailand:22.5,
+        },
+        {
+          year:2001,
+          India:87.7,
+          Pakistan:109.8,
+          Israel:6.6,
+          Malaysia:9.5,
+          'Sri-Lanka':15.8,
+          'Costa-Rica':12.2,
+          'South-Korea':6.4,
+          Philippines:38.9,
+          Indonesia:49.8,
+          Thailand:21.5,
+        },
+        {
+          year:2002,
+          India:84.3,
+          Pakistan:107.5,
+          Israel:6.4,
+          Malaysia:8.9,
+          'Sri-Lanka':15.4,
+          'Costa-Rica':11.6,
+          'South-Korea':6.5,
+          Philippines:38.1,
+          Indonesia:47.6,
+          Thailand:20.5,
+        },
+        {
+          year:2003,
+          India:81,
+          Pakistan:105.3,
+          Israel:6.1,
+          Malaysia:8.5,
+          'Sri-Lanka':15,
+          'Costa-Rica':11,
+          'South-Korea':6.4,
+          Philippines:37.3,
+          Indonesia:45.4,
+          Thailand:19.6,
+        },
+        {
+          year:2004,
+          India:77.7,
+          Pakistan:103.2,
+          Israel:5.8,
+          Malaysia:8.3,
+          'Sri-Lanka':28.8,
+          'Costa-Rica':10.7,
+          'South-Korea':6,
+          Philippines:36.5,
+          Indonesia:49.3,
+          Thailand:18.7,
+        },
+        {
+          year:2005,
+          India:74.6,
+          Pakistan:101.2,
+          Israel:5.6,
+          Malaysia:8.1,
+          'Sri-Lanka':14.1,
+          'Costa-Rica':10.4,
+          'South-Korea':5.6,
+          Philippines:35.7,
+          Indonesia:41.4,
+          Thailand:17.8,
+        },
+        {
+          year:2006,
+          India:71.5,
+          Pakistan:99.3,
+          Israel:5.3,
+          Malaysia:8,
+          'Sri-Lanka':13.3,
+          'Costa-Rica':10.3,
+          'South-Korea':5.2,
+          Philippines:34.9,
+          Indonesia:39.6,
+          Thailand:17,
+        },
+        {
+          year:2007,
+          India:68.5,
+          Pakistan:97.4,
+          Israel:5.1,
+          Malaysia:8,
+          'Sri-Lanka':12.5,
+          'Costa-Rica':10.3,
+          'South-Korea':4.8,
+          Philippines:34.2,
+          Indonesia:37.9,
+          Thailand:16.3,
+        },
+        {
+          year:2008,
+          India:65.6,
+          Pakistan:95.5,
+          Israel:4.9,
+          Malaysia:8,
+          'Sri-Lanka':11.7,
+          'Costa-Rica':10.3,
+          'South-Korea':4.5,
+          Philippines:33.4,
+          Indonesia:36.2,
+          Thailand:15.6,
+        },
+        {
+          year:2009,
+          India:62.7,
+          Pakistan:93.7,
+          Israel:4.7,
+          Malaysia:8.1,
+          'Sri-Lanka':11.1,
+          'Costa-Rica':10.2,
+          'South-Korea':4.3,
+          Philippines:32.6,
+          Indonesia:34.7,
+          Thailand:15,
+        },
+        {
+          year:2010,
+          India:59.9,
+          Pakistan:91.8,
+          Israel:4.6,
+          Malaysia:8.3,
+          'Sri-Lanka':10.6,
+          'Costa-Rica':10.2,
+          'South-Korea':4.1,
+          Philippines:31.9,
+          Indonesia:33.1,
+          Thailand:14.5,
+        },
+        {
+          year:2011,
+          India:57.2,
+          Pakistan:89.9,
+          Israel:4.4,
+          Malaysia:8.4,
+          'Sri-Lanka':10.1,
+          'Costa-Rica':10.1,
+          'South-Korea':4,
+          Philippines:31.2,
+          Indonesia:31.7,
+          Thailand:14,
+        },
+        {
+          year:2012,
+          India:54.5,
+          Pakistan:87.8,
+          Israel:4.3,
+          Malaysia:8.4,
+          'Sri-Lanka':9.7,
+          'Costa-Rica':10.1,
+          'South-Korea':3.9,
+          Philippines:30.4,
+          Indonesia:30.4,
+          Thailand:13.5,
+        },
+        {
+          year:2013,
+          India:52.1,
+          Pakistan:85.6,
+          Israel:4.2,
+          Malaysia:8.4,
+          'Sri-Lanka':9.4,
+          'Costa-Rica':10,
+          'South-Korea':3.7,
+          Philippines:29.6,
+          Indonesia:29.3,
+          Thailand:13.1,
+        },
+        {
+          year:2014,
+          India:49.8,
+          Pakistan:83.3,
+          Israel:4.1,
+          Malaysia:8.4,
+          'Sri-Lanka':9,
+          'Costa-Rica':9.9,
+          'South-Korea':3.6,
+          Philippines:28.8,
+          Indonesia:28.2,
+          Thailand:12.6,
+        },
+        {
+          year:2015,
+          India:47.7,
+          Pakistan:81.1,
+          Israel:4,
+          Malaysia:8.2,
+          'Sri-Lanka':8.7,
+          'Costa-Rica':9.7,
+          'South-Korea':3.5,
+          Philippines:28,
+          Indonesia:27.2,
+          Thailand:12.3,
+        },
 
-        var options = {
-          height:400,
-          width:1000,
-          animation:{
-            "startup":true,
-            duration: 200,
-            easing: 'out',
-          },
-          vAxis: {
-              minValue:0,
-              viewWindow: {
-                  min: 0
-              }
-          },
-          title: 'Freedom graph',
-          titleTextStyle: {
-              color: "#363636",
-              fontSize: 27,
-              bold: true
-          },
-        };
-        var button = document.getElementById('b1');
-        button.onclick = function() {
-          var playData = function(i){
-            if(i<perCapJson.length){
-              data1.setValue(0, 1,perCapJson[i].India);
-              data1.setValue(1, 1,perCapJson[i][name]);
-              chart.draw(data1, options);
-              document.getElementById('infoBox').innerHTML="";
-              var node = document.createElement("LI");
-              var textnode = document.createTextNode(perCapJson[i].year);
-              node.appendChild(textnode);
-              document.getElementById("infoBox").appendChild(node);
-              setTimeout(function() {
-                console.log(i+','+perCapJson[i].year+','+(perCapJson[i].India-perCapJson[i][name]));
-                i = i+1;
-                //console.log(i);
-                playData(i);
+      ];
+      var sexRatJson = [
+        {
+          year:1950,
+          India:108.033,
+          Pakistan:124.534,
+          Israel:105.824,
+          Malaysia:106.026,
+          'Sri-Lanka':120.258,
+          'Costa-Rica':104.196,
+          'South-Korea':84.263,
+          Philippines:98.913,
+          Indonesia:98.434,
+          Thailand:100.651,
+        },
+        {
+          year:1955,
+          India:108.386,
+          Pakistan:121.913,
+          Israel:103.324,
+          Malaysia:103.99,
+          'Sri-Lanka':114.634,
+          'Costa-Rica':103.859,
+          'South-Korea':85.989,
+          Philippines:99.731,
+          Indonesia:98.891,
+          Thailand:100.708,
+        },
+        {
+          year:1960,
+          India:108.722,
+          Pakistan:119.346,
+          Israel:103.043,
+          Malaysia:103.368,
+          'Sri-Lanka':110.761,
+          'Costa-Rica':103.6,
+          'South-Korea':88.635,
+          Philippines:100.452,
+          Indonesia:99.294,
+          Thailand:100.716,
+        },
+        {
+          year:1965,
+          India:108.914,
+          Pakistan:116.922,
+          Israel:102.343,
+          Malaysia:102.896,
+          'Sri-Lanka':108.02,
+          'Costa-Rica':103.373,
+          'South-Korea':90.812,
+          Philippines:100.975,
+          Indonesia:99.677,
+          Thailand:100.7,
+        },
+        {
+          year:1970,
+          India:108.945,
+          Pakistan:114.602,
+          Israel:101.684,
+          Malaysia:101.903,
+          'Sri-Lanka':106.357,
+          'Costa-Rica':103.089,
+          'South-Korea':92.902,
+          Philippines:101.309,
+          Indonesia:100.032,
+          Thailand:100.633,
+        },
+        {
+          year:1975,
+          India:108.861,
+          Pakistan:112.554,
+          Israel:100.402,
+          Malaysia:101.31,
+          'Sri-Lanka':104.99,
+          'Costa-Rica':102.741,
+          'South-Korea':94.214,
+          Philippines:101.558,
+          Indonesia:100.263,
+          Thailand:100.495,
+        },
+        {
+          year:1980,
+          India:108.55,
+          Pakistan:110.85,
+          Israel:99.883,
+          Malaysia:101.373,
+          'Sri-Lanka':104.113,
+          'Costa-Rica':103.968,
+          'South-Korea':94.814,
+          Philippines:101.659,
+          Indonesia:100.496,
+          Thailand:100.33,
+        },
+        {
+          year:1985,
+          India:108.322,
+          Pakistan:109.294,
+          Israel:99.584,
+          Malaysia:101.514,
+          'Sri-Lanka':103.105,
+          'Costa-Rica':103.747,
+          'South-Korea':95.489,
+          Philippines:101.747,
+          Indonesia:100.488,
+          Thailand:98.286,
+        },
+        {
+          year:1990,
+          India:108.184,
+          Pakistan:108.266,
+          Israel:99.197,
+          Malaysia:102.985,
+          'Sri-Lanka':101.877,
+          'Costa-Rica':103.547,
+          'South-Korea':96.083,
+          Philippines:101.754,
+          Indonesia:100.437,
+          Thailand:99.191,
+        },
+        {
+          year:1995,
+          India:107.958,
+          Pakistan:107.506,
+          Israel:97.334,
+          Malaysia:103.256,
+          'Sri-Lanka':100.875,
+          'Costa-Rica':103.475,
+          'South-Korea':96.344,
+          Philippines:101.68,
+          Indonesia:100.332,
+          Thailand:97.97,
+        },
+        {
+          year:2000,
+          India:107.644,
+          Pakistan:106.811,
+          Israel:97.521,
+          Malaysia:103.491,
+          'Sri-Lanka':99.361,
+          'Costa-Rica':103.432,
+          'South-Korea':96.526,
+          Philippines:101.643,
+          Indonesia:100.069,
+          Thailand:96.681,
+        },
+        {
+          year:2005,
+          India:107.246,
+          Pakistan:106.394,
+          Israel:97.989,
+          Malaysia:103.323,
+          'Sri-Lanka':97.761,
+          'Costa-Rica':103.389,
+          'South-Korea':97.114,
+          Philippines:101.57,
+          Indonesia:99.833,
+          Thailand:96.944,
+        },
+        {
+          year:2010,
+          India:106.8,
+          Pakistan:106.11,
+          Israel:98.479,
+          Malaysia:103.094,
+          'Sri-Lanka':96.86,
+          'Costa-Rica':103.141,
+          'South-Korea':97.637,
+          Philippines:101.468,
+          Indonesia:99.663,
+          Thailand:96.714,
+        },
+        {
+          year:2015,
+          India:106.39,
+          Pakistan:105.998,
+          Israel:99.03,
+          Malaysia:102.781,
+          'Sri-Lanka':96.062,
+          'Costa-Rica':102.882,
+          'South-Korea':98.046,
+          Philippines:101.563,
+          Indonesia:99.501,
+          Thailand:96.406,
+        },
+      ];
 
-              },1000);
+      var urbanJson = [
+        {
+          year:1960,
+          India:17.9,
+          Pakistan:22.1,
+          Israel:76.8,
+          Malaysia:26.6,
+          'Sri-Lanka':16.4,
+          'Costa-Rica':34.3,
+          'South-Korea':27.7,
+          Philippines:30.3,
+          Indonesia:14.6,
+          Thailand:19.7,
+        },
+        {
+          year:1961,
+          India:18.0962,
+          Pakistan:22.3854,
+          Israel:77.6664,
+          Malaysia:27.261,
+          'Sri-Lanka':16.67,
+          'Costa-Rica':34.5614,
+          'South-Korea':28.6382,
+          Philippines:30.5584,
+          Indonesia:14.8266,
+          Thailand:19.7818,
+        },
+        {
+          year:1962,
+          India:18.2684,
+          Pakistan:22.6668,
+          Israel:78.4848,
+          Malaysia:27.924,
+          'Sri-Lanka':16.909,
+          'Costa-Rica':34.8688,
+          'South-Korea':29.5664,
+          Philippines:30.8198,
+          Indonesia:15.0672,
+          Thailand:19.8916,
+        },
+        {
+          year:1963,
+          India:18.4406,
+          Pakistan:22.9482,
+          Israel:79.3032,
+          Malaysia:28.587,
+          'Sri-Lanka':17.148,
+          'Costa-Rica':35.1762,
+          'South-Korea':30.4946,
+          Philippines:31.0812,
+          Indonesia:15.3078,
+          Thailand:20.0014,
+        },
+        {
+          year:1964,
+          India:18.6128,
+          Pakistan:23.2296,
+          Israel:80.1216,
+          Malaysia:29.25,
+          'Sri-Lanka':17.387,
+          'Costa-Rica':35.4836,
+          'South-Korea':31.4228,
+          Philippines:31.3426,
+          Indonesia:15.5484,
+          Thailand:20.1112,
+        },
+        {
+          year:1965,
+          India:18.785,
+          Pakistan:23.511,
+          Israel:80.94,
+          Malaysia:29.913,
+          'Sri-Lanka':17.626,
+          'Costa-Rica':35.791,
+          'South-Korea':32.351,
+          Philippines:31.604,
+          Indonesia:15.789,
+          Thailand:20.221,
+        },
+        {
+          year:1966,
+          India:18.98,
+          Pakistan:23.7722,
+          Israel:81.591,
+          Malaysia:30.6212,
+          'Sri-Lanka':18.0036,
+          'Costa-Rica':36.3982,
+          'South-Korea':34.0216,
+          Philippines:31.879,
+          Indonesia:16.0454,
+          Thailand:20.3546,
+        },
+        {
+          year:1967,
+          India:19.175,
+          Pakistan:24.0334,
+          Israel:82.242,
+          Malaysia:31.3294,
+          'Sri-Lanka':18.3812,
+          'Costa-Rica':37.0054,
+          'South-Korea':35.6922,
+          Philippines:32.154,
+          Indonesia:16.3018,
+          Thailand:20.4882,
+        },
+        {
+          year:1968,
+          India:19.37,
+          Pakistan:24.2946,
+          Israel:82.893,
+          Malaysia:32.0376,
+          'Sri-Lanka':18.7588,
+          'Costa-Rica':37.6126,
+          'South-Korea':37.3628,
+          Philippines:32.429,
+          Indonesia:16.5582,
+          Thailand:20.6218,
+        },
+        {
+          year:1969,
+          India:19.565,
+          Pakistan:24.5558,
+          Israel:83.544,
+          Malaysia:32.7458,
+          'Sri-Lanka':19.1364,
+          'Costa-Rica':38.2198,
+          'South-Korea':39.0334,
+          Philippines:32.704,
+          Indonesia:16.8146,
+          Thailand:20.7554,
+        },
+        {
+          year:1970,
+          India:19.76,
+          Pakistan:24.817,
+          Israel:84.195,
+          Malaysia:33.454,
+          'Sri-Lanka':19.514,
+          'Costa-Rica':38.827,
+          'South-Korea':40.704,
+          Philippines:32.979,
+          Indonesia:17.071,
+          Thailand:20.889,
+        },
+        {
+          year:1971,
+          India:20.0744,
+          Pakistan:25.1218,
+          Israel:84.6846,
+          Malaysia:34.2936,
+          'Sri-Lanka':19.5078,
+          'Costa-Rica':39.3314,
+          'South-Korea':42.1698,
+          Philippines:33.4952,
+          Indonesia:17.5202,
+          Thailand:21.4628,
+        },
+        {
+          year:1972,
+          India:20.3888,
+          Pakistan:25.4266,
+          Israel:85.1742,
+          Malaysia:35.1332,
+          'Sri-Lanka':19.5016,
+          'Costa-Rica':39.8358,
+          'South-Korea':43.6356,
+          Philippines:34.0114,
+          Indonesia:17.9694,
+          Thailand:22.0366,
+        },
+        {
+          year:1973,
+          India:20.7032,
+          Pakistan:25.7314,
+          Israel:85.6638,
+          Malaysia:35.9728,
+          'Sri-Lanka':19.4954,
+          'Costa-Rica':40.3402,
+          'South-Korea':45.1014,
+          Philippines:34.5276,
+          Indonesia:18.4186,
+          Thailand:22.6104,
+        },
+        {
+          year:1974,
+          India:21.0176,
+          Pakistan:26.0362,
+          Israel:86.1534,
+          Malaysia:36.8124,
+          'Sri-Lanka':19.4892,
+          'Costa-Rica':40.8446,
+          'South-Korea':46.5672,
+          Philippines:35.0438,
+          Indonesia:18.8678,
+          Thailand:23.1842,
+        },
+        {
+          year:1975,
+          India:21.332,
+          Pakistan:26.341,
+          Israel:86.643,
+          Malaysia:37.652,
+          'Sri-Lanka':19.483,
+          'Costa-Rica':41.349,
+          'South-Korea':48.033,
+          Philippines:35.56,
+          Indonesia:19.317,
+          Thailand:23.758,
+        },
+        {
+          year:1976,
+          India:21.6852,
+          Pakistan:26.686,
+          Israel:87.031,
+          Malaysia:38.5304,
+          'Sri-Lanka':19.3422,
+          'Costa-Rica':41.699,
+          'South-Korea':49.7704,
+          Philippines:35.9442,
+          Indonesia:19.8744,
+          Thailand:24.3646,
+        },
+        {
+          year:1977,
+          India:22.0384,
+          Pakistan:27.031,
+          Israel:87.419,
+          Malaysia:39.4088,
+          'Sri-Lanka':19.2014,
+          'Costa-Rica':42.049,
+          'South-Korea':51.5078,
+          Philippines:36.3284,
+          Indonesia:20.4318,
+          Thailand:24.9712,
+        },
+        {
+          year:1978,
+          India:22.3916,
+          Pakistan:27.376,
+          Israel:87.807,
+          Malaysia:40.2872,
+          'Sri-Lanka':19.0606,
+          'Costa-Rica':42.399,
+          'South-Korea':53.2452,
+          Philippines:36.7126,
+          Indonesia:20.9892,
+          Thailand:25.5778,
+        },
+        {
+          year:1979,
+          India:22.7448,
+          Pakistan:27.721,
+          Israel:88.195,
+          Malaysia:41.1656,
+          'Sri-Lanka':18.9198,
+          'Costa-Rica':42.749,
+          'South-Korea':54.9826,
+          Philippines:37.0968,
+          Indonesia:21.5466,
+          Thailand:26.1844,
+        },
+        {
+          year:1980,
+          India:23.098,
+          Pakistan:28.066,
+          Israel:88.583,
+          Malaysia:42.044,
+          'Sri-Lanka':18.779,
+          'Costa-Rica':43.099,
+          'South-Korea':56.72,
+          Philippines:37.481,
+          Indonesia:22.104,
+          Thailand:26.791,
+        },
+        {
+          year:1981,
+          India:23.348,
+          Pakistan:28.3216,
+          Israel:88.832,
+          Malaysia:42.8138,
+          'Sri-Lanka':18.62,
+          'Costa-Rica':43.5918,
+          'South-Korea':58.3512,
+          Philippines:38.594,
+          Indonesia:22.901,
+          Thailand:27.0518,
+        },
+        {
+          year:1982,
+          India:23.598,
+          Pakistan:28.5772,
+          Israel:89.081,
+          Malaysia:43.5836,
+          'Sri-Lanka':18.461,
+          'Costa-Rica':44.0846,
+          'South-Korea':59.9824,
+          Philippines:39.707,
+          Indonesia:23.698,
+          Thailand:27.3126,
+        },
+        {
+          year:1983,
+          India:23.848,
+          Pakistan:28.8328,
+          Israel:89.33,
+          Malaysia:44.3534,
+          'Sri-Lanka':18.302,
+          'Costa-Rica':44.5774,
+          'South-Korea':61.6136,
+          Philippines:40.82,
+          Indonesia:24.495,
+          Thailand:27.5734,
+        },
+        {
+          year:1984,
+          India:24.098,
+          Pakistan:29.0884,
+          Israel:89.579,
+          Malaysia:45.1232,
+          'Sri-Lanka':18.143,
+          'Costa-Rica':45.0702,
+          'South-Korea':63.2448,
+          Philippines:41.933,
+          Indonesia:25.292,
+          Thailand:27.8342,
+        },
+        {
+          year:1985,
+          India:24.348,
+          Pakistan:29.344,
+          Israel:89.828,
+          Malaysia:45.893,
+          'Sri-Lanka':17.984,
+          'Costa-Rica':45.563,
+          'South-Korea':64.876,
+          Philippines:43.046,
+          Indonesia:26.089,
+          Thailand:28.095,
+        },
+        {
+          year:1986,
+          India:24.5878,
+          Pakistan:29.5904,
+          Israel:89.9342,
+          Malaysia:46.6732,
+          'Sri-Lanka':17.827,
+          'Costa-Rica':46.587,
+          'South-Korea':66.6696,
+          Philippines:44.1548,
+          Indonesia:26.988,
+          Thailand:28.3608,
+        },
+        {
+          year:1987,
+          India:24.8276,
+          Pakistan:29.8368,
+          Israel:90.0404,
+          Malaysia:47.4534,
+          'Sri-Lanka':17.67,
+          'Costa-Rica':47.611,
+          'South-Korea':68.4632,
+          Philippines:45.2636,
+          Indonesia:27.887,
+          Thailand:28.6266,
+        },
+        {
+          year:1988,
+          India:25.0674,
+          Pakistan:30.0832,
+          Israel:90.1466,
+          Malaysia:48.2336,
+          'Sri-Lanka':17.513,
+          'Costa-Rica':48.635,
+          'South-Korea':70.2568,
+          Philippines:46.3724,
+          Indonesia:28.786,
+          Thailand:28.8924,
+        },
+        {
+          year:1989,
+          India:25.3072,
+          Pakistan:30.3296,
+          Israel:90.2528,
+          Malaysia:49.0138,
+          'Sri-Lanka':17.356,
+          'Costa-Rica':49.659,
+          'South-Korea':72.0504,
+          Philippines:47.4812,
+          Indonesia:29.685,
+          Thailand:29.1582,
+        },
+        {
+          year:1990,
+          India:25.547,
+          Pakistan:30.576,
+          Israel:90.359,
+          Malaysia:49.794,
+          'Sri-Lanka':17.199,
+          'Costa-Rica':50.683,
+          'South-Korea':73.844,
+          Philippines:48.59,
+          Indonesia:30.584,
+          Thailand:29.424,
+        },
+        {
+          year:1991,
+          India:25.759,
+          Pakistan:30.828,
+          Israel:90.4604,
+          Malaysia:50.9728,
+          'Sri-Lanka':17.0472,
+          'Costa-Rica':51.7042,
+          'South-Korea':74.723,
+          Philippines:48.53,
+          Indonesia:31.578,
+          Thailand:29.5944,
+        },
+        {
+          year:1992,
+          India:25.971,
+          Pakistan:31.08,
+          Israel:90.5618,
+          Malaysia:52.1516,
+          'Sri-Lanka':16.8954,
+          'Costa-Rica':52.7254,
+          'South-Korea':75.602,
+          Philippines:48.47,
+          Indonesia:32.572,
+          Thailand:29.7648,
+        },
+        {
+          year:1993,
+          India:26.183,
+          Pakistan:31.332,
+          Israel:90.6632,
+          Malaysia:53.3304,
+          'Sri-Lanka':16.7436,
+          'Costa-Rica':53.7466,
+          'South-Korea':76.481,
+          Philippines:48.41,
+          Indonesia:33.566,
+          Thailand:29.9352,
+        },
+        {
+          year:1994,
+          India:26.395,
+          Pakistan:31.584,
+          Israel:90.7646,
+          Malaysia:54.5092,
+          'Sri-Lanka':16.5918,
+          'Costa-Rica':54.7678,
+          'South-Korea':77.36,
+          Philippines:48.35,
+          Indonesia:34.56,
+          Thailand:30.1056,
+        },
+        {
+          year:1995,
+          India:26.607,
+          Pakistan:31.836,
+          Israel:90.866,
+          Malaysia:55.688,
+          'Sri-Lanka':16.44,
+          'Costa-Rica':55.789,
+          'South-Korea':78.239,
+          Philippines:48.29,
+          Indonesia:35.554,
+          Thailand:30.276,
+        },
+        {
+          year:1996,
+          India:26.819,
+          Pakistan:32.0964,
+          Israel:90.9334,
+          Malaysia:56.9458,
+          'Sri-Lanka':16.2938,
+          'Costa-Rica':56.4388,
+          'South-Korea':78.5154,
+          Philippines:48.23,
+          Indonesia:36.8436,
+          Thailand:30.4494,
+        },
+        {
+          year:1997,
+          India:27.031,
+          Pakistan:32.3568,
+          Israel:91.0008,
+          Malaysia:58.2036,
+          'Sri-Lanka':16.1476,
+          'Costa-Rica':57.0886,
+          'South-Korea':78.7918,
+          Philippines:48.17,
+          Indonesia:38.1332,
+          Thailand:30.6228,
+        },
+        {
+          year:1998,
+          India:27.243,
+          Pakistan:32.6172,
+          Israel:91.0682,
+          Malaysia:59.4614,
+          'Sri-Lanka':16.0014,
+          'Costa-Rica':57.7384,
+          'South-Korea':79.0682,
+          Philippines:48.11,
+          Indonesia:39.4228,
+          Thailand:30.7962,
+        },
+        {
+          year:1999,
+          India:27.455,
+          Pakistan:32.8776,
+          Israel:91.1356,
+          Malaysia:60.7192,
+          'Sri-Lanka':15.8552,
+          'Costa-Rica':58.3882,
+          'South-Korea':79.3446,
+          Philippines:48.05,
+          Indonesia:40.7124,
+          Thailand:30.9696,
+        },
+        {
+          year:2000,
+          India:27.667,
+          Pakistan:33.138,
+          Israel:91.203,
+          Malaysia:61.977,
+          'Sri-Lanka':15.709,
+          'Costa-Rica':59.038,
+          'South-Korea':79.621,
+          Philippines:47.99,
+          Indonesia:42.002,
+          Thailand:31.143,
+        },
+        {
+          year:2001,
+          India:27.9806,
+          Pakistan:33.4066,
+          Israel:91.266,
+          Malaysia:63.0966,
+          'Sri-Lanka':15.5926,
+          'Costa-Rica':59.5716,
+          'South-Korea':79.9658,
+          Philippines:47.9986,
+          Indonesia:42.789,
+          Thailand:31.3626,
+        },
+        {
+          year:2002,
+          India:28.2942,
+          Pakistan:33.6752,
+          Israel:91.329,
+          Malaysia:64.2162,
+          'Sri-Lanka':15.4762,
+          'Costa-Rica':60.1052,
+          'South-Korea':80.3106,
+          Philippines:48.0072,
+          Indonesia:43.576,
+          Thailand:31.5822,
+        },
+        {
+          year:2003,
+          India:28.6078,
+          Pakistan:33.9438,
+          Israel:91.392,
+          Malaysia:65.3358,
+          'Sri-Lanka':15.3598,
+          'Costa-Rica':60.6388,
+          'South-Korea':80.6554,
+          Philippines:48.0158,
+          Indonesia:44.363,
+          Thailand:31.8018,
+        },
+        {
+          year:2004,
+          India:28.9214,
+          Pakistan:34.2124,
+          Israel:91.455,
+          Malaysia:66.4554,
+          'Sri-Lanka':15.2434,
+          'Costa-Rica':61.1724,
+          'South-Korea':81.0002,
+          Philippines:48.0244,
+          Indonesia:45.15,
+          Thailand:32.0214,
+        },
+        {
+          year:2005,
+          India:29.235,
+          Pakistan:34.481,
+          Israel:91.518,
+          Malaysia:67.575,
+          'Sri-Lanka':15.127,
+          'Costa-Rica':61.706,
+          'South-Korea':81.345,
+          Philippines:48.033,
+          Indonesia:45.937,
+          Thailand:32.241,
+        },
+        {
+          year:2006,
+          India:29.574,
+          Pakistan:34.7612,
+          Israel:91.579,
+          Malaysia:68.4612,
+          'Sri-Lanka':15.1098,
+          'Costa-Rica':62.202,
+          'South-Korea':81.6626,
+          Philippines:48.156,
+          Indonesia:46.7344,
+          Thailand:32.5388,
+        },
+        {
+          year:2007,
+          India:29.913,
+          Pakistan:35.0414,
+          Israel:91.64,
+          Malaysia:69.3474,
+          'Sri-Lanka':15.0926,
+          'Costa-Rica':62.698,
+          'South-Korea':81.9802,
+          Philippines:48.279,
+          Indonesia:47.5318,
+          Thailand:32.8366,
+        },
+        {
+          year:2008,
+          India:30.252,
+          Pakistan:35.3216,
+          Israel:91.701,
+          Malaysia:70.2336,
+          'Sri-Lanka':15.0754,
+          'Costa-Rica':63.194,
+          'South-Korea':82.2978,
+          Philippines:48.402,
+          Indonesia:48.3292,
+          Thailand:33.1344,
+        },
+        {
+          year:2009,
+          India:30.591,
+          Pakistan:35.6018,
+          Israel:91.762,
+          Malaysia:71.1198,
+          'Sri-Lanka':15.0582,
+          'Costa-Rica':63.69,
+          'South-Korea':82.6154,
+          Philippines:48.525,
+          Indonesia:49.1266,
+          Thailand:33.4322,
+        },
+        {
+          year:2010,
+          India:30.93,
+          Pakistan:35.882,
+          Israel:91.823,
+          Malaysia:72.006,
+          'Sri-Lanka':15.041,
+          'Costa-Rica':64.186,
+          'South-Korea':82.933,
+          Philippines:48.648,
+          Indonesia:49.924,
+          Thailand:33.73,
+        },
+        {
+          year:2011,
+          India:31.295,
+          Pakistan:36.2156,
+          Israel:91.8836,
+          Malaysia:72.684,
+          'Sri-Lanka':15.1264,
+          'Costa-Rica':64.6438,
+          'South-Korea':83.2008,
+          Philippines:48.8856,
+          Indonesia:50.6858,
+          Thailand:34.1104,
+        },
+      ];
+      var labelJson=[];
+      var tooltipName;
+      if(label=='chldMortJson'){
+        labelJson=chldMortJson;
+        tooltipName = 'Child Mortality';
+      }else if(label=='lifeExpJson'){
+        labelJson=lifeExpJson;
+        tooltipName = 'Life Expectancy';
+      }else if(label=='sexRatJson'){
+        labelJson=sexRatJson;
+        tooltipName = 'Sex Ratio';
+      }else if(label=='perCapJson'){
+        labelJson=perCapJson;
+        tooltipName = 'Per Capita Income';
+      }else if(label=='urbanJson'){
+        labelJson=urbanJson;
+        tooltipName = 'Urbanisation (% of population)';
+      }
+      var data1 = new google.visualization.DataTable();
+      data1.addColumn('string', 'Country');
+      data1.addColumn('number', tooltipName);
+      data1.addColumn({ type: 'string', role: 'style' });
+      //data1.addColumn({ type: 'string', role: 'annotation' });
+      var thisRow=[];
+      thisRow.push('India');
+      thisRow.push(labelJson[0].India);
+      thisRow.push("#7fd4d0");
+      //thisRow.push("India");
+      data1.addRow(thisRow);
+      var thisRow=[];
+      thisRow.push(name);
+      thisRow.push(labelJson[0][name]);
+      thisRow.push("#ffc81d");
+      //thisRow.push(name);
+      data1.addRow(thisRow);
+
+      var options = {
+        height:'100%',
+        width:'100%',
+        animation:{
+          "startup":true,
+          duration: 100,
+          easing: 'out',
+        },
+        vAxis: {
+            minValue:0,
+            viewWindow: {
+                min: 0
             }
+        },
+        'chartArea': {'width': '100%', 'height': '100%'},
+        titleTextStyle: {
+            color: "#363636",
+            fontSize: 27,
+            bold: true
+        },
+        colors: ['red', 'green'],
+        legend:{position:'none'},
+      };
+      
+      var button = document.getElementById('b1');
+      button.onclick = function() {
+        if ($(this).hasClass('pause')) {
+          $(this).removeClass('pause');
+          $(this).addClass('play');
+        }else if ($(this).hasClass('play')) {
+          $(this).removeClass('play');
+          $(this).addClass('pause');
+        }
+        
+
+        $(this).addClass('inact');
+        $(this).parent('.overlay').addClass('inact');
+        $('.leftContainer').css({
+          'pointer-events': 'none',
+        });
+        $('#myselect').css({
+          'pointer-events': 'none',
+        });
+        
+        var playData = function(indexNumLoc){
+          
+          
+          if((indexNumLoc<labelJson.length) && (!flagPause)){
+            data1.setValue(0, 1,labelJson[indexNumLoc].India);
+            data1.setValue(1, 1,labelJson[indexNumLoc][name]);
+            chart.draw(data1, options);
+            document.getElementById('infoBox').innerHTML="";
+            var node = document.createElement("LI");
+            var textnode = document.createTextNode(labelJson[indexNumLoc].year);
+            node.appendChild(textnode);
+            document.getElementById("infoBox").appendChild(node);
+            setTimeout(function() {
+              
+              indexNum = indexNum+1;
+              //console.log(i);
+              playData(indexNum);
+
+            },250);
+          }else if((indexNumLoc==labelJson.length)){
+
+            indexNum=1;
+            if ($('#b1').hasClass('pause')) {
+              $('#b1').removeClass('pause');
+              $('#b1').addClass('play');
+            }
+            flagPause=false;
+            console.log('here'+flagPause);
+            $('.leftContainer').css({
+              'pointer-events': 'all',
+            });
+            $('#myselect').css({
+              'pointer-events': 'auto',
+            });
+            $('#b1').parent('.overlay').removeClass('inact');
+            $('#b1').removeClass('inact');
           }
-          playData(1);
         }
 
-        var chart = new google.visualization.ColumnChart(document.getElementById('curve_chart'));
-        chart.draw(data1, options);
 
-        google.visualization.events.addListener(chart, 'select', function (data) {
-          chart.setSelection([]);
-        });
 
-        google.visualization.events.addListener(chart, 'onmouseover', function (data) {
-          document.getElementById('infoBox').innerHTML="";
-        });
+        if($(this).hasClass('pause')){
+          
+          flagPause = false;
+          //$(this).children('.badgeCont').children('span').text('pause');
+          playData(indexNum);
+        }else if($(this).hasClass('play')){
+          flagPause = true;
+          
+          //console.log(flagPause);
+          //$(this).children('.badgeCont').children('span').text('play');
+
+        }
+
+        
       }
-      function initialize(){
-        $(document).ready(function() {
-          $( "select#myselect" ).change(function() {
-            console.log($( "select#myselect option:selected" ).val());
-            drawChart($( "select#myselect option:selected" ).val());
-          });
-          drawChart('Pakistan');
+
+      var chart = new google.visualization.ColumnChart(document.getElementById('curve_chart'));
+      chart.draw(data1, options);
+
+      google.visualization.events.addListener(chart, 'select', function (data) {
+        chart.setSelection([]);
+      });
+
+      google.visualization.events.addListener(chart, 'onmouseover', function (data) {
+        //document.getElementById('infoBox').innerHTML="";
+      });
+    }
+    function initialize(){
+      $(document).ready(function() {
+        
+        $('.optionMain').on('click', function(event) {
+
+          event.preventDefault();
+          $('#b1').parent('.overlay').show();
+          $('.optionMain.active').removeClass('active');
+          $(this).addClass('active');
+          if ($(this).children('.textOptMain').text()=='Child Mortality') {
+            $('.chartTTl').html('Child Mortality');
+            drawChart('chldMortJson','Pakistan',false);
+          }else if ($(this).children('.textOptMain').text()=='Life Expectancy') {
+            $('.chartTTl').html('Life Expectancy');
+            drawChart('lifeExpJson','Pakistan',false);
+          }else if ($(this).children('.textOptMain').text()=='Sex Ratio') {
+            $('.chartTTl').html('Sex Ratio');
+            drawChart('sexRatJson','Pakistan',false);
+          }else if ($(this).children('.textOptMain').text()=='Per Capita Income') {
+            $('.chartTTl').html('Per Capita Income');
+            drawChart('perCapJson','Pakistan',false);
+          }else if ($(this).children('.textOptMain').text()=='Urbanisation (% of population)') {
+            $('.chartTTl').html('Urbanisation <span>(% of population)</span>');
+            drawChart('urbanJson','Pakistan',false);
+          }
         });
-        //drawChart();  
-      }
-      
+        $( "select#myselect" ).change(function() {
+          $('#b1').parent('.overlay').show();
+          var name = $('.optionMain.active').children('.textOptMain').text();
+          $('.otherName').text($( "select#myselect option:selected" ).val());
+          if(name == 'Child Mortality'){
+            drawChart('chldMortJson',$( "select#myselect option:selected" ).val(),false);
+          }
+          if(name == 'Life Expectancy'){
+            drawChart('lifeExpJson',$( "select#myselect option:selected" ).val(),false);
+          }
+          if(name == 'Sex Ratio'){
+            drawChart('sexRatJson',$( "select#myselect option:selected" ).val(),false);
+          }
+          if(name == 'Per Capita Income'){
+            drawChart('perCapJson',$( "select#myselect option:selected" ).val(),false);
+          }
+          if(name == 'Urbanisation (% of population)'){
+            drawChart('urbanJson',$( "select#myselect option:selected" ).val(),false);
+          }
+        });
+        drawChart('chldMortJson','Pakistan',false);
+      });
+      //drawChart();  
+    }
+    
 
 
-    </script>
+  </script>
 </body>
 </html>

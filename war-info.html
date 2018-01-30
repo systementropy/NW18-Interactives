@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<style>
+		.container{
+			
+		}
+		.mainHoverCont{
+			width: 100%;
+			position: relative;
+			
+		}
+		.flex-cont {
+		    display: flex;
+		    flex-direction: column;
+		}
+		.eachCountry {
+		    width: 64px;
+		    height: 64px;
+		    box-shadow: 1px 1px 1px 4px rgba(0,0,0,0.1);
+		    border-radius: 50%;
+		    margin: 10px auto;
+		    cursor: pointer;
+		    display: flex;
+		    opacity: 0.1;
+		}
+		.mainHoverCont h2{
+			min-height: 64px;
+		    font-size: 21px;
+		    text-align: center;
+		}
+		.legendCountry.China,.eachCountry.China{background: #F14E49;color: #fff;}
+		.legendCountry.North_Korea,.eachCountry.North_Korea{background: #424B6A;color: #fff;}
+		.legendCountry.South_Korea,.eachCountry.South_Korea{background: #3E76DC;color: #fff;}
+		.legendCountry.US,.eachCountry.US{background: #EFA007;color: #fff;}
+		.legendCountry.Russia,.eachCountry.Russia{background: #03A397;color: #fff;}
+		.legendCountry.Japan,.eachCountry.Japan{background: #648E45;color: #fff;}
+		.eachCountry span {
+		    margin: auto;
+		}
+		.col-md-2.eachCountry{
+			width: 16.6%;
+			height: auto;
+			border-radius: 0;
+			opacity: 1;
+		}
+	</style>
+</head>
+<body>
+	<div style="" class="container">
+		<h1>WHOSE GOT WAR?</h1>
+		<h3>A look at the military balance in northeast Asia</h3>
+		<div class="row mainHoverCont">
+			<div class="col-md-2 col-sm-2 col-xs-2">
+				<h2>Active army</h2>
+				<div class="flex-cont">
+					<div class="eachCountry China"><span>1600000</span></div>
+					<div class="eachCountry North_Korea"><span>1020000</span></div>
+					<div class="eachCountry South_Korea"><span>495000</span></div>
+					<div class="eachCountry US"><span>409000</span></div>
+					<div class="eachCountry Russia"><span>240000</span></div>
+					<div class="eachCountry Japan"><span>151000</span></div>
+					
+				</div>
+			</div>
+			<div class="col-md-2 col-sm-2 col-xs-2">
+				<h2>Tanks</h2>
+				<div class="flex-cont">
+					<div class="eachCountry China"><span>7190</span></div>
+					<div class="eachCountry North_Korea"><span>4060</span></div>
+					<div class="eachCountry Russia"><span>2700</span></div>
+					<div class="eachCountry South_Korea"><span>2418</span></div>
+					<div class="eachCountry US"><span>2384</span></div>
+					<div class="eachCountry Japan"><span>688</span></div>
+					
+				</div>
+			</div>
+			<div class="col-md-2 col-sm-2 col-xs-2">
+				<h2>Combat jets</h2>
+				<div class="flex-cont">
+					<div class="eachCountry China"><span>2306</span></div>
+					<div class="eachCountry US"><span>1442</span></div>
+					<div class="eachCountry Russia"><span>1090</span></div>
+					<div class="eachCountry Japan"><span>557</span></div>
+					<div class="eachCountry South_Korea"><span>556</span></div>
+					<div class="eachCountry North_Korea"><span>545</span></div>
+					
+				</div>
+			</div>
+			<div class="col-md-2 col-sm-2 col-xs-2">
+				<h2>Warships</h2>
+				<div class="flex-cont">
+					<div class="eachCountry US"><span>88</span></div>
+					<div class="eachCountry China"><span>73</span></div>
+					<div class="eachCountry Japan"><span>44</span></div>
+					<div class="eachCountry Russia"><span>34</span></div>
+					<div class="eachCountry South_Korea"><span>23</span></div>
+					<div class="eachCountry North_Korea"><span>3</span></div>
+					
+				</div>
+			</div>
+			<div class="col-md-2 col-sm-2 col-xs-2">
+				<h2>Submarines</h2>
+				<div class="flex-cont">
+					<div class="eachCountry North_Korea"><span>73</span></div>
+					<div class="eachCountry US"><span>71</span></div>
+					<div class="eachCountry Russia"><span>62</span></div>
+					<div class="eachCountry China"><span>61</span></div>
+					<div class="eachCountry South_Korea"><span>23</span></div>
+					<div class="eachCountry Japan"><span>18</span></div>
+					
+				</div>
+			</div>
+			<div class="col-md-2 col-sm-2 col-xs-2">
+				<h2>Helicopters</h2>
+				<div class="flex-cont">
+					<div class="eachCountry US"><span>5437</span></div>
+					<div class="eachCountry China"><span>1069</span></div>
+					<div class="eachCountry Russia"><span>854</span></div>
+					<div class="eachCountry South_Korea"><span>602</span></div>
+					<div class="eachCountry Japan"><span>589</span></div>
+					<div class="eachCountry North_Korea"><span>286</span></div>
+					
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-2 col-sm-2 col-xs-2 legendCountry eachCountry China">China</div>
+			<div class="col-md-2 col-sm-2 col-xs-2 legendCountry eachCountry North_Korea">North Korea</div>
+			<div class="col-md-2 col-sm-2 col-xs-2 legendCountry eachCountry South_Korea">South Korea</div>
+			<div class="col-md-2 col-sm-2 col-xs-2 legendCountry eachCountry US">US</div>
+			<div class="col-md-2 col-sm-2 col-xs-2 legendCountry eachCountry Russia">Russia</div>
+			<div class="col-md-2 col-sm-2 col-xs-2 legendCountry eachCountry Japan">Japan</div>
+		</div>
+	</div>
+	<script
+	  src="https://code.jquery.com/jquery-3.2.1.min.js"
+	  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+	  crossorigin="anonymous"></script>
+ 	<script>
+ 		$(document).ready(function() {
+ 			$('.eachCountry').mouseenter(function(event) {
+ 				if ($(this).hasClass('China')) {
+ 					$('.China.eachCountry').css({
+ 						opacity: 1,
+ 						
+ 					});
+ 				}
+ 				if ($(this).hasClass('North_Korea')) {
+ 					$('.North_Korea.eachCountry').css({
+ 						opacity: 1,
+ 						
+ 					});
+ 				}
+				if ($(this).hasClass('South_Korea')) {
+					$('.South_Korea.eachCountry').css({
+						opacity: 1,
+						
+					});
+				}
+				if ($(this).hasClass('US')) {
+					$('.US.eachCountry').css({
+						opacity: 1,
+						
+					});
+				}
+				if ($(this).hasClass('Russia')) {
+					$('.Russia.eachCountry').css({
+						opacity: 1,
+						
+					});
+				}
+				if ($(this).hasClass('Japan')) {
+					$('.Japan.eachCountry').css({
+						opacity: 1,
+						
+					});
+				}
+ 				
+ 			}).mouseleave(function(e) {
+				if ($(this).hasClass('China') && !$(this).hasClass('legendCountry')) {
+					$('.China.eachCountry').css({
+						opacity: 0.1,
+						
+					});
+				}
+				if ($(this).hasClass('North_Korea') && !$(this).hasClass('legendCountry')) {
+					$('.North_Korea.eachCountry').css({
+						opacity: 0.1,
+						
+					});
+				}
+				if ($(this).hasClass('South_Korea') && !$(this).hasClass('legendCountry')) {
+					$('.South_Korea.eachCountry').css({
+						opacity: 0.1,
+						
+					});
+				}
+				if ($(this).hasClass('US') && !$(this).hasClass('legendCountry')) {
+					$('.US.eachCountry').css({
+						opacity: 0.1,
+						
+					});
+				}
+				if ($(this).hasClass('Russia') && !$(this).hasClass('legendCountry')) {
+					$('.Russia.eachCountry').css({
+						opacity: 0.1,
+						
+					});
+				}
+				if ($(this).hasClass('Japan') && !$(this).hasClass('legendCountry')) {
+					$('.Japan.eachCountry').css({
+						opacity: 0.1,
+						
+					});
+			}
+ 			});;
+ 		});
+ 	</script>
+</body>
+</html>

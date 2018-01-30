@@ -1,0 +1,61 @@
+ANDHRA Pradesh 			0
+ARUNACHAL PRADESH		34394
+ASSAM					19283
+BIHAR					82585
+Chhattisgarh 			0
+Goa						0
+GUJARAT					60784
+Haryana					141926
+Himachal Pradesh		77069
+J&K						369191
+Jharkhand				17654
+Karnataka				113631
+Kerala					9459
+Madhya Pradesh			247130
+Maharashtra				84050
+Manipur					26836
+Meghalaya				18688
+Mizoram					15895
+Nagaland				36606
+Odisha					20588
+Punjab					359349
+Rajasthan				133968
+Sikkim					0
+Tamil Nadu				22532
+Telangana				0
+Tripura					0
+Uttar Pradesh			1277914
+Uttarakhand				64770
+West Bengal				60525
+
+
+['Code','Subdivision name','Gun Licenses'],
+['IN-AP' , 'Andhra Pradesh',0],
+['IN-AR' , 'Arunachal Pradesh',34394],
+['IN-AS' , 'Assam',19283],
+['IN-BR' , 'Bihar',82585],
+['IN-CT' , 'Chhattisgarh',0],
+['IN-GA' , 'Goa',0],
+['IN-GJ' , 'Gujarat',60784],
+['IN-HR' , 'Haryana',141926],
+['IN-HP' , 'Himachal Pradesh',77069],
+['IN-JK' , 'Jammu and Kashmir',369191],
+['IN-JH' , 'Jharkhand',17654],
+['IN-KA' , 'Karnataka',113631],
+['IN-KL' , 'Kerala',9459],
+['IN-MP' , 'Madhya Pradesh',247130],
+['IN-MH' , 'Maharashtra',84050],
+['IN-MN' , 'Manipur',26836],
+['IN-ML' , 'Meghalaya',18688],
+['IN-MZ' , 'Mizoram',15895],
+['IN-NL' , 'Nagaland',36606],
+['IN-OR' , 'Odisha',20588],
+['IN-PB' , 'Punjab',359349],
+['IN-RJ' , 'Rajasthan',133968],
+['IN-SK' , 'Sikkim',0],
+['IN-TN' , 'Tamil Nadu',22532],
+['IN-TG' , 'Telangana',0],
+['IN-TR' , 'Tripura',0],
+['IN-UT' , 'Uttarakhand',1277914],
+['IN-UP' , 'Uttar Pradesh',64770],
+['IN-WB' , 'West Bengal',60525],

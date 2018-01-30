@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
+	<style>
+		body{
+			font-family: 'Roboto', sans-serif;
+		}
+		.container-fluid.mainCont{
+			width: 100vw;
+			height: 100vh;
+			position: relative;
+			padding: 0;
+			overflow:hidden;
+		}
+		.mainCont{
+		  margin: 0;
+		  padding: 0;
+		  position: relative;
+		}
+		.filter-menu{
+		  position: absolute;
+		  right: 0;
+		  top: 0;
+		}
+		.filter-menu ol.open{
+		   list-style-type: none;
+		   padding: 0;
+		   margin: 10px 0;
+		   z-index: 100;
+		   position: absolute;
+		   transition: all 0.4s ease-in-out;
+		   right: 16px;
+		   background: rgba(255, 255, 255, 0.8);
+		   top: 16px;
+		   transform: rotate(0) scale(1);
+		   opacity: 1;
+		   cursor: pointer;
+		}
+		.filter-menu.active ol.open li:nth-child(even){
+		  opacity: 0;
+		}
+		.filter-menu.active ol.open li:first-child{
+		  transform: rotate(45deg) translate(7px,10px) scale(0.6);
+		}
+		.filter-menu.active ol.open li:last-child{
+		  transform: rotate(-45deg) translate(5px,-10px) scale(0.6);
+		}
+		.filter-menu ol.close{
+		  opacity: 0;
+		  transform: rotate(90deg);
+		}
+		.filter-menu.active ol.close{
+		   list-style-type: none;
+		   padding: 0;
+		   margin: 10px 0;
+		   z-index: 100;
+		   position: absolute;
+		   transition: all 0.4s ease-in-out;
+		   right: 16px;
+		   background: rgba(0, 0, 0, 0.81);
+		   top: 16px;
+		   transform: rotate(0);
+		   opacity: 1;
+		   color: #fff;
+		   padding: 3px 19px;
+		   font-size: 40px;
+		   line-height: 40px;
+		   cursor: pointer;
+		   display: flex;
+		}
+		.filter-menu li{
+		   height: 2px;
+		   margin: 10px;
+		   width: 40px;
+		   background: #333;
+		   transition: all 0.4s ease-in-out;
+		}
+		.optsCont{
+		   background: rgba(0, 0, 0, 0.8);
+		   z-index: 1;
+		   height: 100vh;
+		   position: absolute;
+		   width: 25vw;
+		   left: 61px;
+		   transform: translateX(0);
+		   top: 0;
+		   transition: all 0.4s ease-in-out;
+		   color: #eee;
+		}
+		.optClass{
+		  padding: 40px;
+		}
+		.close span{
+		  transform: rotate(45deg);
+		  margin: auto;
+		}
+		.filter-menu.active .optsCont{
+		  transform: translateX(-100%);
+		}
+		#left_incident_report{
+			z-index: 100;
+			position: absolute;
+			left: 0;
+			top: 0;
+			height: 100vh;
+			background: rgba(150,150,150,0.9);
+			width: 40vw;
+			overflow-y: scroll;
+		}
+		.list-group-item{
+			background: transparent;
+		}
+		.Header{
+			font-size: 16px;
+			font-weight: bold;
+		}
+		.list-group-item.Red,.Header.Red{color: rgba(255,0,0,0.5);}
+		.list-group-item.Yellow,.Header.Yellow{color: rgba(255,255,0,0.5);}
+		.list-group-item.Blue,.Header.Blue{color: rgba(0,0,255,0.5);}
+		.list-group-item.Green,.Header.Green{color: rgba(0,255,0,0.5);}
+		.list-group-item.Brown,.Header.Brown{color: rgba(119, 85, 48, 0.5);}
+		.list-group-item.Grey,.Header.Grey{color: rgba(0,0,0,0.5);}
+		span.boldText {
+		    font-weight: bold;
+		    margin-right: 15px;
+		}
+		#incident_cont{
+			position: absolute;
+			width:0;
+			background:rgba(0,0,0,0.7);
+			left: 40%;
+			height: 100vh;
+			overflow-y: scroll;
+			transition: all 1s ease-in-out;
+			z-index: 1;
+			color:#FFF;
+		}
+		#incident_cont.open{
+			width: 60vw;
+		}
+	</style>
+
+	
+</head>
+<body>
+	<div class="container-fluid mainCont">
+		<div id="incident_cont" class="">
+			
+		</div>
+		<div id="left_incident_report">
+			<ol class="list-group" id="list_incident">
+				<li class='list-group-item'>Place : Casuality</li>
+			</ol>
+		</div>
+		<div id="chart_div" style="width: 100%; height: 100%;margin:0 auto;"></div>
+		<div class="filter-menu" id="filter_ctrl" >
+		  <ol class="open" onclick="myFunction()">
+		    <li></li>
+		    <li></li>
+		    <li></li>
+		  </ol>
+		  <!-- <ol class="close" onclick="myFunction()"><span>+</span></ol> -->
+		  <div class="optsCont">
+		      <div class="optClass">
+		        Filter by:
+		        <p onclick="updateAttr('delayed')"><input type="checkbox" name="" checked value="delayed"> delayed</p>
+		        <p onclick="updateAttr('ontime')"><input type="checkbox" name="" checked  value="ontime"> ontime</p>
+		        <p></p>
+		        <p>
+		          <button type="button" name="button" onclick="update()">Update</button>
+		          <button type="button" name="button" onclick="initMap()">Clear all</button>
+		        </p>
+		      </div>
+		  </div>
+		</div>
+	</div>
+	
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDC01VpIXzU5IqJUAs7oqjtX4RsRoCc-s" type="text/javascript"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script type='text/javascript'>
+		
+		function myFunction() {
+		    var x = document.getElementById('filter_ctrl');
+		    x.classList.toggle("active");
+		}
+		$(document).ready(function() {
+			
+			var map;
+			var infowindow;
+			var markerArray = [];
+			function createMarker(info,color){
+				var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|"+color);
+
+				var lat = info['Lat'];
+				var lng = info['Lng'];
+				//console.log(info);
+				var content=JSON.stringify(info);
+				var marker = new google.maps.Marker({
+					position: {lat,lng},
+					map: map,
+					icon:pinImage,
+					
+				});
+				marker['text-data']= content;
+				markerArray.push(marker);
+
+				google.maps.event.addListener(marker, 'click', function() {
+
+					var info=JSON.parse(marker['text-data']);
+					var content = "<p class='Header "+info.Color+"'><span>"+info.Place+"</span><span class='pull-right'>"+info.Date+"</span></p>	<p class='text-line'><span class='boldText'>Militants_Killed: </span><span class='pull-right'>"+info['Militants_Killed']+"</span></p>	<p class='text-line'><span class='boldText'>Security_forces_killed: </span><span class='pull-right'>"+info['Security_forces_killed']+"</span></p>	<p class='text-line'><span class='boldText'>Civilians_killed: </span><span class='pull-right'>"+info['Civilians_killed']+"</span></p>	<p class='text-line'><span class='boldText'>Millitants_affiliation: </span><span class='pull-right'>"+info['Millitants_affiliation']+"</span></p>	<p class='text-line'><span class='boldText'>Type_of_militants: </span><span class='pull-right'>"+info['Type_of_militants']+"</span></p>";
+					infowindow.setContent(content);
+					infowindow.open(map,this);
+				});
+			}
+			function initMap() {
+				var styledMapType = new google.maps.StyledMapType([{"elementType":"geometry","stylers":[{"color":"#00be2b"},{"saturation":100},{"visibility":"simplified"}]},{"elementType":"geometry.fill","stylers":[{"color":"#00bdbd"},{"saturation":100}]},{"elementType":"geometry.stroke","stylers":[{"color":"#1c2733"}]},{"elementType":"labels","stylers":[{"color":"#1dbeb7"},{"visibility":"off"}]},{"elementType":"labels.text.fill","stylers":[{"color":"#523735"}]},{"elementType":"labels.text.stroke","stylers":[{"color":"#f5f1e6"}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#c9b2a6"}]},{"featureType":"administrative.country","elementType":"geometry","stylers":[{"color":"#000000"},{"visibility":"on"}]},{"featureType":"administrative.country","elementType":"geometry.stroke","stylers":[{"color":"#464433"}]},{"featureType":"administrative.land_parcel","elementType":"geometry.stroke","stylers":[{"color":"#dcd2be"}]},{"featureType":"administrative.land_parcel","elementType":"labels.text.fill","stylers":[{"color":"#ae9e90"}]},{"featureType":"landscape.natural","elementType":"geometry","stylers":[{"color":"#dfd2ae"}]},{"featureType":"landscape.natural.landcover","elementType":"geometry.fill","stylers":[{"color":"#c38d52"},{"visibility":"on"}]},{"featureType":"landscape.natural.terrain","elementType":"geometry","stylers":[{"color":"#bbbbbb"}]},{"featureType":"landscape.natural.terrain","elementType":"geometry.fill","stylers":[{"color":"#bcb686"}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#dfd2ae"}]},{"featureType":"poi","elementType":"labels.text.fill","stylers":[{"color":"#93817c"}]},{"featureType":"poi.park","elementType":"geometry.fill","stylers":[{"color":"#a5b076"}]},{"featureType":"poi.park","elementType":"labels.text.fill","stylers":[{"color":"#447530"}]},{"featureType":"road","elementType":"geometry","stylers":[{"color":"#f5f1e6"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#fdfcf8"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"color":"#f8c967"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#e9bc62"}]},{"featureType":"road.highway.controlled_access","elementType":"geometry","stylers":[{"color":"#e98d58"}]},{"featureType":"road.highway.controlled_access","elementType":"geometry.stroke","stylers":[{"color":"#db8555"}]},{"featureType":"road.local","elementType":"labels.text.fill","stylers":[{"color":"#806b63"}]},{"featureType":"transit.line","elementType":"geometry","stylers":[{"color":"#dfd2ae"}]},{"featureType":"transit.line","elementType":"labels.text.fill","stylers":[{"color":"#8f7d77"}]},{"featureType":"transit.line","elementType":"labels.text.stroke","stylers":[{"color":"#ebe3cd"}]},{"featureType":"transit.station","elementType":"geometry","stylers":[{"color":"#dfd2ae"}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#ffffff"},{"saturation":-5}]},{"featureType":"water","elementType":"labels.text.fill","stylers":[{"color":"#92998d"}]}]
+				);
+				map = new google.maps.Map(document.getElementById('chart_div'), {
+					center: {lat: 34.064590, lng: 76.384855},
+					zoom: 8,
+					region:'IN',
+					mapTypeControlOptions: {
+						mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain','styled_map']
+					}
+				});
+				map.mapTypes.set('styled_map', styledMapType);
+				map.setMapTypeId('styled_map');
+				var city = [{"Color":"Red","Date":"03/01/2017","Place":"Sopore","Lat":34.286605,"Lng":74.462790,"Region":"NK","Militants_Killed":1,"Millitants_affiliation":"Lashkar-e-Toiba","Type_of_militants":"Foreign","Security_forces_killed":0,"Civilians_killed":0},{"Color":"Red","Date":"05/01/2017","Place":"Budgam","Lat":34.012345,"Lng":74.776205,"Region":"CK","Militants_Killed":1,"Millitants_affiliation":"Al_Badr","Type_of_militants":"Local","Security_forces_killed":0,"Civilians_killed":0},{"Color":"Yellow","Date":"09/01/2017","Place":"Akhnoor","Lat":32.896847,"Lng":74.740505,"Region":"J","Militants_Killed":0,"Millitants_affiliation":"Unkown","Type_of_militants":"Foreign","Security_forces_killed":0,"Civilians_killed":3},{"Color":"Red","Date":"10/01/2017","Place":"Hajin,Bandipora","Lat":34.284762,"Lng":74.620043,"Region":"NK","Militants_Killed":1,"Millitants_affiliation":"Lashkar-e-Toiba","Type_of_militants":"Local","Security_forces_killed":0,"Civilians_killed":0},{"Color":"Yellow","Date":"11/01/2017","Place":"Poonch","Lat":33.767690,"Lng":74.095971,"Region":"J","Militants_Killed":2,"Millitants_affiliation":"Unknown","Type_of_militants":"Foreign","Security_forces_killed":0,"Civilians_killed":0},{"Color":"Yellow","Date":"13/01/2017","Place":"Samba","Lat":32.555781,"Lng":75.107256,"Region":"J","Militants_Killed":1,"Millitants_affiliation":"Uknown","Type_of_militants":"Foreign","Security_forces_killed":0,"Civilians_killed":0},{"Color":"Red","Date":"16/01/2017","Place":"Pahlagam","Lat":34.005423,"Lng":75.293394,"Region":"SK","Militants_Killed":3,"Millitants_affiliation":"Hizbul_Mujahideen","Type_of_militants":"Local","Security_forces_killed":0,"Civilians_killed":0},{"Color":"Red","Date":"19/01/2017","Place":"Bandipora","Lat":34.370044,"Lng":74.687101,"Region":"NK","Militants_Killed":1,"Millitants_affiliation":"Lashkar-e-Toiba","Type_of_militants":"Foreign","Security_forces_killed":0,"Civilians_killed":0},{"Color":"Red","Date":"24/01/2017","Place":"Ganderbal","Lat":34.210200,"Lng":74.770356,"Region":"CK","Militants_Killed":2,"Millitants_affiliation":"Lashkar-e-Toiba","Type_of_militants":"Foreign","Security_forces_killed":0,"Civilians_killed":0},{"Color":"Yellow","Date":"24/01/2017","Place":"Sundarbani","Lat":33.048914,"Lng":74.487194,"Region":"J","Militants_Killed":1,"Millitants_affiliation":"Unknown","Type_of_militants":"Foreign","Security_forces_killed":0,"Civilians_killed":0},{"Color":"Red","Date":"04/02/2017","Place":"Sopore","Lat":34.286605,"Lng":74.462790,"Region":"NK","Militants_Killed":2,"Millitants_affiliation":"Hizbul_Mujahideen","Type_of_militants":"Local","Security_forces_killed":0,"Civilians_killed":0},{"Color":"Red","Date":"12/02/2017","Place":"Frisal,Kulgam","Lat":33.758315,"Lng":75.041036,"Region":"SK","Militants_Killed":4,"Millitants_affiliation":"Hizbul_Mujahideen&Lashkar-e-Toiba","Type_of_militants":"Local","Security_forces_killed":2,"Civilians_killed":2},{"Color":"Red","Date":"14/02/2017","Place":"Hajin,Bandipora","Lat":34.284762,"Lng":74.620043,"Region":"NK","Militants_Killed":1,"Millitants_affiliation":"Lashkar-e-Toiba","Type_of_militants":"Foreign","Security_forces_killed":3,"Civilians_killed":0},{"Color":"Red","Date":"14/02/2017","Place":"Handwara","Lat":34.399037,"Lng":74.282051,"Region":"NK","Militants_Killed":3,"Millitants_affiliation":"Lashkar-e-Toiba","Type_of_militants":"Foreign","Security_forces_killed":1,"Civilians_killed":0},{"Color":"Yellow","Date":"20/02/2017","Place":"Rajouri","Lat":33.380447,"Lng":74.322944,"Region":"J","Militants_Killed":1,"Millitants_affiliation":"Uknown","Type_of_militants":"Foreign","Security_forces_killed":0,"Civilians_killed":0},{"Color":"Green","Date":"23/02/2017","Place":"Chitragam,Shopian","Lat":33.767286,"Lng":74.973364,"Region":"SK","Militants_Killed":0,"Millitants_affiliation":"Lashkar-e-Toiba","Type_of_militants":"Local","Security_forces_killed":3,"Civilians_killed":1},{"Color":"Green","Date":"03/03/2017","Place":"MurranChowk,Pulwama","Lat":33.875616,"Lng":74.899690,"Region":"SK","Militants_Killed":0,"Millitants_affiliation":"Unknown","Type_of_militants":"Unknown","Security_forces_killed":0,"Civilians_killed":1},{"Color":"Red","Date":"05/03/2017","Place":"Shikargarh,Tral","Lat":33.897467,"Lng":75.133297,"Region":"SK","Militants_Killed":2,"Millitants_affiliation":"Hizbul_Mujahideen&Lashkar-e-Toiba","Type_of_militants":"Both","Security_forces_killed":1,"Civilians_killed":0},{"Color":"Red","Date":"09/03/2017","Place":"Padgampora,Pulwama","Lat":33.908855,"Lng":74.997034,"Region":"SK","Militants_Killed":2,"Millitants_affiliation":"Lashkar-e-Toiba","Type_of_militants":"Local","Security_forces_killed":0,"Civilians_killed":1},{"Color":"Red","Date":"09/03/2017","Place":"Bandipora","Lat":34.370044,"Lng":74.687101,"Region":"NK","Militants_Killed":1,"Millitants_affiliation":"Hizbul_Mujahideen","Type_of_militants":"Local","Security_forces_killed":0,"Civilians_killed":0},{"Color":"Blue","Date":"13/03/2017","Place":"Pulwama","Lat":33.871294,"Lng":74.898563,"Region":"SK","Militants_Killed":0,"Millitants_affiliation":"None","Type_of_militants":"None","Security_forces_killed":0,"Civilians_killed":1},{"Color":"Red","Date":"15/03/2017","Place":"Hyhama,Kupwara","Lat":34.323988,"Lng":74.221613,"Region":"NK","Militants_Killed":3,"Millitants_affiliation":"Lashkar-e-Toiba","Type_of_militants":"Foreign","Security_forces_killed":0,"Civilians_killed":1},{"Color":"Red","Date":"26/03/2017","Place":"Awantipora,Pulwama","Lat":33.922042,"Lng":75.014155,"Region":"SK","Militants_Killed":2,"Millitants_affiliation":"Hizbul_Mujahideen","Type_of_militants":"Local","Security_forces_killed":0,"Civilians_killed":0},{"Color":"Red","Date":"28/03/2017","Place":"Chadoora,Budgam","Lat":33.945121,"Lng":74.796832,"Region":"CK","Militants_Killed":1,"Millitants_affiliation":"Hizbul_Mujahideen","Type_of_militants":"Local","Security_forces_killed":0,"Civilians_killed":3},{"Color":"Green","Date":"02/04/2017","Place":"Nowhatta,Srinagar","Lat":34.098518,"Lng":74.812752,"Region":"CK","Militants_Killed":0,"Millitants_affiliation":"None","Type_of_militants":"Unknown","Security_forces_killed":1,"Civilians_killed":0},{"Color":"Green","Date":"03/04/2017","Place":"PanthaChowk,Srinagar","Lat":34.039058,"Lng":74.882770,"Region":"CK","Militants_Killed":0,"Millitants_affiliation":"Lashkar-e-Toiba","Type_of_militants":"Unknown","Security_forces_killed":1,"Civilians_killed":0},{"Color":"Brown","Date":"09/04/2017","Place":"Char-e-Sharfee,Budgam","Lat":33.862151,"Lng":74.766427,"Region":"CK","Militants_Killed":0,"Millitants_affiliation":"None","Type_of_militants":"None","Security_forces_killed":0,"Civilians_killed":8},{"Color":"Brown","Date":"09/04/2017","Place":"Beerwah,Budgam","Lat":34.012654,"Lng":74.595876,"Region":"CK","Militants_Killed":0,"Millitants_affiliation":"None","Type_of_militants":"None","Security_forces_killed":0,"Civilians_killed":1},{"Color":"Yellow","Date":"10/04/2017","Place":"Keran,Kupwara","Lat":34.666393,"Lng":73.957515,"Region":"NK","Militants_Killed":4,"Millitants_affiliation":"Unknown","Type_of_militants":"Foreign","Security_forces_killed":0,"Civilians_killed":0},{"Color":"Blue","Date":"15/04/2017","Place":"Pulwama","Lat":33.872292,"Lng":74.885001,"Region":"SK","Militants_Killed":0,"Millitants_affiliation":"None","Type_of_militants":"None","Security_forces_killed":0,"Civilians_killed":1},{"Color":"Brown","Date":"15/04/2017","Place":"Batamaloo,Srinagar","Lat":34.070073,"Lng":74.773122,"Region":"CK","Militants_Killed":0,"Millitants_affiliation":"None","Type_of_militants":"None","Security_forces_killed":0,"Civilians_killed":1},{"Color":"Blue","Date":"16/04/2017","Place":"Pinjoora,Shopian","Lat":33.731280,"Lng":74.860507,"Region":"SK","Militants_Killed":0,"Millitants_affiliation":"None","Type_of_militants":"None","Security_forces_killed":0,"Civilians_killed":1},{"Color":"Blue","Date":"16/04/2017","Place":"Hajin,Bandipora","Lat":34.284762,"Lng":74.620043,"Region":"NK","Militants_Killed":0,"Millitants_affiliation":"None","Type_of_militants":"None","Security_forces_killed":0,"Civilians_killed":1},{"Color":"Brown","Date":"19/04/2017","Place":"Ganderbal","Lat":34.389447,"Lng":75.056000,"Region":"CK","Militants_Killed":0,"Millitants_affiliation":"None","Type_of_militants":"None","Security_forces_killed":0,"Civilians_killed":1},{"Color":"Red","Date":"22/04/2017","Place":"Chadoora,Budgam","Lat":33.945121,"Lng":74.796832,"Region":"CK","Militants_Killed":2,"Millitants_affiliation":"Hizbul_Mujahideen&Lashkar-e-Toiba","Type_of_militants":"Both","Security_forces_killed":0,"Civilians_killed":1},{"Color":"Green","Date":"27/04/2017","Place":"Chowkibal,Kupwara","Lat":34.410771,"Lng":73.952363,"Region":"NK","Militants_Killed":2,"Millitants_affiliation":"Jaish-e-Mohamad","Type_of_militants":"Foreign","Security_forces_killed":2,"Civilians_killed":0},{"Color":"Brown","Date":"27/04/2017","Place":"Panzgam,Kupwara","Lat":34.485228,"Lng":74.070377,"Region":"NK","Militants_Killed":0,"Millitants_affiliation":"None","Type_of_militants":"None","Security_forces_killed":0,"Civilians_killed":1},{"Color":"Green","Date":"30/04/2017","Place":"Khanyar,Srinagar","Lat":34.093909,"Lng":74.813053,"Region":"CK","Militants_Killed":0,"Millitants_affiliation":"Unknown","Type_of_militants":"Unknown","Security_forces_killed":0,"Civilians_killed":1},{"Color":"Green","Date":"01/05/2017","Place":"Kulgam","Lat":33.644387,"Lng":74.982001,"Region":"SK","Militants_Killed":0,"Millitants_affiliation":"Hizbul_Mujahideen","Type_of_militants":"Unknown","Security_forces_killed":5,"Civilians_killed":2},{"Color":"Green","Date":"04/05/2017","Place":"ImamSahib,Shopian","Lat":33.743638,"Lng":74.912189,"Region":"SK","Militants_Killed":0,"Millitants_affiliation":"Hizbul_Mujahideen","Type_of_militants":"Unknown","Security_forces_killed":0,"Civilians_killed":1},{"Color":"Green","Date":"06/05/2017","Place":"Kulgam","Lat":33.643833,"Lng":75.018158,"Region":"SK","Militants_Killed":1,"Millitants_affiliation":"Unknown","Type_of_militants":"Unknown","Security_forces_killed":1,"Civilians_killed":3},{"Color":"Green","Date":"09/05/2017","Place":"Doda","Lat":33.153816,"Lng":75.536085,"Region":"J","Militants_Killed":0,"Millitants_affiliation":"Unknown","Type_of_militants":"Unknown","Security_forces_killed":1,"Civilians_killed":0},{"Color":"Blue","Date":"10/05/2017","Place":"Herman,Shopian","Lat":33.708234,"Lng":74.935711,"Region":"SK","Militants_Killed":0,"Millitants_affiliation":"Unknown","Type_of_militants":"Unknown","Security_forces_killed":1,"Civilians_killed":0},{"Color":"Red","Date":"14/05/2017","Place":"Warpora,Handwara","Lat":34.406202,"Lng":74.272388,"Region":"NK","Militants_Killed":2,"Millitants_affiliation":"Lashkar-e-Toiba","Type_of_militants":"Foreign","Security_forces_killed":0,"Civilians_killed":0},{"Color":"Brown","Date":"14/05/2017","Place":"Kulgam","Lat":33.641445,"Lng":75.009977,"Region":"SK","Militants_Killed":0,"Millitants_affiliation":"Unknown","Type_of_militants":"Unknown","Security_forces_killed":0,"Civilians_killed":1},{"Color":"Grey","Date":"19/05/2017","Place":"Gadoora,Pulwama","Lat":33.906249,"Lng":74.895840,"Region":"SK","Militants_Killed":0,"Millitants_affiliation":"Unknown","Type_of_militants":"Unknown","Security_forces_killed":0,"Civilians_killed":1},{"Color":"Yellow","Date":"21/05/2017","Place":"Nowgam,Kupwara","Lat":34.272466,"Lng":74.066696,"Region":"NK","Militants_Killed":4,"Millitants_affiliation":"Lashkar-e-Toiba","Type_of_militants":"Foreign","Security_forces_killed":3,"Civilians_killed":0},{"Color":"Yellow","Date":"27/05/2017","Place":"Rampur,Baramulla","Lat":34.122197,"Lng":74.179572,"Region":"NK","Militants_Killed":6,"Millitants_affiliation":"Unknown","Type_of_militants":"Foreign","Security_forces_killed":0,"Civilians_killed":0},{"Color":"Red","Date":"27/05/2017","Place":"Soimoh,Tral","Lat":33.898482,"Lng":75.110519,"Region":"SK","Militants_Killed":2,"Millitants_affiliation":"Hizbul_Mujahideen","Type_of_militants":"Local","Security_forces_killed":0,"Civilians_killed":1},{"Color":"Green","Date":"27/05/2017","Place":"Keran,Kupwara","Lat":34.664018,"Lng":73.969124,"Region":"NK","Militants_Killed":0,"Millitants_affiliation":"Uknown","Type_of_militants":"Unknown","Security_forces_killed":0,"Civilians_killed":1},{"Color":"Red","Date":"01/06/2017","Place":"Nathipora,Sopore","Lat":34.364656,"Lng":74.383070,"Region":"NK","Militants_Killed":2,"Millitants_affiliation":"Lashkar-e-Toiba","Type_of_militants":"Local","Security_forces_killed":0,"Civilians_killed":0},{"Color":"Green","Date":"03/06/2017","Place":"LowerMunda,Qazigund","Lat":33.563300,"Lng":75.192440,"Region":"SK","Militants_Killed":0,"Millitants_affiliation":"Hizbul_Mujahideen","Type_of_militants":"Unknown","Security_forces_killed":2,"Civilians_killed":0},{"Color":"Green","Date":"05/06/2017","Place":"Sumbal,Bandipora","Lat":34.227301,"Lng":74.641943,"Region":"NK","Militants_Killed":4,"Millitants_affiliation":"Uknown","Type_of_militants":"Unknown","Security_forces_killed":0,"Civilians_killed":0},{"Color":"Brown","Date":"06/06/2017","Place":"Ganawpora,Shopian","Lat":33.732155,"Lng":74.895579,"Region":"SK","Militants_Killed":0,"Millitants_affiliation":"Uknown","Type_of_militants":"Unknown","Security_forces_killed":0,"Civilians_killed":1},{"Color":"Yellow","Date":"07/06/2017","Place":"Machil,Kupwara","Lat":34.586487,"Lng":74.057378,"Region":"NK","Militants_Killed":4,"Millitants_affiliation":"Uknown","Type_of_militants":"Unknown","Security_forces_killed":0,"Civilians_killed":0},{"Color":"Yellow","Date":"08/06/2017","Place":"Nowgam,Kupwara","Lat":34.325849,"Lng":73.980857,"Region":"NK","Militants_Killed":3,"Millitants_affiliation":"Uknown","Type_of_militants":"Unknown","Security_forces_killed":1,"Civilians_killed":0},{"Color":"Yellow","Date":"09/06/2017","Place":"Uri,Baramulla","Lat":34.071011,"Lng":74.024866,"Region":"NK","Militants_Killed":5,"Millitants_affiliation":"Uknown","Type_of_militants":"Unknown","Security_forces_killed":0,"Civilians_killed":0},{"Color":"Yellow","Date":"10/06/2017","Place":"Gurez,Bandipora","Lat":34.641581,"Lng":74.760832,"Region":"NK","Militants_Killed":1,"Millitants_affiliation":"Uknown","Type_of_militants":"Unknown","Security_forces_killed":0,"Civilians_killed":0},{"Color":"Green","Date":"15/06/2017","Place":"Hyderpora,Srinagar","Lat":34.047257,"Lng":74.787772,"Region":"CK","Militants_Killed":0,"Millitants_affiliation":"Uknown","Type_of_militants":"Unknown","Security_forces_killed":1,"Civilians_killed":0},{"Color":"Green","Date":"15/06/2017","Place":"Bogund,Kulgam","Lat":33.687335,"Lng":75.052061,"Region":"SK","Militants_Killed":0,"Millitants_affiliation":"Uknown","Type_of_militants":"Unknown","Security_forces_killed":1,"Civilians_killed":0},{"Color":"Red","Date":"16/06/2017","Place":"Arwani,Anantnag","Lat":33.779086,"Lng":75.064897,"Region":"SK","Militants_Killed":3,"Millitants_affiliation":"Lashkar-e-Toiba","Type_of_militants":"Local","Security_forces_killed":0,"Civilians_killed":2},{"Color":"Green","Date":"16/06/2017","Place":"Achabal,Anantnag","Lat":33.685901,"Lng":75.220255,"Region":"SK","Militants_Killed":0,"Millitants_affiliation":"Lashkar-e-Toiba","Type_of_militants":"Local","Security_forces_killed":6,"Civilians_killed":0},{"Color":"Brown","Date":"16/06/2017","Place":"Rangreth,Srinagar","Lat":34.008295,"Lng":74.796862,"Region":"CK","Militants_Killed":0,"Millitants_affiliation":"Uknown","Type_of_militants":"Unknown","Security_forces_killed":0,"Civilians_killed":1},{"Color":"Blue","Date":"17/06/2017","Place":"Pinglana,Pulwama","Lat":33.868583,"Lng":74.919246,"Region":"SK","Militants_Killed":0,"Millitants_affiliation":"Uknown","Type_of_militants":"Unknown","Security_forces_killed":0,"Civilians_killed":1},{"Color":"Red","Date":"21/06/2017","Place":"Rafiabad,Sopore","Lat":34.314485,"Lng":74.344119,"Region":"NK","Militants_Killed":2,"Millitants_affiliation":"Hizbul_Mujahideen","Type_of_militants":"Local","Security_forces_killed":0,"Civilians_killed":0},{"Color":"Red","Date":"22/06/2017","Place":"Kakapora,Pulwama","Lat":33.960324,"Lng":74.916449,"Region":"SK","Militants_Killed":3,"Millitants_affiliation":"Lashkar-e-Toiba","Type_of_militants":"Local","Security_forces_killed":0,"Civilians_killed":0},{"Color":"Yellow","Date":"22/06/2017","Place":"Kupwara","Lat":34.543265,"Lng":74.040120,"Region":"NK","Militants_Killed":1,"Millitants_affiliation":"Unknown","Type_of_militants":"Foreign","Security_forces_killed":0,"Civilians_killed":0},{"Color":"Grey","Date":"22/06/2017","Place":"Nowhatta,Srinagar","Lat":34.097660,"Lng":74.808883,"Region":"CK","Militants_Killed":0,"Millitants_affiliation":"Unknown","Type_of_militants":"Unknown","Security_forces_killed":1,"Civilians_killed":0},{"Color":"Green","Date":"24/05/2017","Place":"PanthaChowk,Srinagar","Lat":34.040891,"Lng":74.878627,"Region":"CK","Militants_Killed":0,"Millitants_affiliation":"Lashkar-e-Toiba","Type_of_militants":"Both","Security_forces_killed":1,"Civilians_killed":0},{"Color":"Red","Date":"01/06/2017","Place":"Dailgam,Anantnag","Lat":33.679737,"Lng":75.165002,"Region":"SK","Militants_Killed":2,"Millitants_affiliation":"Lashkar-e-Toiba","Type_of_militants":"Both","Security_forces_killed":0,"Civilians_killed":2},{"Color":"Green","Date":"03/06/2017","Place":"Anantnag","Lat":33.740161,"Lng":75.162065,"Region":"SK","Militants_Killed":0,"Millitants_affiliation":"Unknown","Type_of_militants":"Unknown","Security_forces_killed":1,"Civilians_killed":0},{"Color":"Red","Date":"04/06/2017","Place":"Bahmnoo,Pulwama","Lat":33.878224,"Lng":74.885277,"Region":"SK","Militants_Killed":3,"Millitants_affiliation":"Lashkar-e-Toiba","Type_of_militants":"Local","Security_forces_killed":0,"Civilians_killed":0},{"Color":"Yellow","Date":"09/06/2017","Place":"Uri,Baramulla","Lat":34.103827,"Lng":74.030336,"Region":"NK","Militants_Killed":1,"Millitants_affiliation":"Unknown","Type_of_militants":"Foreign","Security_forces_killed":0,"Civilians_killed":0},{"Color":"Green","Date":"10/06/2017","Place":"Khanabal,Anantnag","Lat":33.741757,"Lng":75.131661,"Region":"SK","Militants_Killed":0,"Millitants_affiliation":"Lashkar-e-Toiba","Type_of_militants":"Unknown","Security_forces_killed":0,"Civilians_killed":8},{"Color":"Yellow","Date":"10/06/2017","Place":"Nowgam,Kupwara","Lat":34.279137,"Lng":74.197337,"Region":"NK","Militants_Killed":2,"Millitants_affiliation":"Unknown","Type_of_militants":"Unknown","Security_forces_killed":0,"Civilians_killed":0},{"Color":"Red","Date":"12/06/2017","Place":"Radbug,Budgam","Lat":34.066649,"Lng":74.648079,"Region":"CK","Militants_Killed":3,"Millitants_affiliation":"Lashkar-e-Toiba","Type_of_militants":"Local","Security_forces_killed":0,"Civilians_killed":0},{"Color":"Red","Date":"15/06/2017","Place":"Tral,Pulwama","Lat":33.935174,"Lng":75.109293,"Region":"SK","Militants_Killed":3,"Millitants_affiliation":"Lashkar-e-Toiba","Type_of_militants":"Local","Security_forces_killed":0,"Civilians_killed":0},{"Color":"Red","Date":"17/06/2017","Place":"Nowgam,Anantnag","Lat":33.695708,"Lng":75.264746,"Region":"SK","Militants_Killed":3,"Millitants_affiliation":"Lashkar-e-Toiba","Type_of_militants":"Both","Security_forces_killed":0,"Civilians_killed":0},{"Color":"Yellow","Date":"18/06/2017","Place":"Gurez,Bandipora","Lat":34.643318,"Lng":74.786716,"Region":"NK","Militants_Killed":2,"Millitants_affiliation":"Unknown","Type_of_militants":"Unknown","Security_forces_killed":0,"Civilians_killed":0},{"Color":"Brown","Date":"18/06/2017","Place":"Bijbehara,Anantnag","Lat":33.780263,"Lng":75.103792,"Region":"SK","Militants_Killed":0,"Millitants_affiliation":"None","Type_of_militants":"None","Security_forces_killed":0,"Civilians_killed":1},{"Color":"Brown","Date":"21/06/2017","Place":"Beerwah,Budgam","Lat":34.015061,"Lng":74.595464,"Region":"NK","Militants_Killed":0,"Millitants_affiliation":"None","Type_of_militants":"None","Security_forces_killed":0,"Civilians_killed":1},{"Color":"Yellow","Date":"23/06/2017","Place":"Machil,Kupwara","Lat":34.562826,"Lng":74.121711,"Region":"NK","Militants_Killed":1,"Millitants_affiliation":"Unknown","Type_of_militants":"Unknown","Security_forces_killed":0,"Civilians_killed":0},{"Color":"Yellow","Date":"31/06/2017","Place":"Uri,Baramulla","Lat":34.074586,"Lng":74.046710,"Region":"NK","Militants_Killed":1,"Millitants_affiliation":"Unknown","Type_of_militants":"Unknown","Security_forces_killed":0,"Civilians_killed":0},{"Color":"Red","Date":"01/07/2017","Place":"Pulwama","Lat":33.870711,"Lng":74.920143,"Region":"SK","Militants_Killed":2,"Millitants_affiliation":"Lashkar-e-Toiba","Type_of_militants":"Both","Security_forces_killed":0,"Civilians_killed":1},{"Color":"Green","Date":"03/07/2017","Place":"Zoipora,Shopian","Lat":33.691759,"Lng":74.931368,"Region":"SK","Militants_Killed":0,"Millitants_affiliation":"Hizbul_Mujahideen","Type_of_militants":"Local","Security_forces_killed":2,"Civilians_killed":0},{"Color":"Green","Date":"03/07/2017","Place":"DHPora,Kulgam","Lat":33.608609,"Lng":74.927732,"Region":"SK","Militants_Killed":2,"Millitants_affiliation":"Hizbul_Mujahideen","Type_of_militants":"Local","Security_forces_killed":0,"Civilians_killed":0},{"Color":"Green","Date":"03/07/2017","Place":"Bijbehara,Anantnag","Lat":33.805560,"Lng":75.091874,"Region":"SK","Militants_Killed":1,"Millitants_affiliation":"Hizbul_Mujahideen","Type_of_militants":"Local","Security_forces_killed":0,"Civilians_killed":1},{"Color":"Red","Date":"05/07/2017","Place":"Sopore","Lat":34.294689,"Lng":74.472675,"Region":"NK","Militants_Killed":3,"Millitants_affiliation":"Lashkar-e-Toiba","Type_of_militants":"Local","Security_forces_killed":0,"Civilians_killed":0},{"Color":"Red","Date":"06/07/2017","Place":"Samboora,Pulwama","Lat":33.961187,"Lng":74.927947,"Region":"SK","Militants_Killed":1,"Millitants_affiliation":"Lashkar-e-Toiba","Type_of_militants":"Foreign","Security_forces_killed":0,"Civilians_killed":0},{"Color":"Yellow","Date":"07/07/2017","Place":"Machil,Kupwara","Lat":34.433911,"Lng":74.011633,"Region":"NK","Militants_Killed":5,"Millitants_affiliation":"Unknown","Type_of_militants":"Foreign","Security_forces_killed":0,"Civilians_killed":0},{"Color":"Red","Date":"09/07/2017","Place":"Tral,Pulwama","Lat":33.932632,"Lng":75.111186,"Region":"SK","Militants_Killed":3,"Millitants_affiliation":"AnsarGhazwat-ul-Hind ","Type_of_militants":"Local","Security_forces_killed":0,"Civilians_killed":0},{"Color":"Brown","Date":"09/07/2017","Place":"Saimoh,Tral","Lat":33.899684,"Lng":75.110362,"Region":"SK","Militants_Killed":0,"Millitants_affiliation":"None","Type_of_militants":"None","Security_forces_killed":0,"Civilians_killed":1},{"Color":"Red","Date":"12/07/2017","Place":"Awneera,Shopian","Lat":33.723692,"Lng":75.073163,"Region":"SK","Militants_Killed":3,"Millitants_affiliation":"Hizbul_Mujahideen","Type_of_militants":"Local","Security_forces_killed":2,"Civilians_killed":0},{"Color":"Brown","Date":"13/07/2017","Place":"Awneera,Shopian","Lat":33.726533,"Lng":75.084616,"Region":"SK","Militants_Killed":0,"Millitants_affiliation":"None","Type_of_militants":"None","Security_forces_killed":0,"Civilians_killed":2},{"Color":"Brown","Date":"13/07/2017","Place":"Kakpora,Pulwama","Lat":33.949908,"Lng":74.935421,"Region":"SK","Militants_Killed":0,"Millitants_affiliation":"None","Type_of_militants":"None","Security_forces_killed":0,"Civilians_killed":1},{"Color":"Red","Date":"16/07/2017","Place":"Banderpora,Pulwama","Lat":33.865119,"Lng":74.977741,"Region":"SK","Militants_Killed":1,"Millitants_affiliation":"Lashkar-e-Toiba","Type_of_militants":"Local","Security_forces_killed":0,"Civilians_killed":1},{"Color":"Green","Date":"16/07/2017","Place":"Budgam","Lat":34.012345,"Lng":74.776205,"Region":"CK","Militants_Killed":0,"Millitants_affiliation":"Uknown","Type_of_militants":"Unknown","Security_forces_killed":1,"Civilians_killed":0},{"Color":"Yellow","Date":"17/07/2017","Place":"Gurez,Bandipora","Lat":34.625866,"Lng":74.845093,"Region":"NK","Militants_Killed":2,"Millitants_affiliation":"Uknown","Type_of_militants":"Unknown","Security_forces_killed":0,"Civilians_killed":0},{"Color":"Blue","Date":"19/07/2017","Place":"Dailgam,Anantnag","Lat":33.689504,"Lng":75.170221,"Region":"SK","Militants_Killed":0,"Millitants_affiliation":"None","Type_of_militants":"None","Security_forces_killed":0,"Civilians_killed":1},{"Color":"Blue","Date":"20/07/2017","Place":"Shopian","Lat":33.717944,"Lng":74.842214,"Region":"SK","Militants_Killed":0,"Millitants_affiliation":"None","Type_of_militants":"None","Security_forces_killed":0,"Civilians_killed":0},{"Color":"Grey","Date":"20/07/2017","Place":"Nagbal,Shopian","Lat":33.746213,"Lng":74.808792,"Region":"SK","Militants_Killed":0,"Millitants_affiliation":"None","Type_of_militants":"None","Security_forces_killed":0,"Civilians_killed":0},{"Color":"Red","Date":"22/07/2017","Place":"Kupwara","Lat":34.586396,"Lng":74.096745,"Region":"NK","Militants_Killed":1,"Millitants_affiliation":"Lashkar-e-Toiba","Type_of_militants":"Foreign","Security_forces_killed":0,"Civilians_killed":0},{"Color":"Green","Date":"26/07/2017","Place":"PoliceLines,Pulwama","Lat":33.970012,"Lng":74.955169,"Region":"SK","Militants_Killed":3,"Millitants_affiliation":"Jaish-e-Mohamad","Type_of_militants":"Foreign","Security_forces_killed":8,"Civilians_killed":0},{"Color":"Green","Date":"28/07/2017","Place":"MainTown,Anantnag","Lat":33.732456,"Lng":75.150143,"Region":"SK","Militants_Killed":0,"Millitants_affiliation":"Unknown","Type_of_militants":"Unknown","Security_forces_killed":1,"Civilians_killed":0},{"Color":"Green","Date":"01/07/2017","Place":"PanthaChowk,Srinagar","Lat":34.039715,"Lng":74.888012,"Region":"CK","Militants_Killed":0,"Millitants_affiliation":"Lashkar-e-Toiba","Type_of_militants":"Unknown","Security_forces_killed":1,"Civilians_killed":0},{"Color":"Red","Date":"02/07/2017","Place":"Yaripora,Kulgam","Lat":33.723612,"Lng":75.019596,"Region":"SK","Militants_Killed":1,"Millitants_affiliation":"Lashkar-e-Toiba","Type_of_militants":"Local","Security_forces_killed":0,"Civilians_killed":0},{"Color":"Red","Date":"04/07/2017","Place":"Shakargund,Sopore","Lat":34.314334,"Lng":74.433861,"Region":"NK","Militants_Killed":2,"Millitants_affiliation":"Hizbul_Mujahideen","Type_of_militants":"Local","Security_forces_killed":0,"Civilians_killed":0}];
+
+				infowindow = new google.maps.InfoWindow({
+					content: "holding..."
+				});
+
+				for (var i = 0; i < city.length; i++) {
+					var this_str = JSON.stringify(city[i]);
+					var newTemp = this_str.replace(/"/g, "'");
+
+					$("<li class='list-group-item "+city[i]['Color']+"'>"+city[i]['Place']+" : M("+city[i]['Militants_Killed']+"), C("+city[i]['Civilians_killed']+"), S("+city[i]['Security_forces_killed']+") <span class='pull-right open_report' data-open="+newTemp+" > >> </span></li>").appendTo($('#list_incident'));
+					var color;
+					if (city[i]['Color']=='Red') {
+						color='FF0000';
+					}else if (city[i]['Color']=='Yellow') {
+						color='FFFF00';
+					}else if (city[i]['Color']=='Blue') {
+						color='0000FF';
+					}else if (city[i]['Color']=='Brown') {
+						color='775530';
+					}else if (city[i]['Color']=='Green') {
+						color='00FF00';
+					}else if (city[i]['Color']=='Grey') {
+						color='999999';
+					}
+					
+					createMarker(city[i],color);					
+				}
+
+				
+			};
+			initMap();
+			$('.open_report').on('click', function(event) {
+				
+				var str = $(this).attr('data-open');
+				var newTemp = str.replace(/'/g, '"');
+				str = JSON.parse(newTemp);
+				
+				$('#incident_cont').addClass('open').html(JSON.stringify(str));
+			});
+		});
+	</script>
+</body>
+</html>

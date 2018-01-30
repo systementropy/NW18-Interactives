@@ -9,7 +9,7 @@
     .str1 {stroke:#003399;stroke-width:0.1}
     .str2 {stroke:#003399;stroke-width:0.2}
     .str3 {stroke:none;stroke-width:0.5}
-    .fil2 {fill:#F7C491}
+    .fil2 {fill:#CA7F7D}
 
     .fil0 {fill:#75C5F0}
     .fil1 {fill:white}
